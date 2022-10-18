@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-	p {
-		@apply text-base;
-	}
+.page {
+	height: calc(100vh - 10rem);
 }
