@@ -1,23 +1,35 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
-import { AiOutlineShoppingCart } from "react-icons/ai";
+import { AiOutlineShoppingCart, AiOutlineSearch } from "react-icons/ai";
 
 const Navbar = () => {
 	return (
-		<nav className="h-20">
-			<div className="navbar bg-neutral ">
-				<div className="flex-1">
+		<nav className="h-16 bg-neutral  ">
+			<div className="navbar w-9/12 mx-auto flex items-center justify-between">
+				<section className="w-full gap-4">
 					<Link to="/" className="btn btn-ghost ">
 						<img src={logo} alt="logo" className="h-10" />
 					</Link>
-				</div>
-				<div className="flex-none ">
+					<div className="form-control max-w-sm w-full ">
+						<div className="input-group ">
+							<input
+								type="text"
+								placeholder="Search…"
+								className="input input-sm input-bordered w-full "
+							/>
+							<button className="btn btn-square btn-sm btn-primary">
+								<AiOutlineSearch size={26} />
+							</button>
+						</div>
+					</div>
+				</section>
+				<div className="gap-2">
 					<div className="dropdown dropdown-end ">
 						<label tabIndex={0} className="btn btn-ghost btn-circle">
 							<div className="indicator">
 								<AiOutlineShoppingCart color="white" size={26} />
-								<span className="badge badge-md indicator-item">8</span>
+								<span className="badge badge-primary indicator-item">8</span>
 							</div>
 						</label>
 						<div
@@ -35,7 +47,7 @@ const Navbar = () => {
 							</div>
 						</div>
 					</div>
-					<div className="dropdown dropdown-end">
+					<div className="dropdown dropdown-end ml-4">
 						<label tabIndex={0} className="btn btn-ghost btn-circle avatar">
 							<div className="w-10 rounded-full">
 								<img src="https://placeimg.com/80/80/people" />

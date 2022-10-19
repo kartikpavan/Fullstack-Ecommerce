@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { Navbar, Footer, Modal } from "./components";
+import { Navbar, Modal } from "./components";
 import { About, Home, OrderHistory, Cart, ResetPassword } from "./pages";
 
 const App = () => {
@@ -15,7 +15,6 @@ const App = () => {
 				<Route path="/reset" element={<ResetPassword />} />
 			</Routes>
 			<Modal />
-			<Footer />
 		</>
 	);
 };

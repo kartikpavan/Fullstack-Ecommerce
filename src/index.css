@@ -2,6 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.page {
+/* .page {
 	height: calc(100vh - 10rem);
-}
+} */
