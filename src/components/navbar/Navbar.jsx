@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../../assets/logo.png";
+import AdminRoute from "../adminRoute/AdminRoute";
+
 import { AiOutlineShoppingCart, AiOutlineSearch } from "react-icons/ai";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -44,7 +45,6 @@ const Navbar = () => {
 			.then(() => {
 				toast.success("User Signed Out ");
 				navigate("/");
-				window.location.reload();
 			})
 			.catch((error) => {
 				const errorCode = error.code;
@@ -55,7 +55,11 @@ const Navbar = () => {
 
 	return (
 		<>
-			{/* {isLoading && <Loader />} */}
+			<AdminRoute>
+				<div className="min-w-screen h-7 bg-red-200 text-red-700 font-bold text-center cursor-pointer">
+					ADMIN
+				</div>
+			</AdminRoute>
 			<nav className="h-16 bg-neutral">
 				<div className="navbar w-full md:w-9/12 mx-auto flex items-center justify-between">
 					<section className="w-full md:gap-4">
@@ -79,7 +83,7 @@ const Navbar = () => {
 						<div className="dropdown dropdown-end ">
 							<label tabIndex={0} className="btn btn-ghost btn-circle">
 								<div className="indicator">
-									<AiOutlineShoppingCart color="white" size={26} />
+									<AiOutlineShoppingCart color="white" size={30} />
 									<span className="badge badge-primary indicator-item">8</span>
 								</div>
 							</label>

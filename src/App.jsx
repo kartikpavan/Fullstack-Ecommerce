@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
-import { Navbar, Modal, ProtectedRoute } from "./components";
-import { About, Home, OrderHistory, Cart, ResetPassword } from "./pages";
+import { Navbar, Modal, ProtectedRoute, AdminRoute } from "./components";
+import { About, Home, OrderHistory, Cart, ResetPassword, NotFound, Admin } from "./pages";
 import { ToastContainer } from "react-toastify";
 
 const App = () => {
@@ -21,6 +21,19 @@ const App = () => {
 				/>
 				<Route path="/cart" element={<Cart />} />
 				<Route path="/reset" element={<ResetPassword />} />
+
+				{/* ADMIN ROUTES */}
+				<Route
+					path="/admin/*"
+					element={
+						<AdminRoute>
+							<Admin />
+						</AdminRoute>
+					}
+				/>
+
+				{/* 404 routes */}
+				<Route path="/*" element={<NotFound />} />
 			</Routes>
 			<Modal />
 		</>
