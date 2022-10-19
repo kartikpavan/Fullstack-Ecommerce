@@ -6,8 +6,8 @@ import { AiOutlineShoppingCart, AiOutlineSearch } from "react-icons/ai";
 const Navbar = () => {
 	return (
 		<nav className="h-16 bg-neutral  ">
-			<div className="navbar w-9/12 mx-auto flex items-center justify-between">
-				<section className="w-full gap-4">
+			<div className="navbar w-full md:w-9/12 mx-auto flex items-center justify-between">
+				<section className="w-full md:gap-4">
 					<Link to="/" className="btn btn-ghost ">
 						<img src={logo} alt="logo" className="h-10" />
 					</Link>
@@ -24,7 +24,7 @@ const Navbar = () => {
 						</div>
 					</div>
 				</section>
-				<div className="gap-2">
+				<div className="md:gap-2">
 					<div className="dropdown dropdown-end ">
 						<label tabIndex={0} className="btn btn-ghost btn-circle">
 							<div className="indicator">
