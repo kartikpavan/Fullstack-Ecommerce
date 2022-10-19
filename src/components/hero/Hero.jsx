@@ -2,11 +2,11 @@ import hero from "../../assets/hero3.png";
 
 const Hero = () => {
 	return (
-		<div className="hero min-h-screen bg-base-200 xl:relative">
-			<div className="hero-content flex-col xl:flex-row-reverse  ">
+		<div className="hero min-h-screen bg-base-200 xl:relative overflow-hidden">
+			<div className="hero-content flex-col xl:flex-row-reverse ">
 				<img
 					src={hero}
-					className="max-w-4xl absolute xl:right-10 opacity-30 xl:opacity-95"
+					className="max-w-screen lg:max-w-4xl absolute lg:right-10 opacity-30 lg:opacity-95 overflow-clip"
 				/>
 				<div className="xl:absolute xl:left-72 z-10">
 					<h1 className="text-2xl font-bold font-mono">Limited Time Only</h1>

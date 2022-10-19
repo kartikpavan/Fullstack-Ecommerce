@@ -60,9 +60,7 @@ const Navbar = () => {
 				<div className="navbar w-full md:w-9/12 mx-auto flex items-center justify-between">
 					<section className="w-full md:gap-4">
 						<Link to="/" className="btn btn-ghost ">
-							{/* 
-                  <img src={logo} alt="logo" className="h-6 md:h-10" /> */}
-							<h1 className="text-lg md:text-xl text-white">E-Shop.com</h1>
+							<h1 className="logo text-white text-lg md:text-2xl ">E-Shop.com</h1>
 						</Link>
 						<div className="form-control max-w-sm w-full ">
 							<div className="input-group ">
