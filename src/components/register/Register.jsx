@@ -1,27 +1,60 @@
 import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import Loader from "../loader/Loader";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+//Firebase
+import { auth } from "../../firebase/config";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [confirmPassword, setConfirmPassword] = useState("");
 	const [showPassword, setShowPassword] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
+	const navigate = useNavigate();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log("registering  IN...");
+		if (password !== confirmPassword) {
+			toast.error("Password Did not match");
+		}
+		//* USER REGISTER
+		setIsLoading(true);
+		createUserWithEmailAndPassword(auth, email, password)
+			.then((userCredential) => {
+				const user = userCredential.user;
+				console.log(user);
+				toast.success("Registration Successful");
+				setIsLoading(false);
+				document.getElementById("my-modal-4").checked = false;
+				navigate("/");
+			})
+			.catch((error) => {
+				const errorCode = error.code;
+				const errorMessage = error.message;
+				toast.error(errorCode, errorMessage);
+				setIsLoading(false);
+			});
+
+		setEmail("");
+		setPassword("");
+		setConfirmPassword("");
 	};
+
+	const AllFieldsRequired = Boolean(email) && Boolean(password) && Boolean(confirmPassword);
+
 	return (
 		<>
-			<div className="py-6">
+			{isLoading && <Loader />}
+			<div className="py-6 w-72 md:w-96">
 				<div className="flex bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-4xl">
-					<div className="w-full px-8 pt-12 pb-6">
+					<div className="w-full px-8 pt-4 pb-6">
 						<p className="text-lg text-gray-600 text-center">Create a new Account</p>
-						<button className="btn btn-sm btn-outline w-full rounded-full mt-4 gap-x-4">
-							<FcGoogle size={22} />
-							Sign in with google
-						</button>
-						<div className="divider text-xs text-gray-400 uppercase">
-							or login with email
-						</div>
+
 						<form onSubmit={handleSubmit} className="form-control">
 							<div>
 								<label className="label-text font-bold mb-2 block">
@@ -31,6 +64,8 @@ const Register = () => {
 									className="input input-bordered w-full border-2"
 									type="email"
 									required
+									value={email}
+									onChange={(e) => setEmail(e.target.value)}
 								/>
 							</div>
 							<div className="mt-4 relative">
@@ -41,6 +76,8 @@ const Register = () => {
 									className="input input-bordered w-full border-2"
 									type={`${showPassword ? "test" : "password"}`}
 									required
+									value={password}
+									onChange={(e) => setPassword(e.target.value)}
 								/>
 								<span onClick={() => setShowPassword((prev) => !prev)}>
 									{showPassword ? (
@@ -59,19 +96,24 @@ const Register = () => {
 								</span>
 							</div>
 							<div className="mt-4">
-								<div className="flex justify-between">
-									<label className="label-text font-bold mb-2">
-										Confirm Password
-									</label>
-								</div>
+								<label className="label-text font-bold mb-2">
+									Confirm Password
+								</label>
 								<input
 									className="input input-bordered w-full border-2"
 									type="password"
 									required
+									value={confirmPassword}
+									onChange={(e) => setConfirmPassword(e.target.value)}
 								/>
 							</div>
+
 							<div className="mt-4">
-								<button type="submit" className="btn w-full">
+								<button
+									type="submit"
+									className="btn w-full"
+									disabled={!AllFieldsRequired}
+								>
 									REGISTER
 								</button>
 							</div>

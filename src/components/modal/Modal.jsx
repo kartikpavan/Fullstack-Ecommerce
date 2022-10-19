@@ -8,7 +8,7 @@ const Modal = () => {
 		<>
 			<input type="checkbox" id="my-modal-4" className="modal-toggle" />
 			<label htmlFor="my-modal-4" className="modal cursor-pointer flex flex-col">
-				<div className="tabs tabs-boxed w-96 ">
+				<div className="tabs tabs-boxed  ">
 					<button
 						className={`tab tab-md w-[50%] ${isLogin ? "tab-active" : null}`}
 						onClick={() => setIsLogin((prev) => !prev)}
@@ -22,7 +22,7 @@ const Modal = () => {
 						Register
 					</button>
 				</div>
-				<label className=" w-96 ">{isLogin ? <Login /> : <Register />}</label>
+				<label className=" md:w-96 ">{isLogin ? <Login /> : <Register />}</label>
 			</label>
 		</>
 	);
