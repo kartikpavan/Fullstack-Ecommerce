@@ -2,11 +2,12 @@ import { Routes, Route } from "react-router-dom";
 import { Navbar, Modal } from "./components";
 import { About, Home, OrderHistory, Cart, ResetPassword } from "./pages";
 import { ToastContainer } from "react-toastify";
+import { redirect } from "react-router-dom";
 
 const App = () => {
 	return (
 		<>
-			<ToastContainer position="bottom-right" autoClose={2000} closeOnClick />
+			<ToastContainer position="bottom-right" autoClose={4000} closeOnClick />
 			<Navbar />
 			<Routes>
 				<Route path="/" element={<Home />} />

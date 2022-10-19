@@ -7,21 +7,34 @@ import "react-toastify/dist/ReactToastify.css";
 // firebase
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase/config";
+//Redux
+import { useDispatch, useSelector } from "react-redux";
+import { setActiveUser, removeActiveUser } from "../../redux/slice/authSlice";
 
 const Navbar = () => {
-	const [userName, setUserName] = useState("");
-	const [userImage, setUserImage] = useState("");
+	const { isUserLoggedIn, userName } = useSelector((store) => store.auth);
+
+	const [displayName, setDisplayName] = useState("");
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	//* Monitor currentl;y signed USER
 	useEffect(() => {
 		onAuthStateChanged(auth, (user) => {
 			if (user) {
-				console.log(user.email.split("@")[0]);
-				setUserName(user.email.split("@")[0]);
-				setUserImage(user.photoURL);
+				if (displayName == null) {
+					setDisplayName(user.email.split("@")[0]);
+				}
+				dispatch(
+					setActiveUser({
+						email: user.email,
+						userName: user.displayName ? user.displayName : displayName,
+						userId: user.uid,
+					})
+				);
 			} else {
-				setUserName("");
+				setDisplayName("");
+				dispatch(removeActiveUser());
 			}
 		});
 	}, []);
@@ -31,6 +44,7 @@ const Navbar = () => {
 			.then(() => {
 				toast.success("User Signed Out ");
 				navigate("/");
+				window.location.reload();
 			})
 			.catch((error) => {
 				const errorCode = error.code;
@@ -87,13 +101,7 @@ const Navbar = () => {
 						<div className="dropdown dropdown-end ml-4">
 							<label tabIndex={0} className="btn btn-ghost btn-circle avatar">
 								<div className="w-10 rounded-full">
-									<img
-										src={`${
-											userImage
-												? userImage
-												: "https://placeimg.com/80/80/people"
-										}`}
-									/>
+									<img src="https://placeimg.com/80/80/people" alt="dp" />
 								</div>
 							</label>
 							<ul
@@ -101,31 +109,35 @@ const Navbar = () => {
 								className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 "
 							>
 								{userName && (
-									<li>
-										<p>
-											Hi,
-											<span className="badge font-bold">{userName}</span>
+									<li className="bg-neutral text-white">
+										<p className="block">
+											Welcome, <span className="font-bold">{userName}</span>
 										</p>
 									</li>
 								)}
 
-								<li>
-									<Link to="/my-orders">My Orders</Link>
-								</li>
-								<li>
-									<label htmlFor="my-modal-4" className="modal-button">
-										Login / Register
-									</label>
-								</li>
-								<li>
-									<Link
-										to="/"
-										className="flex justify-between hover:bg-red-100  text-red-500"
-										onClick={logOutUser}
-									>
-										LOGOUT
-									</Link>
-								</li>
+								{isUserLoggedIn ? (
+									<div>
+										<li>
+											<Link to="/my-orders">My Orders</Link>
+										</li>
+										<li>
+											<Link
+												to="/"
+												className="flex justify-between hover:bg-red-100  text-red-500"
+												onClick={logOutUser}
+											>
+												LOGOUT
+											</Link>
+										</li>
+									</div>
+								) : (
+									<li>
+										<label htmlFor="my-modal-4" className="modal-button">
+											Login / Register
+										</label>
+									</li>
+								)}
 							</ul>
 						</div>
 					</div>
