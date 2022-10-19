@@ -34,6 +34,9 @@ const Login = () => {
 				toast.error(errorCode, errorMessage);
 				setIsLoading(false);
 			});
+
+		setEmail("");
+		setPassword("");
 	};
 
 	//* Login with Google

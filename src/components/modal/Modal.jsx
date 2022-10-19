@@ -10,13 +10,13 @@ const Modal = () => {
 			<label htmlFor="my-modal-4" className="modal cursor-pointer flex flex-col">
 				<div className="tabs tabs-boxed  ">
 					<button
-						className={`tab tab-md w-[50%] ${isLogin ? "tab-active" : null}`}
+						className={`tab tab-lg w-[50%] ${isLogin ? "tab-active" : null}`}
 						onClick={() => setIsLogin((prev) => !prev)}
 					>
 						Login
 					</button>
 					<button
-						className={`tab tab-md w-[50%] ${isLogin ? null : "tab-active"}`}
+						className={`tab tab-lg w-[50%] ${isLogin ? null : "tab-active"}`}
 						onClick={() => setIsLogin((prev) => !prev)}
 					>
 						Register
