@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+
 const Login = () => {
+	const [showPassword, setShowPassword] = useState(false);
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log("LOGGING IN...");
@@ -31,7 +35,7 @@ const Login = () => {
 									required
 								/>
 							</div>
-							<div className="mt-4">
+							<div className="mt-4 relative">
 								<div className="flex justify-between">
 									<label className="label-text font-bold mb-2">Password</label>
 									<Link
@@ -45,10 +49,25 @@ const Login = () => {
 									</Link>
 								</div>
 								<input
-									className="input input-bordered w-full border-2"
-									type="password"
+									className="input input-bordered w-full border-2 "
+									type={`${showPassword ? "test" : "password"}`}
 									required
 								/>
+								<span onClick={() => setShowPassword((prev) => !prev)}>
+									{showPassword ? (
+										<AiFillEye
+											className="absolute top-10 right-3 "
+											size={26}
+											color="gray"
+										/>
+									) : (
+										<AiFillEyeInvisible
+											className="absolute top-10 right-3 "
+											size={26}
+											color="gray"
+										/>
+									)}
+								</span>
 							</div>
 							<div className="mt-4">
 								<button type="submit" className="btn w-full">
