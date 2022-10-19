@@ -1,9 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 .page {
 	height: calc(100vh - 5rem);
+}
+
+.logo {
+	font-family: "Caveat", cursive;
 }
 
 /* LOADING SPINNER CSS */

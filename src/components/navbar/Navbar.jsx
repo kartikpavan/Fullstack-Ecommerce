@@ -18,7 +18,7 @@ const Navbar = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	//* Monitor currentl;y signed USER
+	//* Monitor currentlly signed USER
 	useEffect(() => {
 		onAuthStateChanged(auth, (user) => {
 			if (user) {
@@ -56,11 +56,13 @@ const Navbar = () => {
 	return (
 		<>
 			{/* {isLoading && <Loader />} */}
-			<nav className="h-16 bg-neutral  ">
+			<nav className="h-16 bg-neutral">
 				<div className="navbar w-full md:w-9/12 mx-auto flex items-center justify-between">
 					<section className="w-full md:gap-4">
 						<Link to="/" className="btn btn-ghost ">
-							<img src={logo} alt="logo" className="h-6 md:h-10" />
+							{/* 
+                  <img src={logo} alt="logo" className="h-6 md:h-10" /> */}
+							<h1 className="text-lg md:text-xl text-white">E-Shop.com</h1>
 						</Link>
 						<div className="form-control max-w-sm w-full ">
 							<div className="input-group ">
@@ -109,7 +111,7 @@ const Navbar = () => {
 								className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 "
 							>
 								{userName && (
-									<li className="bg-neutral text-white">
+									<li className="bg-blue-700 text-gray-200">
 										<p className="block">
 											Welcome, <span className="font-bold">{userName}</span>
 										</p>
