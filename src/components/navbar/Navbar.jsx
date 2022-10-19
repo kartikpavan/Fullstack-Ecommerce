@@ -56,8 +56,9 @@ const Navbar = () => {
 	return (
 		<>
 			<AdminRoute>
-				<div className="min-w-screen h-7 bg-red-200 text-red-700 font-bold text-center cursor-pointer">
-					ADMIN
+				<div className="min-w-screen h-10  py-1 bg-red-200 text-red-700 font-bold text-center cursor-pointer">
+					<span>ADMIN</span>
+					<span className="btn btn-primary btn-sm mx-4">VIEW DASHBOARD</span>
 				</div>
 			</AdminRoute>
 			<nav className="h-16 bg-neutral">
