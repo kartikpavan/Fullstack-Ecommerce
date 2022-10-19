@@ -1,18 +1,36 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { AiOutlineShoppingCart, AiOutlineSearch } from "react-icons/ai";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // firebase
-import { signOut } from "firebase/auth";
+import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase/config";
 
 const Navbar = () => {
+	const [userName, setUserName] = useState("");
+	const [userImage, setUserImage] = useState("");
+	const navigate = useNavigate();
+
+	//* Monitor currentl;y signed USER
+	useEffect(() => {
+		onAuthStateChanged(auth, (user) => {
+			if (user) {
+				console.log(user.email.split("@")[0]);
+				setUserName(user.email.split("@")[0]);
+				setUserImage(user.photoURL);
+			} else {
+				setUserName("");
+			}
+		});
+	}, []);
+
 	function logOutUser() {
 		signOut(auth)
 			.then(() => {
 				toast.success("User Signed Out ");
+				navigate("/");
 			})
 			.catch((error) => {
 				const errorCode = error.code;
@@ -69,19 +87,28 @@ const Navbar = () => {
 						<div className="dropdown dropdown-end ml-4">
 							<label tabIndex={0} className="btn btn-ghost btn-circle avatar">
 								<div className="w-10 rounded-full">
-									<img src="https://placeimg.com/80/80/people" />
+									<img
+										src={`${
+											userImage
+												? userImage
+												: "https://placeimg.com/80/80/people"
+										}`}
+									/>
 								</div>
 							</label>
 							<ul
 								tabIndex={0}
 								className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 "
 							>
-								<li>
-									<p>
-										Welcome,
-										<span className="badge font-bold">user</span>
-									</p>
-								</li>
+								{userName && (
+									<li>
+										<p>
+											Hi,
+											<span className="badge font-bold">{userName}</span>
+										</p>
+									</li>
+								)}
+
 								<li>
 									<Link to="/my-orders">My Orders</Link>
 								</li>
