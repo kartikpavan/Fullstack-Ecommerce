@@ -1,8 +1,7 @@
 import { Routes, Route } from "react-router-dom";
-import { Navbar, Modal } from "./components";
+import { Navbar, Modal, ProtectedRoute } from "./components";
 import { About, Home, OrderHistory, Cart, ResetPassword } from "./pages";
 import { ToastContainer } from "react-toastify";
-import { redirect } from "react-router-dom";
 
 const App = () => {
 	return (
@@ -12,7 +11,14 @@ const App = () => {
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/about" element={<About />} />
-				<Route path="/my-orders" element={<OrderHistory />} />
+				<Route
+					path="/my-orders"
+					element={
+						<ProtectedRoute>
+							<OrderHistory />
+						</ProtectedRoute>
+					}
+				/>
 				<Route path="/cart" element={<Cart />} />
 				<Route path="/reset" element={<ResetPassword />} />
 			</Routes>
