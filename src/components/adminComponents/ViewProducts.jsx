@@ -18,12 +18,17 @@ import {
 } from "firebase/firestore";
 import { ref, deleteObject } from "firebase/storage";
 import { db, storage } from "../../firebase/config";
+// Redux
+import { useSelector, useDispatch } from "react-redux";
+import { storeProducts } from "../../redux/slice/productSlice";
 
 const ViewProducts = () => {
+	// const { products: reduxProducts } = useSelector((store) => store.product);
 	const [products, setProducts] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
+	const dispatch = useDispatch();
 
-	async function fetchProducts() {
+	function fetchProducts() {
 		setIsLoading(true);
 		try {
 			const productRef = collection(db, "products");
@@ -35,6 +40,7 @@ const ViewProducts = () => {
 					allProducts.push({ id: doc.id, ...doc.data() });
 				});
 				setProducts(allProducts);
+				dispatch(storeProducts({ products: allProducts }));
 				setIsLoading(false);
 			});
 		} catch (error) {
@@ -65,7 +71,7 @@ const ViewProducts = () => {
 		<>
 			{isLoading && <Loader />}
 			<h1 className="text-xl md:text-3xl font-semibold ">All Products</h1>
-			<main className="max-w-[70vw] md:max-w-[50vw] max-h-[80vh] p-2 overflow-y-scroll ">
+			<main className="max-w-[70vw] md:max-w-[60vw] max-h-[80vh] p-2 overflow-y-scroll ">
 				{products.length && (
 					<div>
 						<div className="underline">
@@ -110,9 +116,9 @@ const ViewProducts = () => {
 													/>
 												</div>
 											</td>
-											<td>{name}</td>
-											<td>{category}</td>
-											<td>{formatPrice(price)}</td>
+											<td className="text-lg">{name}</td>
+											<td className="text-lg">{category}</td>
+											<td className="text-lg">{formatPrice(price)}</td>
 											<td>
 												<div className="flex flex-col md:flex-row gap-2 ">
 													<Link to="/admin/add-product">
