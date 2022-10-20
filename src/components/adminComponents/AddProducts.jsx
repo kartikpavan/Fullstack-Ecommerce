@@ -1,13 +1,22 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
+import Loader from "../loader/Loader";
 // utilities
 import { categories } from "../../utils/adminProductCategories";
 import { defaultValues } from "../../utils/adminAddProductDefaultValues";
 // Firebase
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { storage } from "../../firebase/config";
+import { collection, addDoc, Timestamp } from "firebase/firestore";
+import { storage, db } from "../../firebase/config";
+import { useNavigate } from "react-router-dom";
 
 //! Handle Input Changes
 const AddProducts = () => {
+	const [uploadProgress, setUploadProgress] = useState(0);
+	const [product, setProduct] = useState(defaultValues);
+	const [isLoading, setIsLoading] = useState(false);
+	const navigate = useNavigate();
+
 	function handleInputChange(e) {
 		const { name, value } = e.target;
 		setProduct({ ...product, [name]: value });
@@ -17,16 +26,54 @@ const AddProducts = () => {
 		const file = e.target.files[0];
 		const storageRef = ref(storage, `images/${Date.now()}${file.name}`);
 		const uploadTask = uploadBytesResumable(storageRef, file);
+
+		uploadTask.on(
+			"state_changed",
+			(snapshot) => {
+				const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+				setUploadProgress(progress);
+			},
+			(error) => {
+				toast.error(error.code, error.message);
+			},
+			() => {
+				// Handle successful uploads on complete
+				getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+					setProduct({ ...product, imageURL: downloadURL });
+					toast.success("File Uploaded Successfully");
+				});
+			}
+		);
 	}
 	//! Add Product to Firebase
-	function addProduct(e) {
+	async function addProduct(e) {
 		e.preventDefault();
-		console.log(product);
+		setIsLoading(true);
+		try {
+			const docRef = await addDoc(collection(db, "products"), {
+				name: product.name,
+				imageURL: product.imageURL,
+				price: Number(product.price),
+				category: product.category,
+				brand: product.brand,
+				description: product.description,
+				createdAt: Timestamp.now().toDate(),
+			});
+			setUploadProgress(0);
+			setProduct(defaultValues);
+			setIsLoading(false);
+			toast.success("Product added to Database Successfully");
+			navigate("/admin/all-products");
+		} catch (error) {
+			console.log(error.message);
+			toast.error("Something Went Wrong , Check Console");
+			setIsLoading(false);
+		}
 	}
 
-	const [product, setProduct] = useState(defaultValues);
 	return (
 		<>
+			{isLoading && <Loader />}
 			<h1 className="text-3xl font-semibold pb-3">Add a new Product</h1>
 			<main className="max-w-[70vw] md:max-w-[50vw] h-full rounded-md shadow-lg p-2">
 				<form className="form-control" onSubmit={addProduct}>
@@ -47,26 +94,29 @@ const AddProducts = () => {
 						<div className="border-2 rounded-sm  max-w-xl w-full px-4 pb-2">
 							<div>
 								<progress
-									className="progress progress-primary w-44 md:w-72"
-									value="40"
+									className="progress progress-primary w-44 md:w-72 xl:w-full"
+									value={uploadProgress}
 									max="100"
 								></progress>
 							</div>
 							<input
+								className="max-w-lg w-full"
 								accept="image/all"
 								type="file"
 								placeholder="IMAGE URL"
 								name="image"
 								onChange={handleImageChange}
 							/>
-							<input
-								className="input input-sm input-bordered max-w-lg w-full my-2"
-								type="text"
-								value={product.imageURL}
-								required
-								placeholder="Image URL"
-								disabled
-							/>
+							{product.imageURL === "" ? null : (
+								<input
+									className="input input-sm input-bordered max-w-lg w-full my-2"
+									type="text"
+									value={product.imageURL}
+									required
+									placeholder="Image URL"
+									disabled
+								/>
+							)}
 						</div>
 					</div>
 					<div className="py-2">
