@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AdminRoute from "../adminRoute/AdminRoute";
-
+import { AdminOnlyLink } from "../adminRoute/AdminRoute";
 import { AiOutlineShoppingCart, AiOutlineSearch } from "react-icons/ai";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -55,12 +55,14 @@ const Navbar = () => {
 
 	return (
 		<>
-			<AdminRoute>
+			<AdminOnlyLink>
 				<div className="min-w-screen h-10  py-1 bg-red-200 text-red-700 font-bold text-center cursor-pointer">
 					<span>ADMIN</span>
-					<span className="btn btn-primary btn-sm mx-4">VIEW DASHBOARD</span>
+					<Link to="/admin/home" className="btn btn-primary btn-sm mx-4">
+						VIEW DASHBOARD
+					</Link>
 				</div>
-			</AdminRoute>
+			</AdminOnlyLink>
 			<nav className="h-16 bg-neutral">
 				<div className="navbar w-full md:w-9/12 mx-auto flex items-center justify-between">
 					<section className="w-full md:gap-4">
@@ -124,12 +126,14 @@ const Navbar = () => {
 								{isUserLoggedIn ? (
 									<div>
 										<li>
-											<Link to="/my-orders">My Orders</Link>
+											<Link to="/my-orders" className="text-lg">
+												My Orders
+											</Link>
 										</li>
 										<li>
 											<Link
 												to="/"
-												className="flex justify-between hover:bg-red-100  text-red-500"
+												className="flex justify-between hover:bg-red-100  text-red-500 text-lg"
 												onClick={logOutUser}
 											>
 												LOGOUT
