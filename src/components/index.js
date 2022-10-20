@@ -11,3 +11,4 @@ export { default as AdminHome } from "./adminComponents/AdminHome";
 export { default as AdminSidebar } from "./adminComponents/AdminSidebar";
 export { default as Orders } from "./adminComponents/Orders";
 export { default as ViewProducts } from "./adminComponents/ViewProducts";
+export { default as ConfirmModal } from "./confirmModal/ConfirmModal";

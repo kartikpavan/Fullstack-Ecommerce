@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { formatPrice } from "../../utils/formatPrice";
 import { BiEdit, BiTrash } from "react-icons/bi";
 import { Link } from "react-router-dom";
-
+import ConfirmModal from "../confirmModal/ConfirmModal";
 // Firebase
 import {
 	doc,
@@ -108,7 +108,6 @@ const ViewProducts = () => {
 														alt={name}
 														className="w-10 sm:w-16 object-fill"
 													/>
-													<p>{imageURL}</p>
 												</div>
 											</td>
 											<td>{name}</td>
@@ -119,14 +118,22 @@ const ViewProducts = () => {
 													<Link to="/admin/add-product">
 														<BiEdit size={24} color="blue" />
 													</Link>
+													<label
+														htmlFor="my-modal-6"
+														className="modal-button"
+													>
+														<BiTrash
+															size={24}
+															color="red"
+															className="cursor-pointer"
+														/>
+													</label>
 
-													<BiTrash
-														size={24}
-														color="red"
-														className="cursor-pointer"
-														onClick={() =>
-															deleteSingleProduct(id, imageURL)
-														}
+													<ConfirmModal
+														deleteSingleProduct={deleteSingleProduct}
+														id={id}
+														imageURL={imageURL}
+														name={name}
 													/>
 												</div>
 											</td>
