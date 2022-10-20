@@ -1,34 +1,35 @@
 import React, { useState } from "react";
+// utilities
+import { categories } from "../../utils/adminProductCategories";
+import { defaultValues } from "../../utils/adminAddProductDefaultValues";
+// Firebase
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { storage } from "../../firebase/config";
 
-const defaultValues = {
-	name: "",
-	imageURl: "",
-	price: "",
-	category: "",
-	brand: "",
-	description: "",
-};
-
-const categories = [
-	{ id: 1, name: "Laptop" },
-	{ id: 2, name: "Electronics" },
-	{ id: 3, name: "Fashion" },
-	{ id: 4, name: "Phone" },
-];
-
-function handleInputChange(e) {
-	const name = e.target.name;
-	const value = e.target.value;
-}
-function handleImageChange(e) {}
-
+//! Handle Input Changes
 const AddProducts = () => {
+	function handleInputChange(e) {
+		const { name, value } = e.target;
+		setProduct({ ...product, [name]: value });
+	}
+	//! File Upload to FireStorage
+	function handleImageChange(e) {
+		const file = e.target.files[0];
+		const storageRef = ref(storage, `images/${Date.now()}${file.name}`);
+		const uploadTask = uploadBytesResumable(storageRef, file);
+	}
+	//! Add Product to Firebase
+	function addProduct(e) {
+		e.preventDefault();
+		console.log(product);
+	}
+
 	const [product, setProduct] = useState(defaultValues);
 	return (
 		<>
 			<h1 className="text-3xl font-semibold pb-3">Add a new Product</h1>
 			<main className="max-w-[70vw] md:max-w-[50vw] h-full rounded-md shadow-lg p-2">
-				<form className="form-control">
+				<form className="form-control" onSubmit={addProduct}>
 					<div className="py-2">
 						<label className="label-text font-bold mb-2 block">Product Name: </label>
 						<input
@@ -54,15 +55,16 @@ const AddProducts = () => {
 							<input
 								accept="image/all"
 								type="file"
-								placeholder="Product Image"
+								placeholder="IMAGE URL"
 								name="image"
 								onChange={handleImageChange}
-								required
 							/>
 							<input
 								className="input input-sm input-bordered max-w-lg w-full my-2"
 								type="text"
-								value={product.imageURl}
+								value={product.imageURL}
+								required
+								placeholder="Image URL"
 								disabled
 							/>
 						</div>
@@ -126,7 +128,9 @@ const AddProducts = () => {
 							onChange={handleInputChange}
 						></textarea>
 					</div>
-					<button className="btn btn-primary text-lg max-w-xs w-full">Add Product</button>
+					<button type="submit" className="btn btn-primary text-lg max-w-xs w-full">
+						Add Product
+					</button>
 				</form>
 			</main>
 		</>
