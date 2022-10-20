@@ -17,6 +17,10 @@ body {
 	font-family: "Caveat", cursive;
 }
 
+td {
+	font-weight: 600;
+}
+
 /* LOADING SPINNER CSS */
 
 .overlay {

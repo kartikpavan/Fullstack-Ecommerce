@@ -8,7 +8,7 @@ const Admin = () => {
 			<div className="w-24 md:w-96 border-r-2">
 				<AdminSidebar />
 			</div>
-			<div className="flex-1 p-4">
+			<div className="flex-1 sm:p-4">
 				<Routes>
 					<Route path="home" element={<AdminHome />} />
 					<Route path="all-products" element={<ViewProducts />} />

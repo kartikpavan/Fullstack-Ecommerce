@@ -70,11 +70,19 @@ const AddProducts = () => {
 			setIsLoading(false);
 		}
 	}
+	//! Disable button until everything added to input fields
+	const AllFieldsRequired =
+		Boolean(product.brand) &&
+		Boolean(product.category) &&
+		Boolean(product.description) &&
+		Boolean(product.imageURL) &&
+		Boolean(product.name) &&
+		Boolean(product.name);
 
 	return (
 		<>
 			{isLoading && <Loader />}
-			<h1 className="text-3xl font-semibold pb-3">Add a new Product</h1>
+			<h1 className="text-xl md:text-3xl font-semibold pb-3">Add a new Product</h1>
 			<main className="max-w-[70vw] md:max-w-[50vw] h-full rounded-md shadow-lg p-2">
 				<form className="form-control" onSubmit={addProduct}>
 					<div className="py-2">
@@ -91,33 +99,6 @@ const AddProducts = () => {
 					</div>
 					<div>
 						<label className="label-text font-bold mb-2 block">Product Image: </label>
-						<div className="border-2 rounded-sm  max-w-xl w-full px-4 pb-2">
-							<div>
-								<progress
-									className="progress progress-primary w-44 md:w-72 xl:w-full"
-									value={uploadProgress}
-									max="100"
-								></progress>
-							</div>
-							<input
-								className="max-w-lg w-full"
-								accept="image/all"
-								type="file"
-								placeholder="IMAGE URL"
-								name="image"
-								onChange={handleImageChange}
-							/>
-							{product.imageURL === "" ? null : (
-								<input
-									className="input input-sm input-bordered max-w-lg w-full my-2"
-									type="text"
-									value={product.imageURL}
-									required
-									placeholder="Image URL"
-									disabled
-								/>
-							)}
-						</div>
 					</div>
 					<div className="py-2">
 						<label className="label-text font-bold mb-2 block">Product Price: </label>
@@ -178,7 +159,38 @@ const AddProducts = () => {
 							onChange={handleInputChange}
 						></textarea>
 					</div>
-					<button type="submit" className="btn btn-primary text-lg max-w-xs w-full">
+					<div className="border-2 rounded-sm  max-w-xl w-full px-4 pb-2">
+						<div>
+							<progress
+								className="progress progress-primary w-44 md:w-72 xl:w-full"
+								value={uploadProgress}
+								max="100"
+							></progress>
+						</div>
+						<input
+							className="max-w-lg w-full"
+							accept="image/all"
+							type="file"
+							placeholder="IMAGE URL"
+							name="image"
+							onChange={handleImageChange}
+						/>
+						{product.imageURL === "" ? null : (
+							<input
+								className="input input-sm input-bordered max-w-lg w-full my-2"
+								type="text"
+								value={product.imageURL}
+								required
+								placeholder="Image URL"
+								disabled
+							/>
+						)}
+					</div>
+					<button
+						type="submit"
+						className="btn btn-primary text-lg max-w-xs w-full mt-2"
+						disabled={!AllFieldsRequired}
+					>
 						Add Product
 					</button>
 				</form>
