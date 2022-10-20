@@ -4,11 +4,11 @@ import { AddProducts, AdminHome, AdminSidebar, Orders, ViewProducts } from "../.
 
 const Admin = () => {
 	return (
-		<div className="max-w-[80vw] mx-auto w-full h-[88vh] flex bg-base-100 ">
-			<div className="w-96 border-4 border-red-300 p-4">
+		<div className="max-w-[100vw] mx-auto w-full h-[88vh] flex bg-base-100 ">
+			<div className="w-24 md:w-96 border-r-2">
 				<AdminSidebar />
 			</div>
-			<div className="flex-1 p-4 border-green-400 border-4">
+			<div className="flex-1 p-4">
 				<Routes>
 					<Route path="home" element={<AdminHome />} />
 					<Route path="all-products" element={<ViewProducts />} />
