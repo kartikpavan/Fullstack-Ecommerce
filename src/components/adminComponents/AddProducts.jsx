@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import Loader from "../loader/Loader";
+import { useNavigate, useParams } from "react-router-dom";
+
 // utilities
 import { categories } from "../../utils/adminProductCategories";
 import { defaultValues } from "../../utils/adminAddProductDefaultValues";
@@ -8,15 +10,26 @@ import { defaultValues } from "../../utils/adminAddProductDefaultValues";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { storage, db } from "../../firebase/config";
-import { useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 //! Handle Input Changes
 const AddProducts = () => {
-	const [uploadProgress, setUploadProgress] = useState(0);
-	const [product, setProduct] = useState(defaultValues);
-	const [isLoading, setIsLoading] = useState(false);
 	const navigate = useNavigate();
 	const { id: paramsId } = useParams();
+	const { products: reduxProducts } = useSelector((store) => store.product);
+	const productEdit = reduxProducts.find((item) => item.id === paramsId);
+	const [product, setProduct] = useState(() => {
+		return detectForm(paramsId, defaultValues, productEdit);
+	});
+	const [uploadProgress, setUploadProgress] = useState(0);
+	const [isLoading, setIsLoading] = useState(false);
+
+	//! Check for Add or Edit
+	function detectForm(paramsId, func1, func2) {
+		if (paramsId === "ADD") return func1;
+		return func2;
+	}
+
 	function handleInputChange(e) {
 		const { name, value } = e.target;
 		setProduct({ ...product, [name]: value });
@@ -70,6 +83,18 @@ const AddProducts = () => {
 			setIsLoading(false);
 		}
 	}
+	//! Edit Product
+	function editProduct(e) {
+		e.preventDefault();
+		setIsLoading(true);
+		try {
+		} catch (error) {
+			console.log(error.message);
+			toast.error("Something Went Wrong , Check Console");
+			setIsLoading(false);
+		}
+	}
+
 	//! Disable button until everything added to input fields
 	const AllFieldsRequired =
 		Boolean(product.brand) &&
@@ -84,10 +109,13 @@ const AddProducts = () => {
 			{isLoading && <Loader />}
 
 			<h1 className="text-xl md:text-3xl font-semibold pb-3">
-				{paramsId !== "ADD" ? "Edit product" : "Add a new Product"}
+				{detectForm(paramsId, "Add New Product", "Edit Product")}
 			</h1>
 			<main className="max-w-[70vw] md:max-w-[50vw] h-full rounded-md shadow-lg p-2">
-				<form className="form-control" onSubmit={addProduct}>
+				<form
+					className="form-control"
+					onSubmit={detectForm(paramsId, addProduct, editProduct)}
+				>
 					<div className="py-2">
 						<label className="label-text font-bold mb-2 block text-lg">
 							Product Name:{" "}
@@ -203,10 +231,10 @@ const AddProducts = () => {
 
 					<button
 						type="submit"
-						className="btn btn-primary text-lg max-w-xs w-full mt-2"
+						className="btn btn-primary text-lg max-w-[200px]  mt-2"
 						disabled={!AllFieldsRequired}
 					>
-						Add Product
+						{detectForm(paramsId, "Add Product", "Update Product")}
 					</button>
 				</form>
 			</main>
