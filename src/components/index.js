@@ -14,3 +14,6 @@ export { default as ConfirmModal } from "./confirmModal/ConfirmModal";
 export { default as Breadcrumbs } from "./breadcrumbs/Breadcrumbs";
 export { default as ProductList } from "./Products/ProductList";
 export { default as ProductFilter } from "./Products/ProductFilter";
+export { default as ListView } from "./Products/ListView";
+export { default as GridView } from "./Products/GridView";
+export { default as Search } from "./search/Search";
