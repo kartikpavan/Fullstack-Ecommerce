@@ -73,7 +73,7 @@ const ViewProducts = () => {
 					<h1 className="text-4xl font-bold text-red-500">NO PRODUCTS FOUND</h1>
 				) : (
 					<div className="overflow-x-auto mt-2 w-full">
-						<table className="table table-zebra table-compact	 w-full">
+						<table className="table table-zebra table-compact w-full">
 							{/* TABLE HEAD */}
 							<thead>
 								<tr>
@@ -90,7 +90,7 @@ const ViewProducts = () => {
 								{products?.map((p, index) => {
 									const { id, name, category, price, imageURL } = p;
 									return (
-										<tr key={id} className="hover">
+										<tr key={id}>
 											<td>{index + 1}</td>
 											<td>
 												<div>
@@ -104,9 +104,13 @@ const ViewProducts = () => {
 													/>
 												</div>
 											</td>
-											<td className="text-lg w-[200px]">{name}</td>
-											<td className="text-lg">{category}</td>
-											<td className="text-lg">{formatPrice(price)}</td>
+											<td className="text-lg font-light w-[200px] ">
+												{name}
+											</td>
+											<td className="text-lg font-light">{category}</td>
+											<td className="text-lg font-light">
+												{formatPrice(price)}
+											</td>
 											<td>
 												<div className="flex flex-col md:flex-row gap-2 ">
 													<Link to={`/admin/add-product/${id}`}>

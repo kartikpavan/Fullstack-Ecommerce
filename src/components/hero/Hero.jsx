@@ -1,5 +1,6 @@
 import hero from "../../assets/hero3.png";
-
+import { Link } from "react-router-dom";
+import { TbArrowNarrowRight } from "react-icons/tb";
 const Hero = () => {
 	return (
 		<div className="hero min-h-screen bg-base-200 xl:relative overflow-clip">
@@ -15,7 +16,13 @@ const Hero = () => {
 						Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi
 						exercitationem quasi.
 					</p>
-					<button className="btn btn-primary ">Shop Now</button>
+					<Link
+						to="/all"
+						className="btn btn-primary text-xl flex items-center gap-2 max-w-[200px]"
+					>
+						Shop Now
+						<TbArrowNarrowRight />
+					</Link>
 				</div>
 			</div>
 		</div>

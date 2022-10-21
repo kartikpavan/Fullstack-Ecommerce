@@ -1,6 +1,15 @@
 import { Routes, Route } from "react-router-dom";
 import { Navbar, Modal, ProtectedRoute, AdminRoute } from "./components";
-import { About, Home, OrderHistory, Cart, ResetPassword, NotFound, Admin } from "./pages";
+import {
+	About,
+	Home,
+	OrderHistory,
+	Cart,
+	ResetPassword,
+	NotFound,
+	Admin,
+	AllProducts,
+} from "./pages";
 import { ToastContainer } from "react-toastify";
 
 const App = () => {
@@ -21,7 +30,7 @@ const App = () => {
 				/>
 				<Route path="/cart" element={<Cart />} />
 				<Route path="/reset" element={<ResetPassword />} />
-
+				<Route path="/all" element={<AllProducts />} />
 				{/* ADMIN ROUTES */}
 				<Route
 					path="/admin/*"

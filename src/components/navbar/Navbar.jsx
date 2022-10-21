@@ -55,44 +55,37 @@ const Navbar = () => {
 
 	return (
 		<>
-			<AdminOnlyLink>
-				<div className="min-w-screen h-10  py-1 bg-red-200 text-red-700 font-bold text-center cursor-pointer">
-					<span>ADMIN</span>
-					<Link to="/admin/home" className="btn btn-primary btn-sm mx-4">
-						VIEW DASHBOARD
-					</Link>
-				</div>
-			</AdminOnlyLink>
-			<nav className="h-16 bg-neutral">
+			<nav className="h-16 bg-base-100 shadow-xl   ">
 				<div className="navbar w-full md:w-9/12 mx-auto flex items-center justify-between">
 					<section className="w-full md:gap-4">
 						<Link to="/" className="btn btn-ghost ">
-							<h1 className="logo text-white text-lg md:text-2xl ">E-Shop.com</h1>
+							<h1 className="logo text-black text-lg md:text-3xl ">E-Shop.com</h1>
 						</Link>
-						<div className="form-control max-w-sm w-full ">
-							<div className="input-group ">
-								<input
-									type="text"
-									placeholder="Search…"
-									className="input input-sm input-bordered w-full "
-								/>
-								<button className="btn btn-square btn-sm btn-primary">
-									<AiOutlineSearch size={26} />
-								</button>
-							</div>
-						</div>
 					</section>
+					<AdminOnlyLink>
+						<div className="mx-10">
+							<span className=" text-red-400 text-xl font-bold underline ">
+								ADMIN
+							</span>
+							<Link
+								to="/admin/home"
+								className="btn btn-primary mx-4 btn-sm sm:btn-md"
+							>
+								VIEW DASHBOARD
+							</Link>
+						</div>
+					</AdminOnlyLink>
 					<div className="md:gap-2">
 						<div className="dropdown dropdown-end ">
 							<label tabIndex={0} className="btn btn-ghost btn-circle">
 								<div className="indicator">
-									<AiOutlineShoppingCart color="white" size={30} />
+									<AiOutlineShoppingCart size={30} />
 									<span className="badge badge-primary indicator-item">8</span>
 								</div>
 							</label>
 							<div
 								tabIndex={0}
-								className="mt-3 card card-compact dropdown-content w-52 bg-neutral text-neutral-content shadow "
+								className="mt-3 card card-compact dropdown-content w-52 bg-base-100  shadow-xl "
 							>
 								<div className="card-body">
 									<span className="font-bold text-lg">8 Items</span>

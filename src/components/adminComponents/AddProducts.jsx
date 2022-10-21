@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import Loader from "../loader/Loader";
+// React Router Dom
 import { useNavigate, useParams } from "react-router-dom";
-
 // utilities
 import { categories } from "../../utils/adminProductCategories";
 import { defaultValues } from "../../utils/adminAddProductDefaultValues";
 // Firebase
 import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from "firebase/storage";
 import { collection, addDoc, Timestamp, setDoc, doc } from "firebase/firestore";
-
 import { storage, db } from "../../firebase/config";
+// Redux
 import { useSelector } from "react-redux";
 
 //! Handle Input Changes
@@ -38,6 +38,7 @@ const AddProducts = () => {
 	//! File Upload to FireStorage
 	function handleImageChange(e) {
 		const file = e.target.files[0];
+
 		const storageRef = ref(storage, `images/${Date.now()}${file.name}`);
 		const uploadTask = uploadBytesResumable(storageRef, file);
 
@@ -131,10 +132,10 @@ const AddProducts = () => {
 		<>
 			{isLoading && <Loader />}
 
-			<h1 className="text-xl md:text-3xl font-semibold pb-3">
-				{detectForm(paramsId, "Add New Product", "Edit Product")}
-			</h1>
-			<main className="max-w-[70vw] md:max-w-[50vw] h-full rounded-md shadow-lg p-2">
+			<main className="h-full border-r-2 p-1">
+				<h1 className="text-xl md:text-3xl font-semibold pb-3">
+					{detectForm(paramsId, "Add New Product", "Edit Product")}
+				</h1>
 				<form
 					className="form-control"
 					onSubmit={detectForm(paramsId, addProduct, editProduct)}
