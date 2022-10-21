@@ -6,10 +6,10 @@ import { MdOutlineSubject } from "react-icons/md";
 
 const ProductList = ({ products }) => {
 	const [grid, setGrid] = useState(true);
-
+	const [search, setSearch] = useState("");
 	return (
 		<main>
-			<header className="flex flex-col gap-y-4 md:flex-row md:items-center justify-between border-b pb-2">
+			<header className="flex flex-col gap-y-4 xl:flex-row xl:items-center justify-between border-b pb-2">
 				<div className="flex gap-2 items-center">
 					<div className="flex gap-4">
 						<BsFillGridFill
@@ -23,14 +23,11 @@ const ProductList = ({ products }) => {
 							className={` rounded-md p-1 ${grid ? null : "bg-neutral text-white"}`}
 						/>
 					</div>
-					<div>
-						<h1>
-							<span className="font-bold">10 </span>- Products Found
-						</h1>
-					</div>
+					<h1>
+						<span className="font-bold">10 </span>- Products Found
+					</h1>
 				</div>
-
-				<Search />
+				<Search value={search} onChange={(e) => setSearch(e.target.value)} />
 				<div className="flex gap-2 items-center">
 					<label>Sort by:</label>
 					<select name="" id="" className="select select-sm select-bordered">
@@ -42,7 +39,9 @@ const ProductList = ({ products }) => {
 					</select>
 				</div>
 			</header>
-			<section>{grid ? <GridView /> : <ListView />}</section>
+			<section>
+				{grid ? <GridView products={products} /> : <ListView products={products} />}
+			</section>
 		</main>
 	);
 };

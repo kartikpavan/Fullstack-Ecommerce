@@ -1,15 +1,22 @@
 import React from "react";
-
-const Search = () => {
+import { BiSearch } from "react-icons/bi";
+const Search = ({ value, onChange }) => {
 	return (
 		<div>
-			<input
-				type="text"
-				name=""
-				id=""
-				placeholder="Search for a product"
-				className="input input-bordered  w-[300px]"
-			/>
+			<div className="input-group">
+				<input
+					type="text"
+					name=""
+					id=""
+					value={value}
+					onChange={onChange}
+					placeholder="Search by name"
+					className="input input-bordered  w-[300px]"
+				/>
+				<button className="btn btn-square">
+					<BiSearch size={24} />
+				</button>
+			</div>
 		</div>
 	);
 };
