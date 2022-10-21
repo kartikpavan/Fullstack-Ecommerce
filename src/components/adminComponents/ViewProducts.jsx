@@ -1,42 +1,30 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Loader from "../loader/Loader";
 import { toast } from "react-toastify";
 import { formatPrice } from "../../utils/formatPrice";
 import { BiEdit, BiTrash } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import ConfirmModal from "../confirmModal/ConfirmModal";
+import useFetchProductCollection from "../../hooks/useFetchProductCollection";
 // Firebase
-import { doc, collection, query, orderBy, onSnapshot, deleteDoc } from "firebase/firestore";
+import { doc, deleteDoc } from "firebase/firestore";
 import { ref, deleteObject } from "firebase/storage";
 import { db, storage } from "../../firebase/config";
 // Redux
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { storeProducts } from "../../redux/slice/productSlice";
 
 const ViewProducts = () => {
-	const [products, setProducts] = useState([]);
-	const [isLoading, setIsLoading] = useState(false);
 	const dispatch = useDispatch();
 
-	function fetchProducts() {
-		setIsLoading(true);
-		try {
-			const productRef = collection(db, "products");
-			const q = query(productRef, orderBy("createdAt", "desc"));
-			onSnapshot(q, (querySnapshot) => {
-				const allProducts = [];
-				querySnapshot.forEach((doc) => {
-					allProducts.push({ id: doc.id, ...doc.data() });
-				});
-				setProducts(allProducts);
-				dispatch(storeProducts({ products: allProducts }));
-				setIsLoading(false);
-			});
-		} catch (error) {
-			toast.error(error.code, error.message);
-			setIsLoading(false);
-		}
-	}
+	//! Fetching Products from collection using Custom Hook
+	const { data, isLoading } = useFetchProductCollection("products");
+	const { products } = useSelector((store) => store.product);
+
+	useEffect(() => {
+		dispatch(storeProducts({ products: data }));
+	}, [dispatch, data]);
+
 	//! Delete single product
 	const deleteSingleProduct = async (id, imageURL) => {
 		try {
@@ -51,11 +39,6 @@ const ViewProducts = () => {
 			console.log(error.message);
 		}
 	};
-
-	useEffect(() => {
-		fetchProducts();
-	}, []);
-
 	return (
 		<>
 			{isLoading && <Loader />}
