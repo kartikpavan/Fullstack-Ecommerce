@@ -68,7 +68,7 @@ const ViewProducts = () => {
 					</div>
 				</div>
 			)}
-			<main className="md:max-w-[100vw] max-h-[80vh] p-2 overflow-y-scroll ">
+			<main className="md:max-w-[100vw] max-h-[70vh] py-4 overflow-y-scroll ">
 				{products.length === 0 ? (
 					<h1 className="text-4xl font-bold text-red-500">NO PRODUCTS FOUND</h1>
 				) : (

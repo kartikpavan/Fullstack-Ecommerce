@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import AdminRoute from "../adminRoute/AdminRoute";
 import { AdminOnlyLink } from "../adminRoute/AdminRoute";
 import { AiOutlineShoppingCart, AiOutlineSearch } from "react-icons/ai";
 import { toast } from "react-toastify";
@@ -19,7 +18,7 @@ const Navbar = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	//* Monitor currentlly signed USER
+	//* Monitor currently signed USER
 	useEffect(() => {
 		onAuthStateChanged(auth, (user) => {
 			if (user) {
@@ -55,31 +54,19 @@ const Navbar = () => {
 
 	return (
 		<>
-			<nav className="h-20 bg-base-100 shadow-xl  flex items-center ">
+			<nav className="h-[8vh] bg-neutral shadow-xl  flex items-center ">
 				<div className="navbar w-full md:w-9/12 mx-auto flex items-center justify-between">
 					<section className="w-full md:gap-4">
 						<Link to="/" className="btn btn-ghost ">
-							<h1 className="logo text-black text-lg md:text-3xl ">E-Shop.com</h1>
+							<h1 className="logo text-white text-lg md:text-3xl ">E-Shop.com</h1>
 						</Link>
 					</section>
-					<AdminOnlyLink>
-						<div className="mx-10">
-							<span className=" text-red-400 text-xl font-bold underline ">
-								ADMIN
-							</span>
-							<Link
-								to="/admin/home"
-								className="btn btn-secondary-content mx-4 btn-sm sm:btn-md"
-							>
-								VIEW DASHBOARD
-							</Link>
-						</div>
-					</AdminOnlyLink>
+
 					<div className="md:gap-2">
 						<div className="dropdown dropdown-end ">
 							<label tabIndex={0} className="btn btn-ghost btn-circle">
 								<div className="indicator">
-									<AiOutlineShoppingCart size={30} />
+									<AiOutlineShoppingCart size={30} color="white" />
 									<span className="badge badge-secondary-content indicator-item">
 										8
 									</span>
@@ -147,6 +134,15 @@ const Navbar = () => {
 					</div>
 				</div>
 			</nav>
+			<AdminOnlyLink>
+				<div className="min-w-screen h-10  py-1 bg-red-200 text-red-700 font-bold text-center cursor-pointer">
+					<span>ADMIN</span>
+
+					<Link to="/admin/home" className="btn btn-primary btn-sm mx-4">
+						VIEW DASHBOARD
+					</Link>
+				</div>
+			</AdminOnlyLink>
 		</>
 	);
 };

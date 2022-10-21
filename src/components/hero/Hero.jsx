@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { TbArrowNarrowRight } from "react-icons/tb";
 const Hero = () => {
 	return (
-		<div className="hero min-h-screen bg-base-200 xl:relative overflow-clip">
+		<div className="hero min-h-[91vh] bg-base-200 xl:relative overflow-clip">
 			<div className="hero-content flex-col xl:flex-row-reverse ">
 				<img
 					src={hero}
