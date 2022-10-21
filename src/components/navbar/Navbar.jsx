@@ -55,7 +55,7 @@ const Navbar = () => {
 
 	return (
 		<>
-			<nav className="h-16 bg-base-100 shadow-xl   ">
+			<nav className="h-20 bg-base-100 shadow-xl  flex items-center ">
 				<div className="navbar w-full md:w-9/12 mx-auto flex items-center justify-between">
 					<section className="w-full md:gap-4">
 						<Link to="/" className="btn btn-ghost ">
@@ -69,7 +69,7 @@ const Navbar = () => {
 							</span>
 							<Link
 								to="/admin/home"
-								className="btn btn-primary mx-4 btn-sm sm:btn-md"
+								className="btn btn-secondary-content mx-4 btn-sm sm:btn-md"
 							>
 								VIEW DASHBOARD
 							</Link>
@@ -80,7 +80,9 @@ const Navbar = () => {
 							<label tabIndex={0} className="btn btn-ghost btn-circle">
 								<div className="indicator">
 									<AiOutlineShoppingCart size={30} />
-									<span className="badge badge-primary indicator-item">8</span>
+									<span className="badge badge-secondary-content indicator-item">
+										8
+									</span>
 								</div>
 							</label>
 							<div

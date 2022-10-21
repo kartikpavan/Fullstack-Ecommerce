@@ -1,10 +1,19 @@
 import React from "react";
+import { Link, NavLink } from "react-router-dom";
 
 const Breadcrumbs = () => {
+	const activeLink = ({ isActive }) => (isActive ? "text-secondary-content " : "text-secondary");
+
 	return (
-		<section className="h-32 w-full bg-base-300 flex items-center">
-			<div className="w-9/12 mx-auto px-6 ">
-				<h1 className="text-gray-800 text-3xl font-bold ">Home / Products</h1>
+		<section className="h-44 w-full bg-primary-content flex items-center">
+			<div className="w-full mx-auto px-2 md:w-9/12 md:px-6 ">
+				<Link to="/" className="text-xl md:text-3xl font-bold text-secondary">
+					Home /
+				</Link>
+
+				<NavLink to="/all" className={activeLink}>
+					<span className="text-xl md:text-3xl font-bold"> Products</span>
+				</NavLink>
 			</div>
 		</section>
 	);

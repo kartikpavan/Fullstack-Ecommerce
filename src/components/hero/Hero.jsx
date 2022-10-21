@@ -18,7 +18,7 @@ const Hero = () => {
 					</p>
 					<Link
 						to="/all"
-						className="btn btn-primary text-xl flex items-center gap-2 max-w-[200px]"
+						className="btn btn-secondary-content text-xl flex items-center gap-2 max-w-[200px]"
 					>
 						Shop Now
 						<TbArrowNarrowRight />

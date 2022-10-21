@@ -73,7 +73,7 @@ const ViewProducts = () => {
 					<h1 className="text-4xl font-bold text-red-500">NO PRODUCTS FOUND</h1>
 				) : (
 					<div className="overflow-x-auto mt-2 w-full">
-						<table className="table table-zebra table-compact w-full">
+						<table className="table table-compact w-full">
 							{/* TABLE HEAD */}
 							<thead>
 								<tr>
@@ -90,7 +90,7 @@ const ViewProducts = () => {
 								{products?.map((p, index) => {
 									const { id, name, category, price, imageURL } = p;
 									return (
-										<tr key={id}>
+										<tr key={id} className="hover">
 											<td>{index + 1}</td>
 											<td>
 												<div>
