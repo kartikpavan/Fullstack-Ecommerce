@@ -6,24 +6,14 @@ import { BiEdit, BiTrash } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import ConfirmModal from "../confirmModal/ConfirmModal";
 // Firebase
-import {
-	doc,
-	getDoc,
-	collection,
-	query,
-	where,
-	orderBy,
-	onSnapshot,
-	deleteDoc,
-} from "firebase/firestore";
+import { doc, collection, query, orderBy, onSnapshot, deleteDoc } from "firebase/firestore";
 import { ref, deleteObject } from "firebase/storage";
 import { db, storage } from "../../firebase/config";
 // Redux
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { storeProducts } from "../../redux/slice/productSlice";
 
 const ViewProducts = () => {
-	// const { products: reduxProducts } = useSelector((store) => store.product);
 	const [products, setProducts] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const dispatch = useDispatch();
@@ -32,7 +22,6 @@ const ViewProducts = () => {
 		setIsLoading(true);
 		try {
 			const productRef = collection(db, "products");
-			// const q = query(productRef);
 			const q = query(productRef, orderBy("createdAt", "desc"));
 			onSnapshot(q, (querySnapshot) => {
 				const allProducts = [];
@@ -71,16 +60,15 @@ const ViewProducts = () => {
 		<>
 			{isLoading && <Loader />}
 			<h1 className="text-xl md:text-3xl font-semibold ">All Products</h1>
-			<main className="max-w-[70vw] md:max-w-[60vw] max-h-[80vh] p-2 overflow-y-scroll ">
-				{products.length && (
-					<div>
-						<div className="underline">
-							<span className="text-lg font-bold ">{products.length} </span> products
-							found
-						</div>
+			{products.length && (
+				<div>
+					<div className="underline">
+						<span className="text-lg font-bold ">{products.length} </span> products
+						found
 					</div>
-				)}
-
+				</div>
+			)}
+			<main className="max-w-[70vw] md:max-w-[60vw] max-h-[80vh] p-2 overflow-y-scroll ">
 				{products.length === 0 ? (
 					<h1 className="text-4xl font-bold text-red-500">NO PRODUCTS FOUND</h1>
 				) : (
@@ -121,7 +109,7 @@ const ViewProducts = () => {
 											<td className="text-lg">{formatPrice(price)}</td>
 											<td>
 												<div className="flex flex-col md:flex-row gap-2 ">
-													<Link to="/admin/add-product">
+													<Link to={`/admin/add-product/${id}`}>
 														<BiEdit size={24} color="blue" />
 													</Link>
 													<label

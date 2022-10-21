@@ -15,22 +15,22 @@ const AdminSidebar = () => {
 				<h1 className="text-lg md:text-2xl font-bold text-gray-200">{userName}</h1>
 			</div>
 			<nav>
-				<div className="text-md md:text-2xl p-4 duration-300">
+				<div className="text-md md:text-xl p-4 duration-300  border-b-2 ">
 					<NavLink to="/admin/home" className={activeLink}>
 						Home
 					</NavLink>
 				</div>
-				<div className="text-md md:text-2xl  duration-300  p-4">
+				<div className="text-md md:text-xl  duration-300  border-b-2   p-4">
 					<NavLink to="/admin/all-products" className={activeLink}>
 						All Products
 					</NavLink>
 				</div>
-				<div className="text-md md:text-2xl  duration-300  p-4">
-					<NavLink to="/admin/add-product" className={activeLink}>
+				<div className="text-md md:text-xl  duration-300   border-b-2  p-4">
+					<NavLink to="/admin/add-product/ADD" className={activeLink}>
 						Add Products
 					</NavLink>
 				</div>
-				<div className="text-md md:text-2xl  duration-300  p-4">
+				<div className="text-md md:text-xl  duration-300   border-b-2  p-4">
 					<NavLink to="/admin/orders" className={activeLink}>
 						Orders
 					</NavLink>

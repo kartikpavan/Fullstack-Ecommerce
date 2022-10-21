@@ -8,7 +8,7 @@ const ConfirmModal = ({ deleteSingleProduct, id, imageURL, name }) => {
 				<div className="modal-box">
 					<h3 className="font-bold text-lg">Delete item ? </h3>
 					<div className="alert shadow-lg text-gray-700 border-l-4 border-red-600 my-4">
-						Are You sure you want to delete the item
+						Click "CONFIRM" to delete the item.
 					</div>
 
 					<div className="modal-action">

@@ -8,7 +8,7 @@ import { defaultValues } from "../../utils/adminAddProductDefaultValues";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { storage, db } from "../../firebase/config";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 //! Handle Input Changes
 const AddProducts = () => {
@@ -16,7 +16,7 @@ const AddProducts = () => {
 	const [product, setProduct] = useState(defaultValues);
 	const [isLoading, setIsLoading] = useState(false);
 	const navigate = useNavigate();
-
+	const { id: paramsId } = useParams();
 	function handleInputChange(e) {
 		const { name, value } = e.target;
 		setProduct({ ...product, [name]: value });
@@ -82,11 +82,16 @@ const AddProducts = () => {
 	return (
 		<>
 			{isLoading && <Loader />}
-			<h1 className="text-xl md:text-3xl font-semibold pb-3">Add a new Product</h1>
+
+			<h1 className="text-xl md:text-3xl font-semibold pb-3">
+				{paramsId !== "ADD" ? "Edit product" : "Add a new Product"}
+			</h1>
 			<main className="max-w-[70vw] md:max-w-[50vw] h-full rounded-md shadow-lg p-2">
 				<form className="form-control" onSubmit={addProduct}>
 					<div className="py-2">
-						<label className="label-text font-bold mb-2 block">Product Name: </label>
+						<label className="label-text font-bold mb-2 block text-lg">
+							Product Name:{" "}
+						</label>
 						<input
 							className="input input-bordered max-w-lg w-full border-2"
 							type="text"
@@ -97,11 +102,11 @@ const AddProducts = () => {
 							onChange={handleInputChange}
 						/>
 					</div>
-					<div>
-						<label className="label-text font-bold mb-2 block">Product Image: </label>
-					</div>
+
 					<div className="py-2">
-						<label className="label-text font-bold mb-2 block">Product Price: </label>
+						<label className="label-text font-bold mb-2 block text-lg">
+							Product Price:{" "}
+						</label>
 						<input
 							className="input input-bordered max-w-lg w-full border-2"
 							type="number"
@@ -113,7 +118,9 @@ const AddProducts = () => {
 						/>
 					</div>
 					<div className="py-2">
-						<label className="label-text font-bold mb-2 block">Product Category:</label>
+						<label className="label-text font-bold mb-2 block text-lg">
+							Product Category:
+						</label>
 						<select
 							className="select select-bordered w-full max-w-lg"
 							required
@@ -134,7 +141,9 @@ const AddProducts = () => {
 						</select>
 					</div>
 					<div className="py-2">
-						<label className="label-text font-bold mb-2 block">Product Brand: </label>
+						<label className="label-text font-bold mb-2 block text-lg">
+							Product Brand:{" "}
+						</label>
 						<input
 							className="input input-bordered max-w-lg w-full border-2"
 							type="text"
@@ -146,7 +155,7 @@ const AddProducts = () => {
 						/>
 					</div>
 					<div className="py-2">
-						<label className="label-text font-bold mb-2 block">
+						<label className="label-text font-bold mb-2 block text-lg">
 							Product Description:{" "}
 						</label>
 						<textarea
@@ -159,33 +168,39 @@ const AddProducts = () => {
 							onChange={handleInputChange}
 						></textarea>
 					</div>
-					<div className="border-2 rounded-sm  max-w-xl w-full px-4 pb-2">
-						<div>
-							<progress
-								className="progress progress-primary w-44 md:w-72 xl:w-full"
-								value={uploadProgress}
-								max="100"
-							></progress>
-						</div>
-						<input
-							className="max-w-lg w-full"
-							accept="image/all"
-							type="file"
-							placeholder="IMAGE URL"
-							name="image"
-							onChange={handleImageChange}
-						/>
-						{product.imageURL === "" ? null : (
+					<div>
+						<label className="label-text font-bold mb-2 block text-lg">
+							Product Image:{" "}
+						</label>
+						<div className="border-2 rounded-sm  max-w-xl w-full px-4 pb-2">
+							<div>
+								<progress
+									className="progress progress-primary w-44 md:w-72 xl:w-full"
+									value={uploadProgress}
+									max="100"
+								></progress>
+							</div>
 							<input
-								className="input input-sm input-bordered max-w-lg w-full my-2"
-								type="text"
-								value={product.imageURL}
-								required
-								placeholder="Image URL"
-								disabled
+								className="max-w-lg w-full"
+								accept="image/all"
+								type="file"
+								placeholder="IMAGE URL"
+								name="image"
+								onChange={handleImageChange}
 							/>
-						)}
+							{product.imageURL === "" ? null : (
+								<input
+									className="input input-sm input-bordered max-w-lg w-full my-2"
+									type="text"
+									value={product.imageURL}
+									required
+									placeholder="Image URL"
+									disabled
+								/>
+							)}
+						</div>
 					</div>
+
 					<button
 						type="submit"
 						className="btn btn-primary text-lg max-w-xs w-full mt-2"
