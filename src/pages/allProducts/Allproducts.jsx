@@ -1,7 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Breadcrumbs, ProductFilter, ProductList } from "../../components";
+// custom Hook
+import useFetchCollection from "../../hooks/useFetchCollection";
+// Redux
+import { useSelector, useDispatch } from "react-redux";
+import { storeProducts } from "../../redux/slice/productSlice";
 
 const Allproducts = () => {
+	const { data, isLoading } = useFetchCollection("products");
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(storeProducts({ products: data }));
+	}, [dispatch, data]);
+
+	const { products } = useSelector((store) => store.product);
+
 	return (
 		<main className="w-full">
 			<Breadcrumbs />
@@ -10,7 +24,7 @@ const Allproducts = () => {
 					<ProductFilter />
 				</aside>
 				<article className="flex-1">
-					<ProductList />
+					<ProductList products={products} />
 				</article>
 			</section>
 		</main>

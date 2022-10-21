@@ -1,6 +1,7 @@
 import React from "react";
 
-const ProductList = () => {
+const ProductList = ({ products }) => {
+	console.log(products);
 	return <div>ProductList</div>;
 };
 

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 //Firebase
-import { doc, collection, query, orderBy, onSnapshot, deleteDoc } from "firebase/firestore";
-import { db, storage } from "../firebase/config";
+import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
+import { db } from "../firebase/config";
 
-const useFetchProductCollection = (collectionName) => {
+const useFetchCollection = (collectionName) => {
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -32,4 +32,4 @@ const useFetchProductCollection = (collectionName) => {
 	return { data, isLoading };
 };
 
-export default useFetchProductCollection;
+export default useFetchCollection;

@@ -5,7 +5,7 @@ import { formatPrice } from "../../utils/formatPrice";
 import { BiEdit, BiTrash } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import ConfirmModal from "../confirmModal/ConfirmModal";
-import useFetchProductCollection from "../../hooks/useFetchProductCollection";
+import useFetchCollection from "../../hooks/useFetchCollection";
 // Firebase
 import { doc, deleteDoc } from "firebase/firestore";
 import { ref, deleteObject } from "firebase/storage";
@@ -18,7 +18,7 @@ const ViewProducts = () => {
 	const dispatch = useDispatch();
 
 	//! Fetching Products from collection using Custom Hook
-	const { data, isLoading } = useFetchProductCollection("products");
+	const { data, isLoading } = useFetchCollection("products");
 	const { products } = useSelector((store) => store.product);
 
 	useEffect(() => {
