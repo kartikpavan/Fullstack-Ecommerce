@@ -7,8 +7,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { categories } from "../../utils/adminProductCategories";
 import { defaultValues } from "../../utils/adminAddProductDefaultValues";
 // Firebase
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { collection, addDoc, Timestamp } from "firebase/firestore";
+import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from "firebase/storage";
+import { collection, addDoc, Timestamp, setDoc, doc } from "firebase/firestore";
+
 import { storage, db } from "../../firebase/config";
 import { useSelector } from "react-redux";
 
@@ -84,10 +85,32 @@ const AddProducts = () => {
 		}
 	}
 	//! Edit Product
-	function editProduct(e) {
+	async function editProduct(e) {
 		e.preventDefault();
 		setIsLoading(true);
+		// Check if the image is updated
+		if (product.imageURL !== productEdit.imageURL) {
+			// deleting image from database storage
+			const storageRef = ref(storage, productEdit.imageURL);
+			await deleteObject(storageRef);
+		}
 		try {
+			await setDoc(doc(db, "products", paramsId), {
+				name: product.name,
+				imageURL: product.imageURL,
+				price: Number(product.price),
+				category: product.category,
+				brand: product.brand,
+				description: product.description,
+				// Preserving created at
+				createdAt: productEdit.createdAt,
+				editedAt: Timestamp.now().toDate(),
+			});
+			setUploadProgress(0);
+			setProduct(defaultValues);
+			setIsLoading(false);
+			toast.success("Product Updated Successfully");
+			navigate("/admin/all-products");
 		} catch (error) {
 			console.log(error.message);
 			toast.error("Something Went Wrong , Check Console");
