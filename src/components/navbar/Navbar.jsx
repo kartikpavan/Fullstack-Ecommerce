@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AdminOnlyLink } from "../adminRoute/AdminRoute";
 import { AiOutlineShoppingCart, AiOutlineSearch } from "react-icons/ai";
 import { toast } from "react-toastify";
@@ -51,17 +51,48 @@ const Navbar = () => {
 				toast.error(errorCode, errorMessage);
 			});
 	}
+	let activeStyle = {
+		borderBottom: "2px solid white",
+	};
 
 	return (
 		<>
-			<nav className="h-[8vh] bg-neutral shadow-xl  flex items-center ">
+			<nav className="h-[8vh] bg-neutral shadow-xl ">
 				<div className="navbar w-full md:w-9/12 mx-auto flex items-center justify-between">
-					<section className="w-full md:gap-4">
+					<section className="md:gap-4">
 						<Link to="/" className="btn btn-ghost ">
 							<h1 className="logo text-white text-lg md:text-3xl ">E-Shop.com</h1>
 						</Link>
 					</section>
-
+					<div>
+						<ul className="flex items-center gap-x-6">
+							<li className="text-white text-xl">
+								<NavLink
+									to="/"
+									style={({ isActive }) => (isActive ? activeStyle : null)}
+									end
+								>
+									Home
+								</NavLink>
+							</li>
+							<li className="text-white text-xl">
+								<NavLink
+									to="/all"
+									style={({ isActive }) => (isActive ? activeStyle : null)}
+								>
+									All Products
+								</NavLink>
+							</li>
+							<li className="text-white text-xl">
+								<NavLink
+									to="/contact"
+									style={({ isActive }) => (isActive ? activeStyle : null)}
+								>
+									Contact Us
+								</NavLink>
+							</li>
+						</ul>
+					</div>
 					<div className="md:gap-2">
 						<div className="dropdown dropdown-end ">
 							<label tabIndex={0} className="btn btn-ghost btn-circle">
