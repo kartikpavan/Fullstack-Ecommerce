@@ -10,7 +10,6 @@ export { default as AdminHome } from "./adminComponents/AdminHome";
 export { default as AdminSidebar } from "./adminComponents/AdminSidebar";
 export { default as Orders } from "./adminComponents/Orders";
 export { default as ViewProducts } from "./adminComponents/ViewProducts";
-export { default as ConfirmModal } from "./confirmModal/ConfirmModal";
 export { default as Breadcrumbs } from "./breadcrumbs/Breadcrumbs";
 export { default as ProductList } from "./Products/ProductList";
 export { default as ProductFilter } from "./Products/ProductFilter";

@@ -10,7 +10,7 @@ const GridView = ({ products }) => {
 		<div className=" flex flex-wrap gap-y-5 py-10 ">
 			{products.map((product) => {
 				return (
-					<div key={product.id} className="mx-auto">
+					<div key={product.id} className="mx-auto ">
 						<SingleProduct product={product} />
 					</div>
 				);

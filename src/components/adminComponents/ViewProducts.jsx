@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import { formatPrice } from "../../utils/formatPrice";
 import { BiEdit, BiTrash } from "react-icons/bi";
 import { Link } from "react-router-dom";
-import ConfirmModal from "../confirmModal/ConfirmModal";
 import useFetchCollection from "../../hooks/useFetchCollection";
 // Firebase
 import { doc, deleteDoc } from "firebase/firestore";
