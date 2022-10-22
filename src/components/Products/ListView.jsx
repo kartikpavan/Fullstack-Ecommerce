@@ -1,6 +1,5 @@
 import React from "react";
 import { formatPrice } from "../../utils/formatPrice";
-import SingleProduct from "./SingleProduct";
 
 const ListView = ({ products }) => {
 	if (!products.length) {

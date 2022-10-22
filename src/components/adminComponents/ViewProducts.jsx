@@ -108,7 +108,7 @@ const ViewProducts = () => {
 															color="red"
 															className="cursor-pointer"
 															onClick={() => {
-																deleteSingleProduct(id);
+																deleteSingleProduct(id, imageURL);
 															}}
 														/>
 													</label>
