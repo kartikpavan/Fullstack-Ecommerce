@@ -107,15 +107,18 @@ const ViewProducts = () => {
 															size={24}
 															color="red"
 															className="cursor-pointer"
+															onClick={() => {
+																deleteSingleProduct(id);
+															}}
 														/>
 													</label>
-
+													{/* 
 													<ConfirmModal
 														deleteSingleProduct={deleteSingleProduct}
 														id={id}
 														imageURL={imageURL}
 														name={name}
-													/>
+													/> */}
 												</div>
 											</td>
 										</tr>

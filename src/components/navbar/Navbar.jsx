@@ -66,7 +66,7 @@ const Navbar = () => {
 					</section>
 					<div>
 						<ul className="flex items-center gap-x-6">
-							<li className="text-white text-xl">
+							<li className="text-white text-xs md:text-xl">
 								<NavLink
 									to="/"
 									style={({ isActive }) => (isActive ? activeStyle : null)}
@@ -75,7 +75,7 @@ const Navbar = () => {
 									Home
 								</NavLink>
 							</li>
-							<li className="text-white text-xl">
+							<li className="text-white text-xs md:text-xl">
 								<NavLink
 									to="/all"
 									style={({ isActive }) => (isActive ? activeStyle : null)}
@@ -83,7 +83,7 @@ const Navbar = () => {
 									All Products
 								</NavLink>
 							</li>
-							<li className="text-white text-xl">
+							<li className="text-white text-xs md:text-xl">
 								<NavLink
 									to="/contact"
 									style={({ isActive }) => (isActive ? activeStyle : null)}
