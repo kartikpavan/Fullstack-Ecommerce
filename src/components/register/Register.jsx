@@ -27,16 +27,13 @@ const Register = () => {
 		createUserWithEmailAndPassword(auth, email, password)
 			.then((userCredential) => {
 				const user = userCredential.user;
-				console.log(user);
 				toast.success("Registration Successful");
 				setIsLoading(false);
 				document.getElementById("my-modal-4").checked = false;
 				navigate("/");
 			})
 			.catch((error) => {
-				const errorCode = error.code;
-				const errorMessage = error.message;
-				toast.error(errorCode, errorMessage);
+				toast.error(error.code, error.message);
 				setIsLoading(false);
 			});
 

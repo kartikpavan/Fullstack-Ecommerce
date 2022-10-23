@@ -24,7 +24,7 @@ const ProductList = ({ products }) => {
 						/>
 					</div>
 					<h1>
-						<span className="font-bold">10 </span>- Products Found
+						<span className="font-bold">{products.length} </span>- Products Found
 					</h1>
 				</div>
 				<Search value={search} onChange={(e) => setSearch(e.target.value)} />

@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { Navbar, Modal, ProtectedRoute, AdminRoute } from "./components";
+import { Navbar, Modal, ProtectedRoute, AdminRoute, ProductDetails } from "./components";
 import {
 	Home,
 	OrderHistory,
@@ -31,6 +31,7 @@ const App = () => {
 				<Route path="/reset" element={<ResetPassword />} />
 				<Route path="/contact" element={<Contact />} />
 				<Route path="/all" element={<AllProducts />} />
+				<Route path="/product-details/:id" element={<ProductDetails />} />
 				{/* ADMIN ROUTES */}
 				<Route
 					path="/admin/*"

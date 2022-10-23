@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
-const Breadcrumbs = () => {
+const Breadcrumbs = ({ type }) => {
 	const activeLink = ({ isActive }) => (isActive ? "text-secondary-content " : "text-secondary");
 
 	return (
@@ -12,8 +12,14 @@ const Breadcrumbs = () => {
 				</Link>
 
 				<NavLink to="/all" className={activeLink}>
-					<span className="text-xl md:text-3xl font-bold"> Products</span>
+					<span className="text-xl md:text-3xl font-bold"> Products / </span>
 				</NavLink>
+
+				{type && (
+					<NavLink to={{}} className={activeLink}>
+						<span className="text-xl md:text-3xl font-bold"> {type}</span>
+					</NavLink>
+				)}
 			</div>
 		</section>
 	);

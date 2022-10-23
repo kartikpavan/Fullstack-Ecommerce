@@ -13,7 +13,6 @@ import { setActiveUser, removeActiveUser } from "../../redux/slice/authSlice";
 
 const Navbar = () => {
 	const { isUserLoggedIn, userName } = useSelector((store) => store.auth);
-
 	const [displayName, setDisplayName] = useState("");
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -46,9 +45,7 @@ const Navbar = () => {
 				navigate("/");
 			})
 			.catch((error) => {
-				const errorCode = error.code;
-				const errorMessage = error.message;
-				toast.error(errorCode, errorMessage);
+				toast.error(error.code, error.message);
 			});
 	}
 	let activeStyle = {

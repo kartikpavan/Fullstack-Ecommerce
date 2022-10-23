@@ -22,16 +22,13 @@ const Login = () => {
 		signInWithEmailAndPassword(auth, email, password)
 			.then((userCredential) => {
 				const user = userCredential.user;
-
 				toast.success("Login Successful");
 				setIsLoading(false);
 				document.getElementById("my-modal-4").checked = false;
 				navigate("/");
 			})
 			.catch((error) => {
-				const errorCode = error.code;
-				const errorMessage = error.message;
-				toast.error(errorCode, errorMessage);
+				toast.error(error.code, error.message);
 				setIsLoading(false);
 			});
 
@@ -46,16 +43,13 @@ const Login = () => {
 		signInWithPopup(auth, provider)
 			.then((result) => {
 				const user = result.user;
-				console.log(user);
 				toast.success("Login Successful");
 				setIsLoading(false);
 				document.getElementById("my-modal-4").checked = false;
 				navigate("/");
 			})
 			.catch((error) => {
-				const errorCode = error.code;
-				const errorMessage = error.message;
-				toast.error(errorCode, errorMessage);
+				toast.error(error.code, error.message);
 				setIsLoading(false);
 			});
 	};
