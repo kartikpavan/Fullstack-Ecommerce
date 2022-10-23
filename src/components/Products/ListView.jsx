@@ -1,6 +1,6 @@
 import React from "react";
 import { formatPrice } from "../../utils/formatPrice";
-
+import { Link } from "react-router-dom";
 const ListView = ({ products }) => {
 	if (!products.length) {
 		return <h1 className="text-3xl font-bold">No Products Found</h1>;
@@ -12,7 +12,7 @@ const ListView = ({ products }) => {
 				return (
 					<div key={product.id} className="mx-auto ">
 						{/* <SingleProduct product={product} /> */}
-						<div className="flex flex-col xl:flex-row gap-x-5 relative shadow-md hover:scale-105 duration-300">
+						<div className="flex flex-col xl:flex-row gap-x-5 relative shadow-md hover:scale-105 duration-300 p-2 items-center">
 							<img
 								src={product.imageURL}
 								alt={product.name}
@@ -27,9 +27,11 @@ const ListView = ({ products }) => {
 									{formatPrice(product.price)}
 								</p>
 								<p>{product.description.slice(0, 150)}...</p>
-								<button className="btn btn-sm btn-primary mt-2">
-									View Details
-								</button>
+								<Link to={`/product-details/${product.id}`}>
+									<button className="btn btn-sm btn-primary mt-2">
+										View Details
+									</button>
+								</Link>
 							</div>
 						</div>
 					</div>
