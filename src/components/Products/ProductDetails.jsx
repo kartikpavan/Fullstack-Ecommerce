@@ -1,20 +1,27 @@
-import Breadcrumbs from "../breadcrumbs/Breadcrumbs";
-import { useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../firebase/config";
+import Breadcrumbs from "../breadcrumbs/Breadcrumbs";
+import { Link, useParams } from "react-router-dom";
+import { formatPrice } from "../../utils/formatPrice";
+import Loader from "../loader/Loader";
+// Firebase
 import { useEffect, useState } from "react";
+import { db } from "../../firebase/config";
+
 const ProductDetails = () => {
-	const [product, setProduct] = useState(null);
+	const [product, setProduct] = useState({});
+	const [isLoading, setIsLoading] = useState(false);
 	const { id } = useParams();
 
 	async function getSingleDocument() {
-		try {
-			const docRef = doc(db, "products", id);
-			const documentSnapshot = await getDoc(docRef);
-			console.log(documentSnapshot.data());
-			setProduct(documentSnapshot.data());
-		} catch (error) {
-			console.log(error.message, error.code);
+		setIsLoading(true);
+		const docRef = doc(db, "products", id);
+		const docSnap = await getDoc(docRef);
+		if (docSnap.exists()) {
+			setProduct(docSnap.data());
+			setIsLoading(false);
+		} else {
+			console.log("No such document!");
+			setIsLoading(false);
 		}
 	}
 
@@ -22,13 +29,49 @@ const ProductDetails = () => {
 		getSingleDocument();
 	}, []);
 
+	// const { imageURL, name, category, brand, price, description } = product;
 	return (
-		<main className="w-full">
-			<Breadcrumbs type={"Single product"} />
-			<section className="w-full mx-auto p-4 md:p-10 md:w-9/12 md:px-6 flex h-full">
-				{product?.name}
+		<>
+			{isLoading && <Loader />}
+			<Breadcrumbs type={product.name} />
+			<section className="w-full mx-auto p-4 md:p-10 md:w-9/12 md:px-6 ">
+				<h1 className="text-2xl">Product Details </h1>
+				<Link to="/all" className="btn btn-sm btn-secondary">
+					&larr; Back to All Products
+				</Link>
+				<article className="flex flex-col md:flex-row items-start justify-between py-4 gap-x-4">
+					<div className=" w-full md:w-1/3 flex items-center justify-center border-2">
+						<img
+							src={product.imageURL}
+							alt={product.name}
+							className="w-96 h-96 object-contain "
+						/>
+					</div>
+					<div className="flex-1">
+						<h1 className="text-3xl  mb-2">{product.name}</h1>
+						<h2 className="text-primary border-2 border-blue-500 px-2 py-2 max-w-max  font-bold text-lg mb-2">
+							{formatPrice(product.price)}
+						</h2>
+						<p className="text-gray-500 mb-2">{product.description}</p>
+						<p className="font-semibold mb-2">
+							SKU : <span className="font-light">{id}</span>
+						</p>
+						<p className="font-semibold mb-2">
+							Brand : <span className="font-light">{product.brand}</span>
+						</p>
+						{/* Button Group */}
+						<div className="btn-group items-center mb-2">
+							<button className="btn btn-sm btn-outline">-</button>
+							<button className="btn btn-lg btn-ghost disabled">1</button>
+							<button className="btn btn-sm btn-outline">+</button>
+						</div>
+						<div>
+							<button className="btn btn-lg">Add to Cart</button>
+						</div>
+					</div>
+				</article>
 			</section>
-		</main>
+		</>
 	);
 };
 
