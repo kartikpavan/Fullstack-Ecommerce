@@ -63,7 +63,7 @@ const Navbar = () => {
 					</section>
 					<div>
 						<ul className="flex items-center gap-x-6">
-							<li className="text-white text-xs md:text-xl">
+							<li className="hidden sm:block text-white text-xs md:text-xl">
 								<NavLink
 									to="/"
 									style={({ isActive }) => (isActive ? activeStyle : null)}
@@ -72,7 +72,7 @@ const Navbar = () => {
 									Home
 								</NavLink>
 							</li>
-							<li className="text-white text-xs md:text-xl">
+							<li className="hidden sm:block text-white text-xs md:text-xl">
 								<NavLink
 									to="/all"
 									style={({ isActive }) => (isActive ? activeStyle : null)}
@@ -80,7 +80,7 @@ const Navbar = () => {
 									All Products
 								</NavLink>
 							</li>
-							<li className="text-white text-xs md:text-xl">
+							<li className="hidden sm:block text-white text-xs md:text-xl">
 								<NavLink
 									to="/contact"
 									style={({ isActive }) => (isActive ? activeStyle : null)}
@@ -132,11 +132,28 @@ const Navbar = () => {
 										</p>
 									</li>
 								)}
+								<div className="block sm:hidden">
+									<li>
+										<Link to="/" className="text-lg ">
+											Home
+										</Link>
+									</li>
+									<li>
+										<Link to="/all" className="text-lg ">
+											All Products
+										</Link>
+									</li>
+									<li>
+										<Link to="/contact" className="text-lg">
+											Contact Us
+										</Link>
+									</li>
+								</div>
 
 								{isUserLoggedIn ? (
 									<div>
 										<li>
-											<Link to="/my-orders" className="text-lg">
+											<Link to="/my-orders" className="text-lg text-primary">
 												My Orders
 											</Link>
 										</li>

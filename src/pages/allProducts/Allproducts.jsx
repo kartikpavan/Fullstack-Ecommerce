@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Breadcrumbs, ProductFilter, ProductList } from "../../components";
 import Loader from "../../components/loader/Loader";
 
@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { storeProducts } from "../../redux/slice/productSlice";
 
 const Allproducts = () => {
+	const [filterDrawer, setFilterDrawer] = useState(false);
 	const { data, isLoading } = useFetchCollection("products");
 	const dispatch = useDispatch();
 
@@ -21,17 +22,14 @@ const Allproducts = () => {
 	return (
 		<>
 			{isLoading && <Loader />}
-
 			<main className="w-full">
 				<Breadcrumbs />
 				<section className="w-full mx-auto p-4 md:p-10 md:w-9/12 md:px-6 flex h-full">
-					<aside className="w-24 md:w-64">
-						<div className="fixed">
-							<ProductFilter />
-						</div>
+					<aside className="hidden sm:block sm:w-64 mx-2 ">
+						<ProductFilter />
 					</aside>
 					<article className="flex-1">
-						<ProductList products={products} />
+						<ProductList products={products} setFilterDrawer={setFilterDrawer} />
 					</article>
 				</section>
 			</main>

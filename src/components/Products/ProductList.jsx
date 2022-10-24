@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { ListView, GridView, Search } from "../../components";
+import { ListView, GridView, Search, ProductFilter } from "../../components";
 
-import { BsFillGridFill } from "react-icons/bs";
+import { BsFillGridFill, BsFilter } from "react-icons/bs";
 import { MdOutlineSubject } from "react-icons/md";
 
 const ProductList = ({ products }) => {
@@ -59,6 +59,18 @@ const ProductList = ({ products }) => {
 						<option value="a2z">A - Z</option>
 						<option value="z2a">Z - A</option>
 					</select>
+				</div>
+				{/* Collapse for Filter  */}
+				<div className="collapse sm:hidden">
+					<input type="checkbox" className="peer" />
+					<div className="collapse-title rounded-sm bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content w-80 flex items-center justify-between">
+						<p>Show Filters</p>
+						<BsFilter size={28} />
+					</div>
+					<div className="collapse-content bg-primary text-primary-content peer-checked:bg-white peer-checked:text-black w-80 border-2 ">
+						{/* Filter Component */}
+						<ProductFilter />
+					</div>
 				</div>
 			</header>
 			<section>

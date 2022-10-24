@@ -17,7 +17,7 @@ const GridView = ({ products }) => {
 				return (
 					<div key={id} className="mx-auto ">
 						<div className="group">
-							<div className="card w-72 shadow-md relative hover:scale-105 duration-300">
+							<div className="card w-72 shadow-md relative hover:scale-105 duration-300 items-center">
 								<LazyLoadImage
 									src={imageURL}
 									alt={name}

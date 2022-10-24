@@ -15,7 +15,6 @@ const ListView = ({ products }) => {
 			{products.map((product) => {
 				return (
 					<div key={product.id} className="mx-auto ">
-						{/* <SingleProduct product={product} /> */}
 						<div className="flex flex-col xl:flex-row gap-x-5 relative shadow-md hover:scale-105 duration-300 p-2 items-center">
 							<LazyLoadImage
 								src={product.imageURL}
