@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { formatPrice } from "../../utils/formatPrice";
+//  lazy load
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const GridView = ({ products }) => {
 	if (!products.length) {
@@ -15,10 +18,12 @@ const GridView = ({ products }) => {
 					<div key={id} className="mx-auto ">
 						<div className="group">
 							<div className="card w-72 shadow-md relative hover:scale-105 duration-300">
-								<img
+								<LazyLoadImage
 									src={imageURL}
 									alt={name}
 									className="h-60 object-contain rounded-md"
+									placeholderSrc="https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg"
+									effect="blur"
 								/>
 								<div className=" absolute top-0 right-0">
 									<span className="badge ">Free Delivery</span>

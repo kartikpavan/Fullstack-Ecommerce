@@ -1,6 +1,9 @@
 import React from "react";
 import { formatPrice } from "../../utils/formatPrice";
 import { Link } from "react-router-dom";
+//  lazy load
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const ListView = ({ products }) => {
 	if (!products.length) {
@@ -14,10 +17,12 @@ const ListView = ({ products }) => {
 					<div key={product.id} className="mx-auto ">
 						{/* <SingleProduct product={product} /> */}
 						<div className="flex flex-col xl:flex-row gap-x-5 relative shadow-md hover:scale-105 duration-300 p-2 items-center">
-							<img
+							<LazyLoadImage
 								src={product.imageURL}
 								alt={product.name}
 								className="block w-60 h-60 object-contain rounded-md"
+								placeholderSrc="https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg"
+								effect="blur"
 							/>
 							<div className=" absolute top-0 right-0">
 								<span className="badge ">Free Delivery</span>

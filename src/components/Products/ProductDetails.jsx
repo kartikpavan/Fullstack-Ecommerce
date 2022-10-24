@@ -3,6 +3,9 @@ import Breadcrumbs from "../breadcrumbs/Breadcrumbs";
 import { Link, useParams } from "react-router-dom";
 import { formatPrice } from "../../utils/formatPrice";
 import Loader from "../loader/Loader";
+//Lazy Load
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 // Firebase
 import { useEffect, useState } from "react";
 import { db } from "../../firebase/config";
@@ -41,10 +44,12 @@ const ProductDetails = () => {
 				</Link>
 				<article className="flex flex-col md:flex-row items-start justify-between py-4 gap-x-4">
 					<div className=" w-full md:w-1/3 flex items-center justify-center border-2">
-						<img
+						<LazyLoadImage
 							src={product.imageURL}
 							alt={product.name}
 							className="w-96 h-96 object-contain "
+							placeholderSrc="https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg"
+							effect="blur"
 						/>
 					</div>
 					<div className="flex-1">

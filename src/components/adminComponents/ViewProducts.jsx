@@ -12,6 +12,9 @@ import { db, storage } from "../../firebase/config";
 // Redux
 import { useDispatch, useSelector } from "react-redux";
 import { storeProducts } from "../../redux/slice/productSlice";
+// lazy load
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const ViewProducts = () => {
 	const dispatch = useDispatch();
@@ -76,13 +79,15 @@ const ViewProducts = () => {
 											<td>{index + 1}</td>
 											<td>
 												<div>
-													<img
+													<LazyLoadImage
 														src={
 															imageURL ||
 															`https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png`
 														}
 														alt={name}
 														className="w-10 sm:w-16 object-fill"
+														placeholderSrc="https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg"
+														effect="blur"
 													/>
 												</div>
 											</td>
