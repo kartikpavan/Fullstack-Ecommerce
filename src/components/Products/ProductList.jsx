@@ -1,17 +1,26 @@
 import { useEffect, useState } from "react";
 import { ListView, GridView, Search, ProductFilter } from "../../components";
-
 import { BsFillGridFill, BsFilter } from "react-icons/bs";
 import { MdOutlineSubject } from "react-icons/md";
+// Redux
+import { filterBySearch } from "../../redux/slice/filterSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const ProductList = ({ products }) => {
 	const [grid, setGrid] = useState(true);
 	const [search, setSearch] = useState("");
-
-	// Scroll To Top Button
+	// Scroll To Top
 	const [bacToTop, setBackToTop] = useState(false);
+	const dispatch = useDispatch();
+
+	const { filteredProducts } = useSelector((store) => store.filter);
 
 	useEffect(() => {
+		dispatch(filterBySearch({ products, search }));
+	}, [dispatch, products, search]);
+
+	useEffect(() => {
+		// Scroll back to top
 		const event = window.addEventListener("scroll", () => {
 			if (pageYOffset > 400) {
 				setBackToTop(true);
@@ -32,6 +41,7 @@ const ProductList = ({ products }) => {
 	return (
 		<main className="relative">
 			<header className="flex flex-col gap-y-4 xl:flex-row xl:items-center justify-between border-b pb-2">
+				{/* Grid or List layout */}
 				<div className="flex gap-2 items-center">
 					<div className="flex gap-4">
 						<BsFillGridFill
@@ -49,7 +59,9 @@ const ProductList = ({ products }) => {
 						<span className="font-bold">{products.length} </span>- Products Found
 					</h1>
 				</div>
+				{/* Search Bar */}
 				<Search value={search} onChange={(e) => setSearch(e.target.value)} />
+				{/* Sorting List */}
 				<div className="flex gap-2 items-center">
 					<label>Sort by:</label>
 					<select name="" id="" className="select select-sm select-bordered">
@@ -74,7 +86,11 @@ const ProductList = ({ products }) => {
 				</div>
 			</header>
 			<section>
-				{grid ? <GridView products={products} /> : <ListView products={products} />}
+				{grid ? (
+					<GridView products={filteredProducts} />
+				) : (
+					<ListView products={filteredProducts} />
+				)}
 			</section>
 			{bacToTop && (
 				<div className="fixed bottom-5 right-5">

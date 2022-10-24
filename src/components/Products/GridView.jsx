@@ -47,4 +47,4 @@ const GridView = ({ products }) => {
 	);
 };
 
-export default GridView;
+export default React.memo(GridView);

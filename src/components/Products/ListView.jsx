@@ -46,4 +46,4 @@ const ListView = ({ products }) => {
 	);
 };
 
-export default ListView;
+export default React.memo(ListView);

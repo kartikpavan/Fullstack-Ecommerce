@@ -6,12 +6,10 @@ const Search = ({ value, onChange }) => {
 			<div className="input-group">
 				<input
 					type="text"
-					name=""
-					id=""
 					value={value}
 					onChange={onChange}
 					placeholder="Search by name"
-					className="input input-bordered  w-[300px]"
+					className="input input-bordered w-[300px]"
 				/>
 				<button className="btn btn-square">
 					<BiSearch size={24} />
