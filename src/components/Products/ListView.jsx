@@ -1,6 +1,7 @@
 import React from "react";
 import { formatPrice } from "../../utils/formatPrice";
 import { Link } from "react-router-dom";
+
 const ListView = ({ products }) => {
 	if (!products.length) {
 		return <h1 className="text-3xl font-bold">No Products Found</h1>;

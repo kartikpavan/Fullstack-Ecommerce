@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ListView, GridView, Search } from "../../components";
 
 import { BsFillGridFill } from "react-icons/bs";
@@ -7,8 +7,30 @@ import { MdOutlineSubject } from "react-icons/md";
 const ProductList = ({ products }) => {
 	const [grid, setGrid] = useState(true);
 	const [search, setSearch] = useState("");
+
+	// Scroll To Top Button
+	const [bacToTop, setBackToTop] = useState(false);
+
+	useEffect(() => {
+		const event = window.addEventListener("scroll", () => {
+			if (pageYOffset > 400) {
+				setBackToTop(true);
+			} else {
+				setBackToTop(false);
+			}
+			() => removeEventListener(event);
+		});
+	}, []);
+
+	function scrollToTop() {
+		window.scrollTo({
+			top: 0,
+			behavior: "smooth",
+		});
+	}
+
 	return (
-		<main>
+		<main className="relative">
 			<header className="flex flex-col gap-y-4 xl:flex-row xl:items-center justify-between border-b pb-2">
 				<div className="flex gap-2 items-center">
 					<div className="flex gap-4">
@@ -42,6 +64,13 @@ const ProductList = ({ products }) => {
 			<section>
 				{grid ? <GridView products={products} /> : <ListView products={products} />}
 			</section>
+			{bacToTop && (
+				<div className="fixed bottom-5 right-5">
+					<button className="btn sm:btn-lg rounded-full" onClick={scrollToTop}>
+						&uarr; Back to Top
+					</button>
+				</div>
+			)}
 		</main>
 	);
 };
