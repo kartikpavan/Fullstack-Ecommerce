@@ -40,9 +40,19 @@ const filterSlice = createSlice({
 
 			state.filteredProducts = tempProducts;
 		},
+		filterByCategory(state, action) {
+			const { products, category } = action.payload;
+			let tempProducts = [];
+			if (category === "All") {
+				tempProducts = products;
+			} else {
+				tempProducts = products.filter((item) => item.category === category);
+			}
+			state.filteredProducts = tempProducts;
+		},
 	},
 });
 
-export const { filterBySearch, sortProducts } = filterSlice.actions;
+export const { filterBySearch, sortProducts, filterByCategory } = filterSlice.actions;
 
 export default filterSlice.reducer;

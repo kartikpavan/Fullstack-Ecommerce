@@ -12,12 +12,12 @@ const Breadcrumbs = ({ type }) => {
 				</Link>
 
 				<NavLink to="/all" className={activeLink}>
-					<span className="text-xl md:text-3xl font-bold"> Products / </span>
+					<span className="text-xl md:text-3xl font-bold"> Products </span>
 				</NavLink>
 
 				{type && (
 					<NavLink to={{}} className={activeLink}>
-						<span className="text-xl md:text-3xl font-bold"> {type}</span>
+						<span className="text-xl md:text-3xl font-bold">/ {type}</span>
 					</NavLink>
 				)}
 			</div>
