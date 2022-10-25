@@ -56,9 +56,34 @@ const cartSlice = createSlice({
 			localStorage.setItem("cart", JSON.stringify(state.cartItems));
 			toast.info(`All Items removed from Cart`);
 		},
+		calculateSubtotal: (state) => {
+			const newArr = [];
+			state.cartItems.map((item) => {
+				const { price, qty } = item;
+				const amount = price * qty;
+				newArr.push(amount);
+			});
+			const totalAmount = newArr.reduce((total, curr) => total + curr, 0);
+			state.totalAmount = totalAmount;
+		},
+		calculateTotalQuantity: (state) => {
+			let newArr = [];
+			state.cartItems.map((item) => {
+				newArr.push(item.qty);
+			});
+			const totalQty = newArr.reduce((total, curr) => total + curr, 0);
+			state.totalQuantity = totalQty;
+		},
 	},
 });
 
-export const { addToCart, decreaseCart, removeCartItem, clearCart } = cartSlice.actions;
+export const {
+	addToCart,
+	decreaseCart,
+	removeCartItem,
+	clearCart,
+	calculateSubtotal,
+	calculateTotalQuantity,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

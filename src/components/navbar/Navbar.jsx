@@ -10,10 +10,11 @@ import { auth } from "../../firebase/config";
 //Redux
 import { useDispatch, useSelector } from "react-redux";
 import { setActiveUser, removeActiveUser } from "../../redux/slice/authSlice";
+import { formatPrice } from "../../utils/formatPrice";
 
 const Navbar = () => {
 	const { isUserLoggedIn, userName } = useSelector((store) => store.auth);
-
+	const { totalAmount, totalQuantity } = useSelector((store) => store.cart);
 	const [displayName, setDisplayName] = useState("");
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -97,7 +98,7 @@ const Navbar = () => {
 								<div className="indicator">
 									<AiOutlineShoppingCart size={30} color="white" />
 									<span className="badge badge-secondary-content indicator-item">
-										8
+										{totalQuantity}
 									</span>
 								</div>
 							</label>
@@ -106,8 +107,10 @@ const Navbar = () => {
 								className="mt-3 card card-compact dropdown-content w-52 bg-base-100  shadow-xl "
 							>
 								<div className="card-body">
-									<span className="font-bold text-lg">8 Items</span>
-									<span className="text-info">Subtotal: $999</span>
+									<span className="font-bold text-lg">{totalQuantity} Items</span>
+									<span className="text-info">
+										Subtotal: {formatPrice(totalAmount)}
+									</span>
 									<div className="card-actions">
 										<Link to="/cart" className="btn btn-primary btn-block">
 											View cart

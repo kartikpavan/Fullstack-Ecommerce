@@ -1,10 +1,18 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Breadcrumbs } from "../../components";
 import { formatPrice } from "../../utils/formatPrice";
 import { BiTrash } from "react-icons/bi";
 // Redux
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, decreaseCart, removeCartItem, clearCart } from "../../redux/slice/cartSlice";
+import {
+	addToCart,
+	decreaseCart,
+	removeCartItem,
+	clearCart,
+	calculateSubtotal,
+	calculateTotalQuantity,
+} from "../../redux/slice/cartSlice";
 // lazy load
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
@@ -28,6 +36,11 @@ const Cart = () => {
 	const clearWholeCart = () => {
 		dispatch(clearCart());
 	};
+	useEffect(() => {
+		dispatch(calculateSubtotal());
+		dispatch(calculateTotalQuantity());
+	}, [dispatch, cartItems]);
+
 	return (
 		<main className="w-full">
 			<Breadcrumbs type="Cart" />
