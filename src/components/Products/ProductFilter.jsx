@@ -1,22 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 //  Utilities
 import { getUniqueValues } from "../../utils/uniqueValues";
 //Redux
 import { useDispatch, useSelector } from "react-redux";
-import { filterByCategory } from "../../redux/slice/filterSlice";
+import { filterByCategory, filterByBrand } from "../../redux/slice/filterSlice";
 
 const ProductFilter = () => {
 	const { products } = useSelector((store) => store.product);
 	const [category, setCategory] = useState("All");
+	const [brand, setBrand] = useState("All");
 	const dispatch = useDispatch();
 	// Getting new Categories Array
 	const allCategories = getUniqueValues(products, "category");
-	let allBrands;
+	const allBrands = getUniqueValues(products, "brand");
 
 	const filterProducts = (c) => {
 		setCategory(c);
 		dispatch(filterByCategory({ products, category: c }));
 	};
+
+	useEffect(() => {
+		dispatch(filterByBrand({ products, brand }));
+	}, [dispatch, products, brand]);
 
 	return (
 		<div className="flex flex-col gap-y-5">
@@ -45,8 +50,18 @@ const ProductFilter = () => {
 			{/* Brand */}
 			<div>
 				<h1 className="font-bold">BRAND</h1>
-				<select className="select select-bordered w-full" name="brand">
-					<option value="all">All</option>
+				<select
+					className="select select-bordered w-full"
+					name="brand"
+					onChange={(e) => setBrand(e.target.value)}
+				>
+					{allBrands.map((b, index) => {
+						return (
+							<option key={index} value={b}>
+								{b}
+							</option>
+						);
+					})}
 				</select>
 			</div>
 			{/* Price */}

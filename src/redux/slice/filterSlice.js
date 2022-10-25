@@ -50,9 +50,20 @@ const filterSlice = createSlice({
 			}
 			state.filteredProducts = tempProducts;
 		},
+		filterByBrand(state, action) {
+			const { products, brand } = action.payload;
+			let tempProducts = [];
+			if (brand === "all") {
+				tempProducts = products;
+			} else {
+				tempProducts = products.filter((item) => item.brand === brand);
+			}
+			state.filteredProducts = tempProducts;
+		},
 	},
 });
 
-export const { filterBySearch, sortProducts, filterByCategory } = filterSlice.actions;
+export const { filterBySearch, sortProducts, filterByCategory, filterByBrand } =
+	filterSlice.actions;
 
 export default filterSlice.reducer;
