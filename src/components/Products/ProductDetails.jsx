@@ -11,9 +11,10 @@ import { useEffect, useState } from "react";
 import { db } from "../../firebase/config";
 // Redux
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../redux/slice/cartSlice";
+import { addToCart, decreaseCart, calculateTotalQuantity } from "../../redux/slice/cartSlice";
 
 const ProductDetails = () => {
+	const { cartItems } = useSelector((store) => store.cart);
 	const [product, setProduct] = useState({});
 	const [isLoading, setIsLoading] = useState(false);
 	const { id } = useParams();
@@ -37,8 +38,16 @@ const ProductDetails = () => {
 	}, []);
 	// Add to cart
 	function add2CartFunction(product) {
-		dispatch(addToCart(product));
+		dispatch(addToCart({ ...product, id }));
+		dispatch(calculateTotalQuantity());
 	}
+	// Decrease Qty
+	function decreaseQty(product) {
+		dispatch(decreaseCart({ ...product, id }));
+		dispatch(calculateTotalQuantity());
+	}
+
+	let currentItem = cartItems.find((item) => item.id === id);
 
 	return (
 		<>
@@ -72,11 +81,27 @@ const ProductDetails = () => {
 							Brand : <span className="font-light">{product.brand}</span>
 						</p>
 						{/* Button Group */}
-						<div className="btn-group items-center mb-2">
-							<button className="btn btn-sm btn-outline">-</button>
-							<button className="btn btn-lg btn-ghost disabled">1</button>
-							<button className="btn btn-sm btn-outline">+</button>
-						</div>
+						{cartItems.includes(currentItem) && (
+							<div className="btn-group items-center mb-2">
+								<button
+									className="btn btn-sm btn-outline"
+									onClick={() => decreaseQty(product)}
+								>
+									{" "}
+									-
+								</button>
+								<button className="btn btn-lg btn-ghost disabled">
+									{currentItem.qty}
+								</button>
+								<button
+									className="btn btn-sm btn-outline"
+									onClick={() => add2CartFunction(product)}
+								>
+									+
+								</button>
+							</div>
+						)}
+
 						<div>
 							<button
 								className="btn btn-lg"

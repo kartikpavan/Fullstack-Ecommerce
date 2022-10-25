@@ -11,10 +11,11 @@ import { auth } from "../../firebase/config";
 import { useDispatch, useSelector } from "react-redux";
 import { setActiveUser, removeActiveUser } from "../../redux/slice/authSlice";
 import { formatPrice } from "../../utils/formatPrice";
+import { calculateSubtotal, calculateTotalQuantity } from "../../redux/slice/cartSlice";
 
 const Navbar = () => {
 	const { isUserLoggedIn, userName } = useSelector((store) => store.auth);
-	const { totalAmount, totalQuantity } = useSelector((store) => store.cart);
+	const { totalAmount, totalQuantity, cartItems } = useSelector((store) => store.cart);
 	const [displayName, setDisplayName] = useState("");
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -39,6 +40,11 @@ const Navbar = () => {
 			}
 		});
 	}, []);
+
+	useEffect(() => {
+		dispatch(calculateTotalQuantity());
+		dispatch(calculateSubtotal());
+	}, [dispatch, cartItems]);
 
 	function logOutUser() {
 		signOut(auth)
