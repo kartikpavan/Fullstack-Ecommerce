@@ -116,13 +116,6 @@ const ViewProducts = () => {
 															}}
 														/>
 													</label>
-													{/* 
-													<ConfirmModal
-														deleteSingleProduct={deleteSingleProduct}
-														id={id}
-														imageURL={imageURL}
-														name={name}
-													/> */}
 												</div>
 											</td>
 										</tr>

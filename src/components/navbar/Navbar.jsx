@@ -13,6 +13,7 @@ import { setActiveUser, removeActiveUser } from "../../redux/slice/authSlice";
 
 const Navbar = () => {
 	const { isUserLoggedIn, userName } = useSelector((store) => store.auth);
+
 	const [displayName, setDisplayName] = useState("");
 	const navigate = useNavigate();
 	const dispatch = useDispatch();

@@ -1,13 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { formatPrice } from "../../utils/formatPrice";
+import { FcSearch } from "react-icons/fc";
 //  lazy load
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+// redux
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../redux/slice/cartSlice";
 
 const GridView = ({ products }) => {
+	const dispatch = useDispatch();
 	if (!products.length) {
 		return <h1 className="text-3xl font-bold">No Products Found</h1>;
+	}
+
+	function add2CartFunction(product) {
+		dispatch(addToCart(product));
 	}
 
 	return (
@@ -34,10 +43,16 @@ const GridView = ({ products }) => {
 								</div>
 								<div className="absolute top-0 right-0 h-full w-full group-hover:bg-[rgba(0,0,0,0.5)] duration-300"></div>
 								<Link to={`/product-details/${id}`}>
-									<button className="absolute top-1/3 left-1/4 btn btn-primary hidden group-hover:block transition-all ease-in duration-300">
-										View Details
+									<button className="absolute top-1/3 left-[45%] hidden group-hover:block transition-all ease-in duration-300">
+										<FcSearch size={32} />
 									</button>
 								</Link>
+								<button
+									className="absolute bottom-1/3 left-[30%] btn btn-sm btn-primary hidden group-hover:block transition-all ease-in duration-300"
+									onClick={() => add2CartFunction(product)}
+								>
+									Add to Cart
+								</button>
 							</div>
 						</div>
 					</div>

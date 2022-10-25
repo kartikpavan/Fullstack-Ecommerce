@@ -13,6 +13,7 @@ const cartSlice = createSlice({
 	reducers: {
 		addToCart: (state, action) => {
 			// Check if item exists in local Storage Cart
+			console.log(action.payload);
 			const itemIndex = state.cartItems.findIndex((item) => item.id === action.payload.id);
 			// item Already exists in the cart
 			if (itemIndex >= 0) {

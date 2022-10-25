@@ -4,10 +4,19 @@ import { Link } from "react-router-dom";
 //  lazy load
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+// redux
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../redux/slice/cartSlice";
 
 const ListView = ({ products }) => {
+	const dispatch = useDispatch();
+
 	if (!products.length) {
 		return <h1 className="text-3xl font-bold">No Products Found</h1>;
+	}
+
+	function add2CartFunction(product) {
+		dispatch(addToCart(product));
 	}
 
 	return (
@@ -33,6 +42,13 @@ const ListView = ({ products }) => {
 									{formatPrice(product.price)}
 								</p>
 								<p>{product.description.slice(0, 150)}...</p>
+
+								<button
+									onClick={() => add2CartFunction(product)}
+									className="btn btn-sm btn-outline mr-4"
+								>
+									Add to cart
+								</button>
 								<Link to={`/product-details/${product.id}`}>
 									<button className="btn btn-sm btn-primary mt-2">
 										View Details
