@@ -3,25 +3,40 @@ import { useEffect, useState } from "react";
 import { getUniqueValues } from "../../utils/uniqueValues";
 //Redux
 import { useDispatch, useSelector } from "react-redux";
-import { filterByCategory, filterByBrand } from "../../redux/slice/filterSlice";
+import { filterByCategory, filterByBrand, filterByprice } from "../../redux/slice/filterSlice";
+import { formatPrice } from "../../utils/formatPrice";
 
 const ProductFilter = () => {
 	const { products } = useSelector((store) => store.product);
+	const { minPrice, maxPrice } = useSelector((store) => store.product);
+
 	const [category, setCategory] = useState("All");
 	const [brand, setBrand] = useState("All");
+	const [price, setPrice] = useState(maxPrice);
 	const dispatch = useDispatch();
-	// Getting new Categories Array
+	// Getting new Category and  brand Array
 	const allCategories = getUniqueValues(products, "category");
 	const allBrands = getUniqueValues(products, "brand");
-
+	//! Categi
 	const filterProducts = (c) => {
 		setCategory(c);
 		dispatch(filterByCategory({ products, category: c }));
 	};
-
+	//! Brand
 	useEffect(() => {
 		dispatch(filterByBrand({ products, brand }));
 	}, [dispatch, products, brand]);
+
+	//!Price
+	useEffect(() => {
+		dispatch(filterByprice({ products, price }));
+	}, [dispatch, products, price]);
+
+	function clearFilter() {
+		setCategory("All");
+		setBrand("All");
+		setPrice(maxPrice);
+	}
 
 	return (
 		<div className="flex flex-col gap-y-5">
@@ -67,17 +82,20 @@ const ProductFilter = () => {
 			{/* Price */}
 			<div>
 				<h1 className="font-bold">PRICE</h1>
+				<p>{formatPrice(price)}</p>
 				<input
 					className="range"
 					type="range"
-					name="price"
-					min={100}
-					max={130000}
-					step={500}
+					value={price}
+					min={minPrice}
+					max={maxPrice}
+					onChange={(e) => setPrice(e.target.value)}
 				/>
 			</div>
 			<div>
-				<button className="btn btn-error">Clear Filters</button>
+				<button className="btn btn-error" onClick={clearFilter}>
+					Clear Filters
+				</button>
 			</div>
 		</div>
 	);

@@ -6,15 +6,15 @@ import Loader from "../../components/loader/Loader";
 import useFetchCollection from "../../hooks/useFetchCollection";
 // Redux
 import { useSelector, useDispatch } from "react-redux";
-import { storeProducts } from "../../redux/slice/productSlice";
+import { storeProducts, getPriceRange } from "../../redux/slice/productSlice";
 
 const Allproducts = () => {
-	const [filterDrawer, setFilterDrawer] = useState(false);
 	const { data, isLoading } = useFetchCollection("products");
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(storeProducts({ products: data }));
+		dispatch(getPriceRange({ products: data }));
 	}, [dispatch, data]);
 
 	const { products } = useSelector((store) => store.product);
@@ -29,7 +29,7 @@ const Allproducts = () => {
 						<ProductFilter />
 					</aside>
 					<article className="flex-1">
-						<ProductList products={products} setFilterDrawer={setFilterDrawer} />
+						<ProductList products={products} />
 					</article>
 				</section>
 			</main>
