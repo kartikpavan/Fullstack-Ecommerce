@@ -2,22 +2,33 @@ import { Link } from "react-router-dom";
 import { Breadcrumbs } from "../../components";
 import { formatPrice } from "../../utils/formatPrice";
 import { BiTrash } from "react-icons/bi";
-
 // Redux
 import { useDispatch, useSelector } from "react-redux";
+import { addToCart, decreaseCart } from "../../redux/slice/cartSlice";
 // lazy load
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
 const Cart = () => {
 	const { cartItems, totalAmount, totalQuantity } = useSelector((store) => store.cart);
+	const dispatch = useDispatch();
+	//! increase cart item Qty
+	const increaseQty = (item) => {
+		dispatch(addToCart(item));
+	};
+	//! Decrease Cart Item Qty
+	const decreaseQty = (item) => {
+		dispatch(decreaseCart(item));
+	};
 
 	return (
 		<main className="w-full">
 			<Breadcrumbs type="Cart" />
 			<section className="w-full mx-auto p-4 md:p-10 md:w-9/12 md:px-6 flex flex-col h-full">
 				<h1 className="text-3xl font-semibold mb-4">Shopping Cart</h1>
-
+				<button className="btn btn-sm btn-error max-w-[200px] w-full mb-2 ">
+					Clear Cart{" "}
+				</button>
 				{!cartItems.length ? (
 					<h1> Your Cart Is Empty </h1>
 				) : (
@@ -57,13 +68,19 @@ const Cart = () => {
 														</p>
 														<p>Qty: </p>
 														<div className="btn-group items-center mb-2">
-															<button className="btn btn-xs btn-outline">
+															<button
+																className="btn btn-xs btn-outline"
+																onClick={() => decreaseQty(item)}
+															>
 																-
 															</button>
 															<button className="btn btn-xs btn-ghost disabled">
 																{qty}
 															</button>
-															<button className="btn btn-xs btn-outline">
+															<button
+																className="btn btn-xs btn-outline"
+																onClick={() => increaseQty(item)}
+															>
 																+
 															</button>
 														</div>
@@ -83,7 +100,7 @@ const Cart = () => {
 							</table>
 						</div>
 
-						<div className="w-88 md:w-96 h-auto shadow-lg rounded-sm p-2 flex flex-col gap-3 ">
+						<div className="w-88 md:w-96 h-56 shadow-lg rounded-sm p-2 flex flex-col gap-3 ">
 							<Link to="/all" className="link italic text-gray-400">
 								&larr; Continue Shopping
 							</Link>
