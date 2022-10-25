@@ -9,11 +9,15 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 // Firebase
 import { useEffect, useState } from "react";
 import { db } from "../../firebase/config";
+// Redux
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../redux/slice/cartSlice";
 
 const ProductDetails = () => {
 	const [product, setProduct] = useState({});
 	const [isLoading, setIsLoading] = useState(false);
 	const { id } = useParams();
+	const dispatch = useDispatch();
 
 	async function getSingleDocument() {
 		setIsLoading(true);
@@ -27,10 +31,14 @@ const ProductDetails = () => {
 			setIsLoading(false);
 		}
 	}
-
+	// Fetching single document from firestore on initial component mount
 	useEffect(() => {
 		getSingleDocument();
 	}, []);
+	// Add to cart
+	function add2CartFunction(product) {
+		dispatch(addToCart(product));
+	}
 
 	return (
 		<>
@@ -70,7 +78,12 @@ const ProductDetails = () => {
 							<button className="btn btn-sm btn-outline">+</button>
 						</div>
 						<div>
-							<button className="btn btn-lg">Add to Cart</button>
+							<button
+								className="btn btn-lg"
+								onClick={() => add2CartFunction(product)}
+							>
+								Add to Cart
+							</button>
 						</div>
 					</div>
 				</article>
