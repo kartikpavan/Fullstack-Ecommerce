@@ -4,7 +4,7 @@ import { formatPrice } from "../../utils/formatPrice";
 import { BiTrash } from "react-icons/bi";
 // Redux
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, decreaseCart } from "../../redux/slice/cartSlice";
+import { addToCart, decreaseCart, removeCartItem, clearCart } from "../../redux/slice/cartSlice";
 // lazy load
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
@@ -20,14 +20,24 @@ const Cart = () => {
 	const decreaseQty = (item) => {
 		dispatch(decreaseCart(item));
 	};
-
+	//! Remove Single Item
+	const removeItem = (item) => {
+		dispatch(removeCartItem(item));
+	};
+	//! Clear Cart
+	const clearWholeCart = () => {
+		dispatch(clearCart());
+	};
 	return (
 		<main className="w-full">
 			<Breadcrumbs type="Cart" />
 			<section className="w-full mx-auto p-4 md:p-10 md:w-9/12 md:px-6 flex flex-col h-full">
 				<h1 className="text-3xl font-semibold mb-4">Shopping Cart</h1>
-				<button className="btn btn-sm btn-error max-w-[200px] w-full mb-2 ">
-					Clear Cart{" "}
+				<button
+					className="btn btn-sm btn-error max-w-[200px] w-full mb-2 "
+					onClick={clearWholeCart}
+				>
+					Clear Cart
 				</button>
 				{!cartItems.length ? (
 					<h1> Your Cart Is Empty </h1>
@@ -91,7 +101,11 @@ const Cart = () => {
 													{formatPrice(price * qty)}
 												</td>
 												<td>
-													<BiTrash size={24} color="red" />
+													<BiTrash
+														size={24}
+														color="red"
+														onClick={() => removeItem(item)}
+													/>
 												</td>
 											</tr>
 										);
