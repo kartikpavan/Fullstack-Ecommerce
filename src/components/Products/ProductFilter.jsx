@@ -9,11 +9,12 @@ import { formatPrice } from "../../utils/formatPrice";
 const ProductFilter = () => {
 	const { products } = useSelector((store) => store.product);
 	const { minPrice, maxPrice } = useSelector((store) => store.product);
+	const dispatch = useDispatch();
 
 	const [category, setCategory] = useState("All");
 	const [brand, setBrand] = useState("All");
 	const [price, setPrice] = useState(maxPrice);
-	const dispatch = useDispatch();
+
 	// Getting new Category and  brand Array
 	const allCategories = getUniqueValues(products, "category");
 	const allBrands = getUniqueValues(products, "brand");

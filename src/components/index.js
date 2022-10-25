@@ -17,3 +17,4 @@ export { default as ListView } from "./Products/ListView";
 export { default as GridView } from "./Products/GridView";
 export { default as Search } from "./search/Search";
 export { default as ProductDetails } from "./Products/ProductDetails";
+export { default as Pagination } from "./pagination/Pagination";

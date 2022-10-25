@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ListView, GridView, Search, ProductFilter } from "../../components";
+import { ListView, GridView, Search, ProductFilter, Pagination } from "../../components";
 import { BsFillGridFill, BsFilter } from "react-icons/bs";
 import { MdOutlineSubject } from "react-icons/md";
 // Redux
@@ -7,14 +7,16 @@ import { filterBySearch, sortProducts } from "../../redux/slice/filterSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const ProductList = ({ products }) => {
+	const { filteredProducts } = useSelector((store) => store.filter);
 	const [grid, setGrid] = useState(true);
 	const [search, setSearch] = useState("");
 	const [sort, setSort] = useState("latest");
+	// Pagination
+	const [currentPage, setCurrentPage] = useState(1);
+	const [productPerPage, setProductPerPage] = useState(9);
 	// Scroll To Top
 	const [bacToTop, setBackToTop] = useState(false);
 	const dispatch = useDispatch();
-
-	const { filteredProducts } = useSelector((store) => store.filter);
 
 	//! Search
 	useEffect(() => {
@@ -43,6 +45,11 @@ const ProductList = ({ products }) => {
 			behavior: "smooth",
 		});
 	}
+
+	//get current product
+	const indexOfLastProduct = currentPage * productPerPage;
+	const indexOfFirstProduct = indexOfLastProduct - productPerPage;
+	const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
 
 	return (
 		<main className="relative">
@@ -98,9 +105,9 @@ const ProductList = ({ products }) => {
 			</header>
 			<section>
 				{grid ? (
-					<GridView products={filteredProducts} />
+					<GridView products={currentProducts} />
 				) : (
-					<ListView products={filteredProducts} />
+					<ListView products={currentProducts} />
 				)}
 			</section>
 			{bacToTop && (
@@ -110,6 +117,12 @@ const ProductList = ({ products }) => {
 					</button>
 				</div>
 			)}
+			<Pagination
+				productPerPage={productPerPage}
+				currentPage={currentPage}
+				setCurrentPage={setCurrentPage}
+				totalProducts={filteredProducts.length}
+			/>
 		</main>
 	);
 };
