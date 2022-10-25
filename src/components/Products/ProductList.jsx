@@ -3,21 +3,27 @@ import { ListView, GridView, Search, ProductFilter } from "../../components";
 import { BsFillGridFill, BsFilter } from "react-icons/bs";
 import { MdOutlineSubject } from "react-icons/md";
 // Redux
-import { filterBySearch } from "../../redux/slice/filterSlice";
+import { filterBySearch, sortProducts } from "../../redux/slice/filterSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const ProductList = ({ products }) => {
 	const [grid, setGrid] = useState(true);
 	const [search, setSearch] = useState("");
+	const [sort, setSort] = useState("latest");
 	// Scroll To Top
 	const [bacToTop, setBackToTop] = useState(false);
 	const dispatch = useDispatch();
 
 	const { filteredProducts } = useSelector((store) => store.filter);
 
+	//! Search
 	useEffect(() => {
 		dispatch(filterBySearch({ products, search }));
 	}, [dispatch, products, search]);
+	//! Sort
+	useEffect(() => {
+		dispatch(sortProducts({ products, sort }));
+	}, [dispatch, products, sort]);
 
 	useEffect(() => {
 		// Scroll back to top
@@ -56,7 +62,8 @@ const ProductList = ({ products }) => {
 						/>
 					</div>
 					<h1>
-						<span className="font-bold">{products.length} </span>- Products Found
+						<span className="font-bold">{filteredProducts.length} </span>- Products
+						Found
 					</h1>
 				</div>
 				{/* Search Bar */}
@@ -64,12 +71,16 @@ const ProductList = ({ products }) => {
 				{/* Sorting List */}
 				<div className="flex gap-2 items-center">
 					<label>Sort by:</label>
-					<select name="" id="" className="select select-sm select-bordered">
+					<select
+						value={sort}
+						className="select select-sm select-bordered"
+						onChange={(e) => setSort(e.target.value)}
+					>
 						<option value="latest">Latest</option>
 						<option value="lowest-price">Lowest Price</option>
 						<option value="highest-price">Highest Price</option>
-						<option value="a2z">A - Z</option>
-						<option value="z2a">Z - A</option>
+						<option value="a2z">Name(a - z)</option>
+						<option value="z2a">Name(z - a)</option>
 					</select>
 				</div>
 				{/* Collapse for Filter  */}

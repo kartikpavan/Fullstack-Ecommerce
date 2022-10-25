@@ -2,7 +2,7 @@ import React from "react";
 
 const ProductFilter = () => {
 	return (
-		<div className=" ">
+		<div className="flex flex-col gap-y-5">
 			{/* Categories */}
 			<div>
 				<h1 className="font-bold">CATEGORIES</h1>

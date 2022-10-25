@@ -32,14 +32,13 @@ const ProductDetails = () => {
 		getSingleDocument();
 	}, []);
 
-	// const { imageURL, name, category, brand, price, description } = product;
 	return (
 		<>
 			{isLoading && <Loader />}
 			<Breadcrumbs type={product.name} />
 			<section className="w-full mx-auto p-4 md:p-10 md:w-9/12 md:px-6 ">
-				<h1 className="text-2xl">Product Details </h1>
-				<Link to="/all" className="btn btn-sm btn-secondary">
+				<h1 className="text-2xl font-semibold">Product Details </h1>
+				<Link to="/all" className="link link-secondary">
 					&larr; Back to All Products
 				</Link>
 				<article className="flex flex-col md:flex-row items-start justify-between py-4 gap-x-4">

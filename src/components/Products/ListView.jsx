@@ -27,7 +27,8 @@ const ListView = ({ products }) => {
 								<span className="badge ">Free Delivery</span>
 							</div>
 							<div className="flex-1">
-								<h1 className="font-semibold py-2">{product.name}</h1>
+								<h1 className="font-semibold">{product.brand}</h1>
+								<h1 className="font-semibold pb-2">{product.name}</h1>
 								<p className="py-2 text-xl font-semibold">
 									{formatPrice(product.price)}
 								</p>
