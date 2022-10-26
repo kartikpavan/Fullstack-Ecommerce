@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
-const Breadcrumbs = ({ type, checkout }) => {
+const Breadcrumbs = ({ type, checkout, stripe }) => {
 	const activeLink = ({ isActive }) => (isActive ? "text-secondary-content " : "text-secondary");
 
 	return (
@@ -22,6 +22,11 @@ const Breadcrumbs = ({ type, checkout }) => {
 				{checkout && (
 					<NavLink to={{}} className={activeLink}>
 						<span className="text-xl md:text-3xl font-bold"> / {checkout}</span>
+					</NavLink>
+				)}
+				{stripe && (
+					<NavLink to={{}} className={activeLink}>
+						<span className="text-xl md:text-3xl font-bold"> / {stripe}</span>
 					</NavLink>
 				)}
 			</div>
