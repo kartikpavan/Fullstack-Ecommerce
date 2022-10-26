@@ -146,8 +146,7 @@ const Cart = () => {
 							</div>
 							<p className="text-gray-400">Tax and Shipping calculated at checkout</p>
 							{isUserLoggedIn ? (
-								<Link to="/checkout" className="btn btn-primary w-full">
-									{" "}
+								<Link to="/checkout-details" className="btn btn-primary w-full">
 									Checkout
 								</Link>
 							) : (

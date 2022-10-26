@@ -140,7 +140,7 @@ const AddProducts = () => {
 				>
 					<div className="py-2">
 						<label className="label-text font-bold mb-2 block text-lg">
-							Product Name:{" "}
+							Product Name:
 						</label>
 						<input
 							className="input input-bordered max-w-lg w-full border-2"

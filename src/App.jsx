@@ -9,6 +9,7 @@ import {
 	Admin,
 	AllProducts,
 	Contact,
+	CheckoutDetails,
 	Checkout,
 } from "./pages";
 import { ToastContainer } from "react-toastify";
@@ -33,6 +34,14 @@ const App = () => {
 				<Route path="/contact" element={<Contact />} />
 				<Route path="/all" element={<AllProducts />} />
 				<Route path="/product-details/:id" element={<ProductDetails />} />
+				<Route
+					path="/checkout-details"
+					element={
+						<ProtectedRoute>
+							<CheckoutDetails />
+						</ProtectedRoute>
+					}
+				/>
 				<Route
 					path="/checkout"
 					element={

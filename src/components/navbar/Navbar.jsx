@@ -41,11 +41,6 @@ const Navbar = () => {
 		});
 	}, []);
 
-	useEffect(() => {
-		dispatch(calculateTotalQuantity());
-		dispatch(calculateSubtotal());
-	}, [dispatch, cartItems]);
-
 	function logOutUser() {
 		signOut(auth)
 			.then(() => {
@@ -59,6 +54,11 @@ const Navbar = () => {
 	let activeStyle = {
 		borderBottom: "2px solid white",
 	};
+
+	useEffect(() => {
+		dispatch(calculateTotalQuantity());
+		dispatch(calculateSubtotal());
+	}, [dispatch, cartItems]);
 
 	return (
 		<>
