@@ -34,22 +34,24 @@ const App = () => {
 				<Route path="/contact" element={<Contact />} />
 				<Route path="/all" element={<AllProducts />} />
 				<Route path="/product-details/:id" element={<ProductDetails />} />
-				<Route
+				{/* <Route
 					path="/checkout-details"
 					element={
 						<ProtectedRoute>
 							<CheckoutDetails />
 						</ProtectedRoute>
 					}
-				/>
-				<Route
+				/> */}
+				<Route path="/checkout-details" element={<CheckoutDetails />} />
+				{/* <Route
 					path="/checkout"
 					element={
 						<ProtectedRoute>
 							<Checkout />
 						</ProtectedRoute>
 					}
-				/>
+				/> */}
+				<Route path="/checkout" element={<Checkout />} />
 				{/* ADMIN ROUTES */}
 				<Route
 					path="/admin/*"
