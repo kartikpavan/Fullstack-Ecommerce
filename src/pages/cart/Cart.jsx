@@ -19,6 +19,7 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 
 const Cart = () => {
 	const { cartItems, totalAmount, totalQuantity } = useSelector((store) => store.cart);
+	const { isUserLoggedIn } = useSelector((store) => store.auth);
 	const dispatch = useDispatch();
 	//! increase cart item Qty
 	const increaseQty = (item) => {
@@ -144,7 +145,19 @@ const Cart = () => {
 								<p className="text-primary text-2xl">{formatPrice(totalAmount)}</p>
 							</div>
 							<p className="text-gray-400">Tax and Shipping calculated at checkout</p>
-							<button className="btn btn-primary w-full ">Checkout</button>
+							{isUserLoggedIn ? (
+								<Link to="/checkout" className="btn btn-primary w-full">
+									{" "}
+									Checkout
+								</Link>
+							) : (
+								<label
+									htmlFor="my-modal-4"
+									className="modal-button btn btn-primary w-full"
+								>
+									Login To Checkout
+								</label>
+							)}
 						</div>
 					</article>
 				)}

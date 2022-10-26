@@ -6,3 +6,4 @@ export { default as ResetPassword } from "./resetPassword/ResetPassword";
 export { default as NotFound } from "./notFound/NotFound";
 export { default as AllProducts } from "./allProducts/Allproducts";
 export { default as Contact } from "./contact/Contact";
+export { default as Checkout } from "./checkout/Checkout";
