@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import CheckoutSummary from "../checkoutSummary/CheckoutSummary";
 import Breadcrumbs from "../breadcrumbs/Breadcrumbs";
+import { toast } from "react-toastify";
 
 const CheckoutForm = () => {
 	const stripe = useStripe();
@@ -38,6 +39,10 @@ const CheckoutForm = () => {
 		});
 	}, [stripe]);
 
+	const saveOrder = () => {
+		console.log("order Saved");
+	};
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setMessage(null);
@@ -49,15 +54,18 @@ const CheckoutForm = () => {
 			elements,
 			confirmParams: {
 				// Make sure to change this to your payment completion page
-				return_url: "http://localhost:3000",
+				return_url: "http://localhost:5173/checkout-success",
 			},
 		});
 		if (error.type === "card_error" || error.type === "validation_error") {
 			setMessage(error.message);
+			toast.error(error.message);
 		} else {
 			setMessage("An unexpected error occurred.");
+			toast.error("An unexpected error occurred.");
 		}
-
+		toast.success("Payment Successfull");
+		saveOrder();
 		setIsLoading(false);
 	};
 
