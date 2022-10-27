@@ -12,6 +12,7 @@ import {
 	CheckoutDetails,
 	Checkout,
 	CheckoutSuccess,
+	OrderDetails,
 } from "./pages";
 import { ToastContainer } from "react-toastify";
 
@@ -30,6 +31,7 @@ const App = () => {
 						</ProtectedRoute>
 					}
 				/>
+				<Route path="/order-details/:id" element={<OrderDetails />} />
 				<Route path="/reset" element={<ResetPassword />} />
 				<Route path="/contact" element={<Contact />} />
 				<Route path="/all" element={<AllProducts />} />

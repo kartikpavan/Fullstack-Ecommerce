@@ -44,7 +44,7 @@ const OrderHistory = () => {
 							<span className="font-semibold">Product Review</span>
 						</p>
 						<div className="overflow-x-auto">
-							<table className="table border-2 rounded-none  w-full">
+							<table className="table  w-full">
 								{/* thead */}
 								<thead>
 									<tr>
