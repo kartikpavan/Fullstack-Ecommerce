@@ -3,9 +3,12 @@ import { useParams } from "react-router-dom";
 import { Header } from "../../components";
 // Star rating library
 import StarsRating from "react-star-rate";
-
 //redux
 import { useSelector } from "react-redux";
+// lazy load
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+import { formatPrice } from "../../utils/formatPrice";
 
 const Review = () => {
 	const [rating, setRating] = useState(0);
@@ -17,38 +20,70 @@ const Review = () => {
 
 	//! find the the matching product from the productsSlice
 	const filteredProduct = products.find((item) => item.id === id);
-	console.log(filteredProduct);
+
+	function submitReview(e) {
+		e.preventDefault();
+
+		console.log(rating, review);
+	}
+
 	return (
 		<>
 			<Header text="Review" />
-			<main className="w-full mx-auto px-2 md:w-9/12 md:px-6 mt-6 ">
-				<h1 className="text-2xl fonr-semibold">Rate this Product</h1>
-				<section className="flex justify-around ">
-					<div className="w-96">
-						<h2 className="text-xl font-semibold">
-							Product Name : <span className="text-light"></span>
-						</h2>
-					</div>
+			{filteredProduct === null ? (
+				<h1 className="text-2xl font-bold"> No product Found </h1>
+			) : (
+				<main className="w-full mx-auto px-2 md:w-9/12 md:px-6 mt-6 ">
+					<section className="flex justify-evenly items-center flex-col lg:flex-row">
+						<div className="w-96">
+							<div className="flex flex-col gap-5">
+								<h1 className="font-light text-primary text-xl">
+									{filteredProduct.name}
+								</h1>
+								<div className="flex gap-4 items-center">
+									<LazyLoadImage
+										src={filteredProduct.imageURL}
+										alt={"image"}
+										className="w-10 sm:w-32 object-fill"
+										placeholderSrc="https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg"
+										effect="blur"
+									/>
+									<div>
+										<p className="font-semibold">{filteredProduct.brand}</p>
+										<p className="font-semibold">
+											{formatPrice(filteredProduct.price)}
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
 
-					<div className="p-4 rounded-md shadow-lg w-max flex flex-col">
-						<h1 className="font-semibold">Rating : </h1>
-						<StarsRating
-							value={rating}
-							onChange={(rating) => {
-								setRating(rating);
-							}}
-						/>
-						<textarea
-							className="textarea textarea-secondary mt-4"
-							placeholder="Review"
-							rows={10}
-							cols={50}
-							value={review}
-							onChange={(e) => setReview(e.target.value)}
-						></textarea>
-					</div>
-				</section>
-			</main>
+						<form
+							onSubmit={submitReview}
+							className="p-4 rounded-md shadow-lg w-max flex flex-col"
+						>
+							<h1 className="font-semibold">Rating : </h1>
+							<StarsRating
+								value={rating}
+								onChange={(rating) => {
+									setRating(rating);
+								}}
+							/>
+							<textarea
+								className="textarea textarea-secondary mt-4"
+								placeholder="Review"
+								rows={10}
+								cols={50}
+								value={review}
+								onChange={(e) => setReview(e.target.value)}
+							></textarea>
+							<button type="submit" className="btn btn-primary">
+								Submit review
+							</button>
+						</form>
+					</section>
+				</main>
+			)}
 		</>
 	);
 };
