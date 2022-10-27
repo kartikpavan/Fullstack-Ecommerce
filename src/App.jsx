@@ -33,7 +33,14 @@ const App = () => {
 					}
 				/>
 				<Route path="/order-details/:id" element={<OrderDetails />} />
-				<Route path="/review-product/:id" element={<Review />} />
+				<Route
+					path="/review-product/:id"
+					element={
+						<ProtectedRoute>
+							<Review />
+						</ProtectedRoute>
+					}
+				/>
 				<Route path="/reset" element={<ResetPassword />} />
 				<Route path="/contact" element={<Contact />} />
 				<Route path="/all" element={<AllProducts />} />

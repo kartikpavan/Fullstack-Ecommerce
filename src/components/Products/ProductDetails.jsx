@@ -3,6 +3,9 @@ import Breadcrumbs from "../breadcrumbs/Breadcrumbs";
 import { Link, useParams } from "react-router-dom";
 import { formatPrice } from "../../utils/formatPrice";
 import Loader from "../loader/Loader";
+import ReviewComponent from "../review/ReviewComponent";
+// Custom Hook
+import useFetchCollection from "../../hooks/useFetchCollection";
 //Lazy Load
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
@@ -14,12 +17,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart, decreaseCart, calculateTotalQuantity } from "../../redux/slice/cartSlice";
 
 const ProductDetails = () => {
+	// get cart items from redux store
 	const { cartItems } = useSelector((store) => store.cart);
 	const [product, setProduct] = useState({});
 	const [isLoading, setIsLoading] = useState(false);
 	const { id } = useParams();
 	const dispatch = useDispatch();
 
+	//! fetch Review Collection
+	const { data } = useFetchCollection("reviews");
+	console.log(data);
+	// find the review which matches the current product
+	const filteredReview = data.filter((item) => item.productId === id);
+	console.log(filteredReview);
+
+	//! fetch single product Document from products collection
 	async function getSingleDocument() {
 		setIsLoading(true);
 		const docRef = doc(db, "products", id);
@@ -36,6 +48,7 @@ const ProductDetails = () => {
 	useEffect(() => {
 		getSingleDocument();
 	}, []);
+
 	// Add to cart
 	function add2CartFunction(product) {
 		dispatch(addToCart({ ...product, id }));
@@ -46,7 +59,7 @@ const ProductDetails = () => {
 		dispatch(decreaseCart({ ...product, id }));
 		dispatch(calculateTotalQuantity());
 	}
-
+	// Check if the item is already present in the cart or not
 	let currentItem = cartItems.find((item) => item.id === id);
 
 	return (
@@ -112,6 +125,18 @@ const ProductDetails = () => {
 						</div>
 					</div>
 				</article>
+				<h1 className="text-2xl font-semibold mt-2">Reviews</h1>
+				{!filteredReview.length ? (
+					<Link to={`/review-product/${id}`} className="link link-primary ">
+						Be the first one to review this product
+					</Link>
+				) : (
+					<div className="flex flex-col gap-4  ">
+						{filteredReview.map((review) => {
+							return <ReviewComponent review={review} />;
+						})}
+					</div>
+				)}
 			</section>
 		</>
 	);
