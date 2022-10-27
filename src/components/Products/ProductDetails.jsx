@@ -125,18 +125,22 @@ const ProductDetails = () => {
 						</div>
 					</div>
 				</article>
-				<h1 className="text-2xl font-semibold mt-2">Reviews</h1>
-				{!filteredReview.length ? (
-					<Link to={`/review-product/${id}`} className="link link-primary ">
-						Be the first one to review this product
-					</Link>
-				) : (
-					<div className="flex flex-col gap-4  ">
-						{filteredReview.map((review) => {
-							return <ReviewComponent review={review} />;
-						})}
+				<section className="border-2 rounded-sm shadow-lg">
+					<div className="border-b-2 w-full ">
+						<h1 className="text-2xl font-semibold mt-2 p-2">Reviews</h1>
 					</div>
-				)}
+					{!filteredReview.length ? (
+						<Link to={`/review-product/${id}`} className="link link-primary p-2">
+							Be the first one to review this product
+						</Link>
+					) : (
+						<div className="flex flex-col gap-4 p-2 ">
+							{filteredReview.map((review) => {
+								return <ReviewComponent review={review} />;
+							})}
+						</div>
+					)}
+				</section>
 			</section>
 		</>
 	);
