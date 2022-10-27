@@ -9,19 +9,19 @@ import { useSelector, useDispatch } from "react-redux";
 import { storeProducts, getPriceRange } from "../../redux/slice/productSlice";
 
 const Allproducts = () => {
-	// const { data, isLoading } = useFetchCollection("products");
-	// const dispatch = useDispatch();
+	const { data, isLoading } = useFetchCollection("products");
+	const dispatch = useDispatch();
 
-	// useEffect(() => {
-	// 	dispatch(storeProducts({ products: data }));
-	// 	dispatch(getPriceRange({ products: data }));
-	// }, [dispatch, data]);
+	useEffect(() => {
+		dispatch(storeProducts({ products: data }));
+		dispatch(getPriceRange({ products: data }));
+	}, [dispatch, data]);
 
 	const { products } = useSelector((store) => store.product);
 
 	return (
 		<>
-			{/* {isLoading && <Loader />} */}
+			{isLoading && <Loader />}
 			<main className="w-full">
 				<Breadcrumbs />
 				<section className="w-full mx-auto p-4 md:p-10 md:w-9/12 md:px-6 flex h-full">
