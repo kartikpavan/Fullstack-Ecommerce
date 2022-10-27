@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Loader from "../../components/loader/Loader";
 import { formatPrice } from "../../utils/formatPrice";
+import Review from "../reviewProduct/Review";
+
 //firebase
 import useFetchDocument from "../../hooks/useFetchDocument";
 // lazy load
@@ -73,12 +75,18 @@ const OrderDetails = () => {
 								</thead>
 								<tbody>
 									{order.cartItems.map((product, index) => {
-										const { id, name, price, imageURL, qty } = product;
+										const {
+											id: productId,
+											name,
+											price,
+											imageURL,
+											qty,
+										} = product;
 										return (
 											<tr key={index}>
 												<td>{index + 1}</td>
 												<td>
-													<Link to={`/product-details/${id}`}>
+													<Link to={`/product-details/${productId}`}>
 														<LazyLoadImage
 															src={
 																imageURL ||
@@ -96,9 +104,12 @@ const OrderDetails = () => {
 												<td>{qty}</td>
 												<td>{formatPrice(price * qty)}</td>
 												<td>
-													<button className="btn btn-accent">
+													<Link
+														to={`/review-product/${productId}`}
+														className="btn btn-accent"
+													>
 														Add a review
-													</button>
+													</Link>
 												</td>
 											</tr>
 										);

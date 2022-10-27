@@ -13,6 +13,7 @@ import {
 	Checkout,
 	CheckoutSuccess,
 	OrderDetails,
+	Review,
 } from "./pages";
 import { ToastContainer } from "react-toastify";
 
@@ -32,6 +33,7 @@ const App = () => {
 					}
 				/>
 				<Route path="/order-details/:id" element={<OrderDetails />} />
+				<Route path="/review-product/:id" element={<Review />} />
 				<Route path="/reset" element={<ResetPassword />} />
 				<Route path="/contact" element={<Contact />} />
 				<Route path="/all" element={<AllProducts />} />
