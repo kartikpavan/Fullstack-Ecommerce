@@ -20,3 +20,4 @@ export { default as ProductDetails } from "./Products/ProductDetails";
 export { default as Pagination } from "./pagination/Pagination";
 export { default as CheckoutSummary } from "./checkoutSummary/CheckoutSummary";
 export { default as CheckoutForm } from "./checkoutForm/CheckoutForm";
+export { default as Header } from "./header/Header";

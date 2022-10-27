@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import Breadcrumbs from "../../components/breadcrumbs/Breadcrumbs";
+import { Header } from "../../components";
+
 import useFetchCollection from "../../hooks/useFetchCollection";
 import Loader from "../../components/loader/Loader";
 import { useNavigate } from "react-router-dom";
@@ -27,13 +28,7 @@ const OrderHistory = () => {
 	return (
 		<>
 			{isLoading && <Loader />}
-			<section className="h-44 w-full bg-primary-content flex items-center">
-				<div className="w-full mx-auto px-2 md:w-9/12 md:px-6 ">
-					<h1 className="text-xl md:text-3xl font-bold text-secondary-content">
-						My Orders
-					</h1>
-				</div>
-			</section>
+			<Header text="My Orders" />
 			<main className="w-full mx-auto px-2 md:w-9/12 md:px-6 mt-6 ">
 				{!filteredOrders.length ? (
 					<h1 className="text-2xl font-bold"> No Orders found </h1>
@@ -41,7 +36,7 @@ const OrderHistory = () => {
 					<div>
 						<p className="text-lg font-light">
 							Click an order to leave a{" "}
-							<span className="font-semibold">Product Review</span>
+							<span className="font-semibold text-primary">Product Review</span>
 						</p>
 						<div className="overflow-x-auto">
 							<table className="table  w-full">
