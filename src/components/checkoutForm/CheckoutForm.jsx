@@ -3,13 +3,19 @@ import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js"
 import CheckoutSummary from "../checkoutSummary/CheckoutSummary";
 import Breadcrumbs from "../breadcrumbs/Breadcrumbs";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = () => {
 	const stripe = useStripe();
 	const elements = useElements();
+	const navigate = useNavigate();
 
 	const [message, setMessage] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
+
+	const saveOrder = () => {
+		console.log("order Saved");
+	};
 
 	useEffect(() => {
 		if (!stripe) {
@@ -39,10 +45,6 @@ const CheckoutForm = () => {
 		});
 	}, [stripe]);
 
-	const saveOrder = () => {
-		console.log("order Saved");
-	};
-
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setMessage(null);
@@ -50,22 +52,30 @@ const CheckoutForm = () => {
 			return;
 		}
 		setIsLoading(true);
-		const { error } = await stripe.confirmPayment({
-			elements,
-			confirmParams: {
-				// Make sure to change this to your payment completion page
-				return_url: "http://localhost:5173/checkout-success",
-			},
-		});
-		if (error.type === "card_error" || error.type === "validation_error") {
-			setMessage(error.message);
-			toast.error(error.message);
-		} else {
-			setMessage("An unexpected error occurred.");
-			toast.error("An unexpected error occurred.");
-		}
-		toast.success("Payment Successfull");
-		saveOrder();
+		const confirmPayment = await stripe
+			.confirmPayment({
+				elements,
+				confirmParams: {
+					// Make sure to change this to your payment completion page
+					return_url: "http://localhost:5173/checkout-success",
+				},
+				redirect: "if_required",
+			})
+			.then((res) => {
+				if (res.error) {
+					setMessage(res.error.message);
+					toast.error(res.error.message);
+					return;
+				}
+				if (res.paymentIntent) {
+					if (res.paymentIntent.status === "succeeded") {
+						setIsLoading(false);
+						toast.success("Payment Successful");
+						saveOrder();
+						navigate("/checkout-success", { replace: true });
+					}
+				}
+			});
 		setIsLoading(false);
 	};
 

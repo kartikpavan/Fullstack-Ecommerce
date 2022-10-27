@@ -1,4 +1,4 @@
-form {
+/* form {
 	width: 30vw;
 	min-width: 500px;
 	align-self: center;
@@ -6,7 +6,7 @@ form {
 		0px 1px 1.5px 0px rgba(0, 0, 0, 0.07);
 	border-radius: 7px;
 	padding: 40px;
-}
+} */
 
 #payment-message {
 	color: rgb(105, 115, 134);
@@ -94,9 +94,9 @@ form {
 	}
 }
 
-@media only screen and (max-width: 600px) {
+/* @media only screen and (max-width: 600px) {
 	form {
 		width: 80vw;
 		min-width: initial;
 	}
-}
+} */
