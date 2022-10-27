@@ -9,3 +9,4 @@ export { default as Contact } from "./contact/Contact";
 export { default as CheckoutDetails } from "./checkout/CheckoutDetails";
 export { default as Checkout } from "./checkout/Checkout";
 export { default as CheckoutSuccess } from "./checkout/CheckoutSuccess";
+export { default as OrderDetails } from "./orderDetails/OrderDetails";

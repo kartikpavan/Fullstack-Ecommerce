@@ -41,7 +41,6 @@ const CheckoutForm = () => {
 		try {
 			addDoc(collection(db, "orders"), orderDetails);
 			dispatch(clearCart());
-			toast.success("Order saved to database"); //!Remove it later
 		} catch (error) {
 			toast.error(error.message);
 		}
