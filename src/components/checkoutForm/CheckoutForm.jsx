@@ -4,46 +4,48 @@ import CheckoutSummary from "../checkoutSummary/CheckoutSummary";
 import Breadcrumbs from "../breadcrumbs/Breadcrumbs";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+// firebase
+import { collection, addDoc, Timestamp } from "firebase/firestore";
+import { db } from "../../firebase/config";
+//redux
+import { useSelector, useDispatch } from "react-redux";
+import { clearCart } from "../../redux/slice/cartSlice";
 
 const CheckoutForm = () => {
 	const stripe = useStripe();
 	const elements = useElements();
-	const navigate = useNavigate();
 
 	const [message, setMessage] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
 
-	const saveOrder = () => {
-		console.log("order Saved");
-	};
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const { email, userId } = useSelector((store) => store.auth);
+	const { cartItems, totalAmount } = useSelector((store) => store.cart);
+	const { shippingAddress } = useSelector((store) => store.checkout);
 
-	useEffect(() => {
-		if (!stripe) {
-			return;
+	const saveOrder = () => {
+		const date = new Date().toDateString();
+		const time = new Date().toLocaleTimeString();
+		const orderDetails = {
+			userId,
+			email,
+			orderDate: date,
+			orderTime: time,
+			orderAmount: totalAmount,
+			orderStatus: "Order Placed",
+			cartItems,
+			shippingAddress,
+			createdAt: Timestamp.now().toDate(),
+		};
+		try {
+			addDoc(collection(db, "orders"), orderDetails);
+			dispatch(clearCart());
+			toast.success("Order saved to database"); //!Remove it later
+		} catch (error) {
+			toast.error(error.message);
 		}
-		const clientSecret = new URLSearchParams(window.location.search).get(
-			"payment_intent_client_secret"
-		);
-		if (!clientSecret) {
-			return;
-		}
-		stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
-			switch (paymentIntent.status) {
-				case "succeeded":
-					setMessage("Payment succeeded!");
-					break;
-				case "processing":
-					setMessage("Your payment is processing.");
-					break;
-				case "requires_payment_method":
-					setMessage("Your payment was not successful, please try again.");
-					break;
-				default:
-					setMessage("Something went wrong.");
-					break;
-			}
-		});
-	}, [stripe]);
+	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -78,6 +80,18 @@ const CheckoutForm = () => {
 			});
 		setIsLoading(false);
 	};
+
+	useEffect(() => {
+		if (!stripe) {
+			return;
+		}
+		const clientSecret = new URLSearchParams(window.location.search).get(
+			"payment_intent_client_secret"
+		);
+		if (!clientSecret) {
+			return;
+		}
+	}, [stripe]);
 
 	return (
 		<>
