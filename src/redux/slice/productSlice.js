@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-	products: [],
+	products: localStorage.getItem("product") ? JSON.parse(localStorage.getItem("product")) : [],
 	minPrice: 0,
 	maxPrice: 0,
 };
@@ -12,6 +12,7 @@ const productSlice = createSlice({
 	reducers: {
 		storeProducts(state, action) {
 			state.products = action.payload.products;
+			localStorage.setItem("product", JSON.stringify(action.payload.products));
 		},
 		getPriceRange(state, action) {
 			const { products } = action.payload;
