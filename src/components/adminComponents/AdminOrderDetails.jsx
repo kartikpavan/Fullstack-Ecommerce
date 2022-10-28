@@ -3,10 +3,9 @@ import { useParams, Link } from "react-router-dom";
 import Loader from "../../components/loader/Loader";
 //firebase
 import useFetchDocument from "../../hooks/useFetchDocument";
-
 import OrderDetailsComponent from "../../components/orderDetailsComponent/OrderDetailsComponent";
 
-const OrderDetails = () => {
+const AdminOrderDetails = () => {
 	const [order, setOrder] = useState(null);
 	const { id } = useParams();
 	const { document } = useFetchDocument("orders", id);
@@ -14,18 +13,18 @@ const OrderDetails = () => {
 	useEffect(() => {
 		setOrder(document);
 	}, [document]);
-	console.log(id);
+
 	return (
 		<>
 			{order === null ? (
 				<Loader />
 			) : (
-				<div className="w-full mx-auto px-2 md:w-9/12 md:px-6 mt-6 ">
-					<OrderDetailsComponent order={order} user={true} admin={false} />
+				<div>
+					<OrderDetailsComponent order={order} user={false} admin={true} orderId={id} />
 				</div>
 			)}
 		</>
 	);
 };
 
-export default OrderDetails;
+export default AdminOrderDetails;

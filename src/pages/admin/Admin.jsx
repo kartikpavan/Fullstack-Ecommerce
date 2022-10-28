@@ -1,6 +1,13 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { AddProducts, AdminHome, AdminSidebar, Orders, ViewProducts } from "../../components";
+import {
+	AddProducts,
+	AdminHome,
+	AdminOrderDetails,
+	AdminSidebar,
+	Orders,
+	ViewProducts,
+} from "../../components";
 
 const Admin = () => {
 	return (
@@ -16,6 +23,7 @@ const Admin = () => {
 							<Route path="all-products" element={<ViewProducts />} />
 							<Route path="add-product/:id" element={<AddProducts />} />
 							<Route path="orders" element={<Orders />} />
+							<Route path="order-details/:id" element={<AdminOrderDetails />} />
 						</Routes>
 					</div>
 				</div>

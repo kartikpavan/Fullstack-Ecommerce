@@ -9,7 +9,7 @@ const OrdersComponent = ({ orders, user, admin }) => {
 		navigate(`/order-details/${orderId}`);
 	}
 	function handleAdminClick(orderId) {
-		console.log("Admin Clicked");
+		navigate(`/admin/order-details/${orderId}`);
 	}
 
 	return (
@@ -58,9 +58,9 @@ const OrdersComponent = ({ orders, user, admin }) => {
 											<td className="font-bold">
 												<p
 													className={`${
-														orderStatus !== "Delivered"
+														orderStatus !== "Item(s) Delivered"
 															? "text-primary"
-															: "text-success"
+															: "text-green-600"
 													}`}
 												>
 													{orderStatus}
