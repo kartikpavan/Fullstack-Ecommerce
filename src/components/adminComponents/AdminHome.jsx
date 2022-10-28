@@ -32,8 +32,9 @@ const AdminHome = () => {
 				<InfoBox title={"Products"} count={products.length} icon={orderIcon} />
 				<InfoBox title={"Orders"} count={orderHistory.length} icon={productIcon} />
 			</section>
-
-			<Chart />
+			<div className="w-[80%]">
+				<Chart />
+			</div>
 		</main>
 	);
 };
