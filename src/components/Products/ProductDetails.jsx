@@ -26,10 +26,9 @@ const ProductDetails = () => {
 
 	//! fetch Review Collection
 	const { data } = useFetchCollection("reviews");
-	console.log(data);
+
 	// find the review which matches the current product
 	const filteredReview = data.filter((item) => item.productId === id);
-	console.log(filteredReview);
 
 	//! fetch single product Document from products collection
 	async function getSingleDocument() {
@@ -116,10 +115,7 @@ const ProductDetails = () => {
 						)}
 
 						<div>
-							<button
-								className="btn btn-lg"
-								onClick={() => add2CartFunction(product)}
-							>
+							<button className="btn " onClick={() => add2CartFunction(product)}>
 								Add to Cart
 							</button>
 						</div>

@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Header } from "../../components";
+import { formatPrice } from "../../utils/formatPrice";
 import { toast } from "react-toastify";
+// lazy load
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 // Star rating library
 import StarsRating from "react-star-rate";
 //redux
 import { useSelector } from "react-redux";
-// lazy load
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
-import { formatPrice } from "../../utils/formatPrice";
 // firebase
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { db } from "../../firebase/config";
