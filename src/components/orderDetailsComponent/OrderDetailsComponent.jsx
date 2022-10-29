@@ -27,15 +27,31 @@ const OrderDetailsComponent = ({ order, admin, user, orderId }) => {
 						<p className="font-semibold text-lg">
 							Order Status :
 							<span
-								className={`font-light ${
-									order.orderStatus === "Delivered"
-										? "text-success"
+								className={`font-bold ${
+									order.orderStatus === "Item(s) Delivered"
+										? "text-green-600"
 										: "text-primary"
 								}`}
 							>
 								{order.orderStatus}
 							</span>
 						</p>
+						<div>
+							<ul className="steps steps-vertical lg:steps-horizontal">
+								<li data-content="●" className="step step-primary">
+									Order Placed
+								</li>
+								<li data-content="●" className="step ">
+									Processing
+								</li>
+								<li data-content="●" className="step">
+									Shipped
+								</li>
+								<li data-content="✓" className="step">
+									Delivered
+								</li>
+							</ul>
+						</div>
 						{admin && (
 							<div>
 								{/* Recipient Name */}

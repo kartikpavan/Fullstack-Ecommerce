@@ -10,6 +10,7 @@ import { db } from "../../firebase/config";
 //redux
 import { useSelector, useDispatch } from "react-redux";
 import { clearCart } from "../../redux/slice/cartSlice";
+import Loader from "../loader/Loader";
 
 const CheckoutForm = () => {
 	const stripe = useStripe();
@@ -107,11 +108,12 @@ const CheckoutForm = () => {
 							<button
 								disabled={isLoading || !stripe || !elements}
 								id="submit"
-								className="btn btn-primary"
+								className="btn bg-blue-600"
 							>
 								<span id="button-text">
 									{isLoading ? (
-										<div className="spinner" id="spinner"></div>
+										// <div className="spinner" id="spinner"></div>
+										<Loader />
 									) : (
 										"Pay now"
 									)}

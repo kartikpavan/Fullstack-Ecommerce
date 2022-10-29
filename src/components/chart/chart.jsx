@@ -37,12 +37,11 @@ const chart = () => {
 	const getOrderCount = (arr, value) => {
 		return arr.filter((item) => item === value).length;
 	};
-	const [a, b, c, d] = ["Order Placed", "Processing...", "Processing...", "Item(s) Delivered"];
 
-	const placed = getOrderCount(filteredOrders, a);
-	const shipped = getOrderCount(filteredOrders, b);
-	const processing = getOrderCount(filteredOrders, c);
-	const delivered = getOrderCount(filteredOrders, d);
+	const placed = getOrderCount(filteredOrders, "Order Placed");
+	const processing = getOrderCount(filteredOrders, "Processing...");
+	const shipped = getOrderCount(filteredOrders, "Item(s) Shipped");
+	const delivered = getOrderCount(filteredOrders, "Item(s) Delivered");
 
 	const data = {
 		labels: ["Order Places", "Processing", "Shipped", "Delivered"],

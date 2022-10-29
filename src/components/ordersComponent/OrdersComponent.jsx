@@ -19,8 +19,13 @@ const OrdersComponent = ({ orders, user, admin }) => {
 			) : (
 				<div>
 					<p className="text-lg font-light">
-						Open order to
-						<span className="font-semibold text-primary">Change Order Status</span>
+						Open order to (
+						{admin ? (
+							<span className="font-semibold text-primary">Change Order Status</span>
+						) : (
+							<span className="font-semibold text-primary">Track Order Status</span>
+						)}
+						)
 					</p>
 					<div className="overflow-x-auto">
 						<table className="table  w-full">
