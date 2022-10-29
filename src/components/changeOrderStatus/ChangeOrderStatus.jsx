@@ -12,7 +12,6 @@ const ChangeOrderStatus = ({ order, orderId }) => {
 	const navigate = useNavigate();
 
 	const changeStatus = (e, orderId) => {
-		console.log(orderId);
 		e.preventDefault();
 		setIsloading(true);
 		const orderDetails = {

@@ -14,7 +14,7 @@ const OrderDetails = () => {
 	useEffect(() => {
 		setOrder(document);
 	}, [document]);
-	console.log(id);
+
 	return (
 		<>
 			{order === null ? (

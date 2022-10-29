@@ -27,3 +27,4 @@ export { default as InfoBox } from "./infoBox/InfoBox";
 export { default as Chart } from "./chart/chart";
 export { default as OrdersComponent } from "./ordersComponent/OrdersComponent";
 export { default as OrderDetailsComponent } from "./orderDetailsComponent/OrderDetailsComponent";
+export { default as Steps } from "./steps/Steps";

@@ -4,54 +4,47 @@ import { formatPrice } from "../../utils/formatPrice";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import ChangeOrderStatus from "../changeOrderStatus/ChangeOrderStatus";
+import Steps from "../steps/Steps";
 
 const OrderDetailsComponent = ({ order, admin, user, orderId }) => {
 	return (
-		<div>
+		<>
 			<section className="p-4 w-full bg-primary-content flex items-center">
-				<article className="flex flex-col lg:flex-row items-center justify-between gap-y-5">
+				<article className="w-full flex flex-col lg:flex-row items-center justify-between gap-y-5">
 					{/* Order Details */}
-					<div className="w-full mx-auto  md:px-6 ">
-						<h1 className="text-xl md:text-3xl font-bold text-secondary-content">
-							Order Details
-						</h1>
-						<p className="font-semibold text-lg">
-							Order ID :<span className="font-light text-gray-500"> {order.id}</span>
-						</p>
-						<p className="font-semibold text-lg">
-							Order Amount :
-							<span className="font-light text-gray-500">
-								{formatPrice(order.orderAmount)}
-							</span>
-						</p>
-						<p className="font-semibold text-lg">
-							Order Status :
-							<span
-								className={`font-bold ${
-									order.orderStatus === "Item(s) Delivered"
-										? "text-green-600"
-										: "text-primary"
-								}`}
-							>
-								{order.orderStatus}
-							</span>
-						</p>
-						<div>
-							<ul className="steps steps-vertical lg:steps-horizontal">
-								<li data-content="●" className="step step-primary">
-									Order Placed
-								</li>
-								<li data-content="●" className="step ">
-									Processing
-								</li>
-								<li data-content="●" className="step">
-									Shipped
-								</li>
-								<li data-content="✓" className="step">
-									Delivered
-								</li>
-							</ul>
-						</div>
+					<div className="w-full mx-auto md:px-6 ">
+						<section className="flex items-center justify-between ">
+							<div>
+								<h1 className="text-xl md:text-3xl font-bold text-secondary-content">
+									Order Details
+								</h1>
+								<p className="font-semibold text-lg my-2">
+									Order ID :
+									<span className="font-light text-gray-500"> {order.id}</span>
+								</p>
+								<p className="font-semibold text-lg my-2">
+									Order Amount :
+									<span className="font-light text-gray-500">
+										{formatPrice(order.orderAmount)}
+									</span>
+								</p>
+								<p className="font-semibold text-lg my-2">
+									Order Status :
+									<span
+										className={`font-bold ${
+											order.orderStatus === "Item(s) Delivered"
+												? "text-green-600"
+												: "text-primary"
+										}`}
+									>
+										{order.orderStatus}
+									</span>
+								</p>
+							</div>
+							{/* Steps for order traacking only for user */}
+							{user && <Steps order={order} />}
+						</section>
+
 						{admin && (
 							<div>
 								{/* Recipient Name */}
@@ -141,7 +134,7 @@ const OrderDetailsComponent = ({ order, admin, user, orderId }) => {
 					</table>
 				</div>
 			</main>
-		</div>
+		</>
 	);
 };
 

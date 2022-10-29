@@ -32,7 +32,7 @@ const chart = () => {
 	const { orderHistory } = useSelector((store) => store.order);
 	// Create new Array of  order status
 	const filteredOrders = orderHistory.map((item) => item.orderStatus);
-	console.log(filteredOrders);
+
 	// Count the occurances of order status(s)
 	const getOrderCount = (arr, value) => {
 		return arr.filter((item) => item === value).length;
