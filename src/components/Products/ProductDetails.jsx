@@ -131,8 +131,8 @@ const ProductDetails = () => {
 						</Link>
 					) : (
 						<div className="flex flex-col gap-4 p-2 ">
-							{filteredReview.map((review) => {
-								return <ReviewComponent review={review} />;
+							{filteredReview.map((review, index) => {
+								return <ReviewComponent review={review} key={index} />;
 							})}
 						</div>
 					)}
