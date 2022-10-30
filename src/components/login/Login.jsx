@@ -17,6 +17,8 @@ const Login = () => {
 
 	const testLogin = (e) => {
 		e.preventDefault();
+		document.getElementById("my-modal-4").checked = false;
+
 		let testEmail = import.meta.env.VITE_TEST_EMAIL;
 		let testPass = import.meta.env.VITE_TEST_PASSWORD;
 		setIsLoading(true);
@@ -25,7 +27,7 @@ const Login = () => {
 				const user = userCredential.user;
 				toast.success("Login Successful");
 				setIsLoading(false);
-				document.getElementById("my-modal-4").checked = false;
+				// document.getElementById("my-modal-4").checked = false;
 				navigate("/");
 			})
 			.catch((error) => {
@@ -36,6 +38,9 @@ const Login = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		// Close dialog box when Login Btn is clicked immediately
+		document.getElementById("my-modal-4").checked = false;
+
 		//* Custom User login
 		setIsLoading(true);
 		signInWithEmailAndPassword(auth, email, password)
@@ -43,7 +48,6 @@ const Login = () => {
 				const user = userCredential.user;
 				toast.success("Login Successful");
 				setIsLoading(false);
-				document.getElementById("my-modal-4").checked = false;
 				navigate("/");
 			})
 			.catch((error) => {
@@ -59,12 +63,12 @@ const Login = () => {
 	const provider = new GoogleAuthProvider();
 	const googleSignIn = () => {
 		setIsLoading(true);
+		document.getElementById("my-modal-4").checked = false;
 		signInWithPopup(auth, provider)
 			.then((result) => {
 				const user = result.user;
 				toast.success("Login Successful");
 				setIsLoading(false);
-				document.getElementById("my-modal-4").checked = false;
 				navigate("/");
 			})
 			.catch((error) => {

@@ -11,7 +11,7 @@ const OrdersComponent = ({ orders, user, admin }) => {
 	function handleAdminClick(orderId) {
 		navigate(`/admin/order-details/${orderId}`);
 	}
-
+	console.log(orders);
 	return (
 		<main>
 			{!orders.length ? (
@@ -27,56 +27,50 @@ const OrdersComponent = ({ orders, user, admin }) => {
 						)}
 						)
 					</p>
-					<div className="overflow-x-auto">
-						<table className="table  w-full">
-							{/* thead */}
-							<thead>
-								<tr>
-									<th></th>
-									<th className="text-sm md:text-lg">Date</th>
-									<th className="text-sm md:text-lg">Order id</th>
-									<th className="text-sm md:text-lg">Total Amount</th>
-									<th className="text-sm md:text-lg">Order Status</th>
-								</tr>
-							</thead>
-							{/* tbody */}
-							<tbody>
-								{orders.map((order, index) => {
-									const { id, orderTime, orderDate, orderAmount, orderStatus } =
-										order;
-									return (
-										<tr
-											key={index}
-											className="hover cursor-pointer"
-											onClick={() => {
-												user ? handleUserClick(id) : handleAdminClick(id);
-											}}
-										>
-											<td>{index + 1}</td>
-											<td className="font-light">
-												{orderDate} at {orderTime}
-											</td>
-											<td className="font-light">{id}</td>
-											<td className="font-light">
+
+					{orders.map((order, index) => {
+						const { id, orderDate, orderAmount, orderStatus } = order;
+						return (
+							<section
+								className="w-full my-2 shadow-md rounded-md cursor-pointer hover:scale-105 duration-300"
+								key={index}
+								onClick={() => {
+									user ? handleUserClick(id) : handleAdminClick(id);
+								}}
+							>
+								<div className="p-4 bg-base-200">
+									<div className="flex items-center justify-between gap-6">
+										<p className="text-gray-500 text-sm md:text-lg ">
+											ORDER PLACED : <br /> <span>{orderDate}</span>
+										</p>
+										<p className="text-gray-500 text-sm md:text-lg">
+											TOTAL :
+											<span className="text-primary">
 												{formatPrice(orderAmount)}
-											</td>
-											<td className="font-bold">
-												<p
-													className={`${
-														orderStatus !== "Item(s) Delivered"
-															? "text-primary"
-															: "text-green-600"
-													}`}
-												>
-													{orderStatus}
-												</p>
-											</td>
-										</tr>
-									);
-								})}
-							</tbody>
-						</table>
-					</div>
+											</span>
+										</p>
+									</div>
+								</div>
+								<div className="p-4 flex items-center justify-between">
+									<p className="text-sm md:text-lg">
+										ID: <span className="font-semibold "> {id}</span>
+									</p>
+									<p className="text-sm md:text-lg ">
+										Status: <br />{" "}
+										<span
+											className={`font-semibold ${
+												orderStatus !== "Item(s) Delivered"
+													? "text-primary"
+													: "text-green-600"
+											}`}
+										>
+											{orderStatus}
+										</span>
+									</p>
+								</div>
+							</section>
+						);
+					})}
 				</div>
 			)}
 		</main>

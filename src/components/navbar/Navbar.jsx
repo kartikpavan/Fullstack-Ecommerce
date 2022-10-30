@@ -179,8 +179,11 @@ const Navbar = () => {
 									</div>
 								) : (
 									<li>
-										<label htmlFor="my-modal-4" className="modal-button">
-											Login / Register
+										<label
+											htmlFor="my-modal-4"
+											className="modal-button text-lg text-primary"
+										>
+											Login
 										</label>
 									</li>
 								)}
