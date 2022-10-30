@@ -13,7 +13,6 @@ const checkoutSlice = createSlice({
 			state.shippingAddress = action.payload;
 		},
 		saveBillingAddress: (state, action) => {
-			console.log(action.payload);
 			state.billingAddress = action.payload;
 		},
 	},

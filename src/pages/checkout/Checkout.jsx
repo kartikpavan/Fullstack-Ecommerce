@@ -6,14 +6,11 @@ import { Elements } from "@stripe/react-stripe-js";
 import "./stripe.css";
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
-const stripePromise = loadStripe(
-	"pk_test_51IhD2ISEIMxXwIhEbF3F1RJovmp613mt1x3vyZGjKqoYqe5pGc9C2cTxN3uNPGIkiTuo815fej7RzpHQE15H7NYb00siStbRNX"
-);
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 //Redux
 import { useSelector, useDispatch } from "react-redux";
 import { calculateSubtotal, calculateTotalQuantity } from "../../redux/slice/cartSlice";
 import { formatPrice } from "../../utils/formatPrice";
-import { toast } from "react-toastify";
 
 const Checkout = () => {
 	// Redux states
@@ -25,8 +22,8 @@ const Checkout = () => {
 		dispatch(calculateSubtotal());
 		dispatch(calculateTotalQuantity());
 	}, [dispatch, cartItems]);
+
 	// local States
-	const [message, setMessage] = useState("Initializing Checkout... ");
 	const [clientSecret, setClientSecret] = useState("");
 
 	const description = `Payment of ${formatPrice(totalAmount)} from ${email}`;
