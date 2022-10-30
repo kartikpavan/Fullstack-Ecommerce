@@ -47,7 +47,7 @@ const CheckoutDetails = () => {
 		<main className="w-full">
 			<Breadcrumbs type="cart" checkout="Checkout-Details" />
 			<section className="w-full mx-auto p-4 md:p-10 md:w-9/12 md:px-6 flex flex-col h-full">
-				<article className="flex flex-col md:flex-row gap-4">
+				<article className="flex flex-col-reverse  md:flex-row gap-4">
 					<div className="flex-1 p-4 rounded-md shadow-lg">
 						<h1 className="text-3xl font-light">Shipping Address</h1>
 						<form onSubmit={handleSubmit} className="form-control mt-2">

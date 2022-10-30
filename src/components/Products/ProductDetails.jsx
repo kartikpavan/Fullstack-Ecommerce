@@ -121,9 +121,9 @@ const ProductDetails = () => {
 						</div>
 					</div>
 				</article>
-				<section className="border-2 rounded-sm shadow-lg">
-					<div className="border-b-2 w-full ">
-						<h1 className="text-2xl font-semibold mt-2 p-2">Reviews</h1>
+				<section className="rounded-md shadow-lg">
+					<div className=" w-full ">
+						<h1 className="text-lg md:text-2xl font-semibold mt-2 p-2">Reviews</h1>
 					</div>
 					{!filteredReview.length ? (
 						<Link to={`/review-product/${id}`} className="link link-primary p-2">

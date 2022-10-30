@@ -103,7 +103,7 @@ const CheckoutForm = () => {
 					</div>
 					<div className="rounded-md shadow-xl pt-4 pb-8 px-10">
 						<h1 className="text-3xl font-light mb-2">Stripe Checkout</h1>
-						<form id="payment-form" onSubmit={handleSubmit}>
+						<form className="md:w-[30rem]" onSubmit={handleSubmit}>
 							<PaymentElement id="payment-element" />
 							<button
 								disabled={isLoading || !stripe || !elements}

@@ -57,8 +57,8 @@ const Review = () => {
 				<h1 className="text-2xl font-bold"> No product Found </h1>
 			) : (
 				<main className="w-full mx-auto px-2 md:w-9/12 md:px-6 mt-6 ">
-					<section className="flex justify-evenly items-center flex-col lg:flex-row">
-						<div className="w-96">
+					<section className="flex justify-evenly items-center flex-col lg:flex-row p-6">
+						<div className="">
 							<div className="flex flex-col gap-5">
 								<h1 className="font-light text-primary text-xl">
 									{filteredProduct.name}
@@ -83,7 +83,7 @@ const Review = () => {
 
 						<form
 							onSubmit={submitReview}
-							className="p-4 rounded-md shadow-lg w-max flex flex-col"
+							className="p-4 w-full md:w-[30rem] rounded-md shadow-lg flex flex-col"
 						>
 							<h1 className="font-semibold">Rating : </h1>
 							<StarsRating
@@ -93,14 +93,13 @@ const Review = () => {
 								}}
 							/>
 							<textarea
-								className="textarea textarea-secondary mt-4"
+								className="textarea textarea-secondary mt-2 max-w-[100%] w-full"
 								placeholder="Review"
 								rows={10}
-								cols={50}
 								value={review}
 								onChange={(e) => setReview(e.target.value)}
 							></textarea>
-							<button type="submit" className="btn btn-primary">
+							<button type="submit" className="btn btn-primary mt-3">
 								Submit review
 							</button>
 						</form>

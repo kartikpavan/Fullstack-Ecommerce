@@ -22,7 +22,7 @@ const Orders = () => {
 	return (
 		<>
 			{isLoading && <Loader />}
-			<h1 className="text-3xl font-light mb-4">ALL ORDERS</h1>
+			<h1 className="text-xl md:text-3xl font-light mb-4">ALL ORDERS</h1>
 			<div>
 				<OrdersComponent orders={orderHistory} user={false} admin={true} />
 			</div>

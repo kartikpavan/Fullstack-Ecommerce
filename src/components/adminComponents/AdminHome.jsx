@@ -26,7 +26,7 @@ const AdminHome = () => {
 
 	return (
 		<main className="h-full border-r-2 p-1">
-			<h1 className="text-3xl font-light mb-4">Admin Home</h1>
+			<h1 className="text-xl md:text-3xl font-light mb-4">Admin Home</h1>
 			<section className="flex flex-wrap gap-10">
 				<InfoBox title={"Earnings"} count={formatPrice(totalAmount)} icon={earningIcon} />
 				<InfoBox title={"Products"} count={products.length} icon={orderIcon} />

@@ -11,21 +11,21 @@ const Contact = () => {
 				<section className="w-full md:w-[30rem] bg-primary-content rounded-md p-6 min-h-max">
 					{/* Card */}
 					<div className="mb-4">
-						<h1 className="text-3xl">Contact Information</h1>
-						<p className="text-lg">Fill the form or contact us via other channels</p>
+						<h1 className="text-xl md:text-3xl">Contact Information</h1>
+						<p className="md:text-lg">Fill the form or contact us via other channels</p>
 					</div>
 					<div>
-						<div className="flex items-center gap-2 my-2 text-xl">
+						<div className="flex items-center gap-2 my-2 md:text-xl">
 							<AiOutlineMail />
 							<a href="mailto: Support@eshop.com?subject=Feedback&body=message">
 								Support@eshop.com
 							</a>
 						</div>
-						<div className="flex items-center gap-2  my-2 text-xl">
+						<div className="flex items-center gap-2  my-2 md:text-xl">
 							<CiPhone />
 							<a href="tel:+91-123-12345">91-123-12345</a>
 						</div>
-						<div className="flex items-center gap-2 text-xl  my-2">
+						<div className="flex items-center gap-2 md:text-xl  my-2">
 							<AiOutlineTwitter />
 							<a
 								href="https://twitter.com/kartik_im"
@@ -39,10 +39,10 @@ const Contact = () => {
 				</section>
 				<section className="w-full md:w-2/3 rounded-md shadow-lg border-2 p-6">
 					{/* Form */}
-					<h1 className="text-3xl">Contact Us</h1>
+					<h1 className="text-xl md:text-3xl">Contact Us</h1>
 					<form className="form-control">
 						<div className="py-2">
-							<label className="label-text font-semibold mb-2 block text-lg">
+							<label className="label-text md:font-semibold mb-2 block text-lg">
 								Name :
 							</label>
 							<input
@@ -56,7 +56,7 @@ const Contact = () => {
 							/>
 						</div>
 						<div className="py-2">
-							<label className="label-text font-semibold mb-2 block text-lg">
+							<label className="label-text md:font-semibold mb-2 block text-lg">
 								Email :
 							</label>
 							<input
@@ -70,7 +70,7 @@ const Contact = () => {
 							/>
 						</div>
 						<div className="py-2">
-							<label className="label-text font-semibold mb-2 block text-lg">
+							<label className="label-text md:font-semibold mb-2 block text-lg">
 								Subject :
 							</label>
 							<input
@@ -84,12 +84,11 @@ const Contact = () => {
 							/>
 						</div>
 						<div className="py-2">
-							<label className="label-text font-semibold mb-2 block text-lg">
+							<label className="label-text md:font-semibold mb-2 block text-lg">
 								Message :
 							</label>
 							<textarea
-								className="textarea textarea-bordered"
-								cols={50}
+								className="textarea textarea-bordered max-w-[100%] w-full"
 								rows={7}
 							></textarea>
 						</div>
