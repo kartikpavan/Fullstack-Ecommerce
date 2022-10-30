@@ -11,7 +11,7 @@ const OrdersComponent = ({ orders, user, admin }) => {
 	function handleAdminClick(orderId) {
 		navigate(`/admin/order-details/${orderId}`);
 	}
-	console.log(orders);
+
 	return (
 		<main>
 			{!orders.length ? (
@@ -29,10 +29,10 @@ const OrdersComponent = ({ orders, user, admin }) => {
 					</p>
 
 					{orders.map((order, index) => {
-						const { id, orderDate, orderAmount, orderStatus } = order;
+						const { id, orderDate, orderAmount, orderStatus, email } = order;
 						return (
 							<section
-								className="w-full my-2 shadow-md rounded-md cursor-pointer hover:scale-105 duration-300"
+								className="w-full my-2 shadow-md rounded-md cursor-pointer hover:bg-base-200 duration-200"
 								key={index}
 								onClick={() => {
 									user ? handleUserClick(id) : handleAdminClick(id);
@@ -40,9 +40,18 @@ const OrdersComponent = ({ orders, user, admin }) => {
 							>
 								<div className="p-4 bg-base-200">
 									<div className="flex items-center justify-between gap-6">
-										<p className="text-gray-500 text-sm md:text-lg ">
-											ORDER PLACED : <br /> <span>{orderDate}</span>
-										</p>
+										<div className="flex flex-col md:flex-row gap-x-5">
+											<p className="text-gray-500 text-sm md:text-lg ">
+												ORDER PLACED : <br /> <span>{orderDate}</span>
+											</p>
+											<p className="text-gray-500 text-sm md:text-lg ">
+												SHIP TO : <br />{" "}
+												<span className="text-primary">
+													{email.split("@")[0]}
+												</span>
+											</p>
+										</div>
+
 										<p className="text-gray-500 text-sm md:text-lg">
 											TOTAL :
 											<span className="text-primary">
