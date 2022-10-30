@@ -15,6 +15,25 @@ const Login = () => {
 	const [showPassword, setShowPassword] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 
+	const testLogin = (e) => {
+		e.preventDefault();
+		let testEmail = import.meta.env.VITE_TEST_EMAIL;
+		let testPass = import.meta.env.VITE_TEST_PASSWORD;
+		setIsLoading(true);
+		signInWithEmailAndPassword(auth, testEmail, testPass)
+			.then((userCredential) => {
+				const user = userCredential.user;
+				toast.success("Login Successful");
+				setIsLoading(false);
+				document.getElementById("my-modal-4").checked = false;
+				navigate("/");
+			})
+			.catch((error) => {
+				toast.error(error.code, error.message);
+				setIsLoading(false);
+			});
+	};
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		//* Custom User login
@@ -119,13 +138,16 @@ const Login = () => {
 									)}
 								</span>
 							</div>
-							<div className="mt-4">
+							<div className="mt-4 w-full flex flex-col items-center justify-center">
 								<button
 									type="submit"
 									className="btn w-full"
 									disabled={!AllFieldsRequired}
 								>
 									Login
+								</button>
+								<button className="btn btn-info btn-sm mt-2" onClick={testLogin}>
+									Test App
 								</button>
 							</div>
 						</form>

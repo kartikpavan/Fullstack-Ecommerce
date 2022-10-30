@@ -78,7 +78,6 @@ const OrderDetailsComponent = ({ order, admin, user, orderId }) => {
 				<Link to="/admin/orders" className="link active my-2">
 					&larr; Back to All Orders
 				</Link>
-
 				<OrderTable order={order} user={user} />
 			</main>
 		</>
