@@ -10,6 +10,7 @@
 		"start": "node server"
 	},
 	"dependencies": {
+		"@emailjs/browser": "^3.7.0",
 		"@reduxjs/toolkit": "^1.8.6",
 		"@stripe/react-stripe-js": "^1.14.0",
 		"@stripe/stripe-js": "^1.42.0",

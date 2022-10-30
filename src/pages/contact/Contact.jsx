@@ -1,9 +1,31 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Header } from "../../components";
 import { CiPhone } from "react-icons/ci";
 import { AiOutlineMail, AiOutlineTwitter } from "react-icons/ai";
+import emailjs from "@emailjs/browser";
+import { toast } from "react-toastify";
 
 const Contact = () => {
+	const formRef = useRef();
+
+	const sendEmail = (e) => {
+		e.preventDefault();
+		emailjs
+			.sendForm("service_rn5uwdh", "template_z55djla", formRef.current, "onCf_FZuuuG_27Kb_")
+			.then(
+				(result) => {
+					console.log(result.text);
+					toast.success("Feedback Recorded. We will Contact you shortly");
+					// window.location.reload();
+				},
+				(error) => {
+					console.log(error.text);
+					toast.error("Something went Wrong , Please try again alter");
+				}
+			);
+		e.target.reset();
+	};
+
 	return (
 		<>
 			<Header text="Contact Us" />
@@ -40,7 +62,7 @@ const Contact = () => {
 				<section className="w-full md:w-2/3 rounded-md shadow-lg border-2 p-6">
 					{/* Form */}
 					<h1 className="text-xl md:text-3xl">Contact Us</h1>
-					<form className="form-control">
+					<form className="form-control" onSubmit={sendEmail} ref={formRef}>
 						<div className="py-2">
 							<label className="label-text md:font-semibold mb-2 block text-lg">
 								Name :
@@ -50,9 +72,7 @@ const Contact = () => {
 								type="text"
 								placeholder="Full Name"
 								required
-								// name="name"
-								// value={product.name}
-								// onChange={handleInputChange}
+								name="username"
 							/>
 						</div>
 						<div className="py-2">
@@ -64,9 +84,7 @@ const Contact = () => {
 								type="email"
 								placeholder="Active Email"
 								required
-								// name="name"
-								// value={product.name}
-								// onChange={handleInputChange}
+								name="email"
 							/>
 						</div>
 						<div className="py-2">
@@ -78,9 +96,7 @@ const Contact = () => {
 								type="text"
 								placeholder="Subject"
 								required
-								// name="name"
-								// value={product.name}
-								// onChange={handleInputChange}
+								name="subject"
 							/>
 						</div>
 						<div className="py-2">
@@ -90,9 +106,13 @@ const Contact = () => {
 							<textarea
 								className="textarea textarea-bordered max-w-[100%] w-full"
 								rows={7}
+								required
+								name="message"
 							></textarea>
 						</div>
-						<button className="btn max-w-xs w-full">Send Message</button>
+						<button className="btn max-w-xs w-full" type="submit">
+							Send Message
+						</button>
 					</form>
 				</section>
 			</main>
