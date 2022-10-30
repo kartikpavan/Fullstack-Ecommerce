@@ -75,9 +75,16 @@ const OrderDetailsComponent = ({ order, admin, user, orderId }) => {
 				</article>
 			</section>
 			<main>
-				<Link to="/admin/orders" className="link active my-2">
-					&larr; Back to All Orders
-				</Link>
+				{admin ? (
+					<Link to="/admin/orders" className="link active my-2">
+						&larr; Back to All Orders
+					</Link>
+				) : (
+					<Link to="/my-orders" className="link active my-2">
+						&larr; Back to All Orders
+					</Link>
+				)}
+
 				<OrderTable order={order} user={user} />
 			</main>
 		</>
