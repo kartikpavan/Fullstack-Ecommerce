@@ -1,9 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Loader from "../loader/Loader";
 import { toast } from "react-toastify";
 import { formatPrice } from "../../utils/formatPrice";
 import { BiEdit, BiTrash } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import { Search } from "../../components";
+// Custom Hook
 import useFetchCollection from "../../hooks/useFetchCollection";
 // Firebase
 import { doc, deleteDoc } from "firebase/firestore";
@@ -12,20 +14,29 @@ import { db, storage } from "../../firebase/config";
 // Redux
 import { useDispatch, useSelector } from "react-redux";
 import { storeProducts } from "../../redux/slice/productSlice";
+import { filterBySearch } from "../../redux/slice/filterSlice";
+
 // lazy load
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
 const ViewProducts = () => {
+	const [search, setSearch] = useState("");
 	const dispatch = useDispatch();
 
 	//! Fetching Products from collection using Custom Hook
 	const { data, isLoading } = useFetchCollection("products");
+	const { filteredProducts } = useSelector((store) => store.filter);
 	const { products } = useSelector((store) => store.product);
 
 	useEffect(() => {
 		dispatch(storeProducts({ products: data }));
 	}, [dispatch, data]);
+
+	//! Search
+	useEffect(() => {
+		dispatch(filterBySearch({ products: data, search }));
+	}, [dispatch, data, search]);
 
 	//! Delete single product
 	const deleteSingleProduct = async (id, imageURL) => {
@@ -48,13 +59,14 @@ const ViewProducts = () => {
 			{products.length && (
 				<div>
 					<div className="underline">
-						<span className="text-lg font-bold ">{products.length} </span> products
-						found
+						<span className="text-lg font-bold ">{filteredProducts.length} </span>{" "}
+						products found
 					</div>
 				</div>
 			)}
+			<Search value={search} onChange={(e) => setSearch(e.target.value)} />
 			<main className="md:max-w-[100vw] max-h-[70vh] py-4 overflow-y-scroll ">
-				{products.length === 0 ? (
+				{filteredProducts.length === 0 ? (
 					<h1 className="text-4xl font-bold text-red-500">NO PRODUCTS FOUND</h1>
 				) : (
 					<div className="overflow-x-auto mt-2 w-full">
@@ -72,7 +84,7 @@ const ViewProducts = () => {
 							</thead>
 							{/* TABLE BODY */}
 							<tbody>
-								{products?.map((p, index) => {
+								{filteredProducts?.map((p, index) => {
 									const { id, name, category, price, imageURL } = p;
 									return (
 										<tr key={id} className="hover">
