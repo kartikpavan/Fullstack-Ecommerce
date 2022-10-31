@@ -151,7 +151,7 @@ const Login = () => {
 									Login
 								</button>
 								<button className="btn btn-info btn-sm mt-2" onClick={testLogin}>
-									Test App
+									Guest Login
 								</button>
 							</div>
 						</form>
