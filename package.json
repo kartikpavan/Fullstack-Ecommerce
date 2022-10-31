@@ -29,6 +29,7 @@
 		"react-router-dom": "^6.4.2",
 		"react-star-rate": "^0.2.0",
 		"react-toastify": "^9.0.8",
+		"serve": "^14.0.1",
 		"stripe": "^10.15.0"
 	},
 	"devDependencies": {

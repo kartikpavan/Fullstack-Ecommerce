@@ -13,7 +13,7 @@ const Admin = () => {
 	return (
 		<>
 			<div className=" bg-base-200 ">
-				<div className="w-full md:w-9/12 mx-auto h-[91vh] flex bg-base-100  ">
+				<div className="w-full lg:w-9/12 mx-auto h-[91vh] flex bg-base-100  ">
 					<div className="w-24 md:w-96 border-x-2">
 						<AdminSidebar />
 					</div>

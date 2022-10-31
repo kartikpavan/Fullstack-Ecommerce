@@ -7,7 +7,7 @@ import { formatPrice } from "../../utils/formatPrice";
 const OrderTable = ({ user, order }) => {
 	return (
 		<div className="overflow-x-auto">
-			<table className="table w-full">
+			<table className="table table-compact w-full">
 				<thead>
 					<tr>
 						<th></th>
@@ -36,10 +36,10 @@ const OrderTable = ({ user, order }) => {
 											placeholderSrc="https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg"
 											effect="blur"
 										/>
-										<h1>{name}</h1>
+										<div>{name}</div>
 									</Link>
 								</td>
-								<td>{formatPrice(price)}</td>
+								<td>{price}</td>
 								<td>{qty}</td>
 								<td>{formatPrice(price * qty)}</td>
 								{user && (

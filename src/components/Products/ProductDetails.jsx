@@ -65,7 +65,7 @@ const ProductDetails = () => {
 		<>
 			{isLoading && <Loader />}
 			<Breadcrumbs type={product.name} />
-			<section className="w-full mx-auto p-4 md:p-10 md:w-9/12 md:px-6 ">
+			<section className="w-full mx-auto p-4 md:p-10 lg:w-9/12 md:px-6 ">
 				<h1 className="text-2xl font-semibold">Product Details </h1>
 				<Link to="/all" className="link link-secondary">
 					&larr; Back to All Products

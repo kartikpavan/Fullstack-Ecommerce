@@ -46,7 +46,7 @@ const Cart = () => {
 	return (
 		<main className="w-full">
 			<Breadcrumbs type="Cart" />
-			<section className="w-full mx-auto p-4 md:p-10 md:w-9/12 md:px-6 flex flex-col h-full">
+			<section className="w-full mx-auto p-4 md:p-10 lg:w-9/12 md:px-6 flex flex-col h-full">
 				{/* <button
 					className="btn btn-sm btn-error max-w-[200px] w-full mb-2 "
 					onClick={clearWholeCart}

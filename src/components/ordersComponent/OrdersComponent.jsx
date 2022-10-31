@@ -32,7 +32,7 @@ const OrdersComponent = ({ orders, user, admin }) => {
 						const { id, orderDate, orderAmount, orderStatus, email } = order;
 						return (
 							<section
-								className="w-full my-2 shadow-md rounded-md cursor-pointer hover:bg-base-200 duration-200"
+								className="w-full my-6 shadow-md rounded-md cursor-pointer hover:bg-base-200 duration-200"
 								key={index}
 								onClick={() => {
 									user ? handleUserClick(id) : handleAdminClick(id);

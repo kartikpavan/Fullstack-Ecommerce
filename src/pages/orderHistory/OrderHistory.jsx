@@ -30,7 +30,7 @@ const OrderHistory = () => {
 		<>
 			{isLoading && <Loader />}
 			<Header text="My Orders" />
-			<main className="w-full mx-auto px-2 md:w-9/12 md:px-6 mt-6 ">
+			<main className="w-full mx-auto px-2 lg:w-9/12 md:px-6 mt-6 ">
 				<OrdersComponent orders={filteredOrders} user={true} admin={false} />
 			</main>
 		</>

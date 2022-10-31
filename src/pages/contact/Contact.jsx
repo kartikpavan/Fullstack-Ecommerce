@@ -29,8 +29,8 @@ const Contact = () => {
 	return (
 		<>
 			<Header text="Contact Us" />
-			<main className="w-full mx-auto px-2 md:w-9/12 md:px-6 mt-6 flex flex-col md:flex-row justify-between gap-10">
-				<section className="w-full md:w-[30rem] bg-primary-content rounded-md p-6 min-h-max">
+			<main className="w-full mx-auto px-2 lg:w-9/12 md:px-6 mt-4 lg:mt-6 flex flex-col md:flex-row justify-between gap-10">
+				<section className="w-full md:w-[30rem] bg-primary-content rounded-md p-6 max-h-max">
 					{/* Card */}
 					<div className="mb-4">
 						<h1 className="text-xl md:text-3xl">Contact Information</h1>

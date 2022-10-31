@@ -14,13 +14,13 @@ const OrderDetails = () => {
 	useEffect(() => {
 		setOrder(document);
 	}, [document]);
-
+	console.log(order);
 	return (
 		<>
 			{order === null ? (
 				<Loader />
 			) : (
-				<div className="w-full mx-auto px-2 md:w-9/12 md:px-6 mt-6 ">
+				<div className="w-full mx-auto px-2 lg:w-9/12 md:px-6 mt-6 ">
 					<OrderDetailsComponent order={order} user={true} admin={false} />
 				</div>
 			)}
