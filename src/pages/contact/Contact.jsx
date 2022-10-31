@@ -30,10 +30,10 @@ const Contact = () => {
 		<>
 			<Header text="Contact Us" />
 			<main className="w-full mx-auto px-2 lg:w-9/12 md:px-6 mt-4 lg:mt-6 flex flex-col md:flex-row justify-between gap-10">
-				<section className="w-full md:w-[30rem] bg-primary-content rounded-md p-6 max-h-max">
+				<section className="w-full md:w-[30rem] bg-primary-content rounded-md p-6 h-72">
 					{/* Card */}
-					<div className="mb-4">
-						<h1 className="text-xl md:text-3xl">Contact Information</h1>
+					<div className="mb-10">
+						<h1 className="text-xl md:text-3xl mb-2">Contact Information</h1>
 						<p className="md:text-lg">Fill the form or contact us via other channels</p>
 					</div>
 					<div>
@@ -105,7 +105,7 @@ const Contact = () => {
 							</label>
 							<textarea
 								className="textarea textarea-bordered max-w-[100%] w-full"
-								rows={7}
+								rows={5}
 								required
 								name="message"
 							></textarea>

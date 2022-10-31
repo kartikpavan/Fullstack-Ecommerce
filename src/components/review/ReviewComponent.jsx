@@ -2,7 +2,7 @@ import React from "react";
 import StarsRating from "react-star-rate";
 
 const ReviewComponent = ({ review }) => {
-	const { userName, rating, review: comments, reviewDate, reviewTime } = review;
+	const { userName, rating, review: comments, reviewDate } = review;
 	return (
 		<main className="p-2 w-full border-2 rounded-md ">
 			<section className="flex justify-between mb-2 flex-col lg:flex-row  ">

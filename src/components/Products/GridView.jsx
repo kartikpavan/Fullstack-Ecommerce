@@ -35,7 +35,7 @@ const GridView = ({ products }) => {
 									effect="blur"
 								/>
 								<div className=" absolute top-0 right-0">
-									<span className="badge ">Free Delivery</span>
+									<span className="badge badge-primary">Free Delivery</span>
 								</div>
 								<div className="my-4 items-center text-center">
 									<h1 className="font-semibold py-2">{name}</h1>

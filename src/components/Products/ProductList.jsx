@@ -112,7 +112,10 @@ const ProductList = ({ products }) => {
 			</section>
 			{bacToTop && (
 				<div className="fixed bottom-5 right-5">
-					<button className="btn sm:btn-lg rounded-full" onClick={scrollToTop}>
+					<button
+						className="btn btn-primary sm:btn-lg rounded-full"
+						onClick={scrollToTop}
+					>
 						&uarr; Back to Top
 					</button>
 				</div>

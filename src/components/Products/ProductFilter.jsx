@@ -52,7 +52,7 @@ const ProductFilter = () => {
 								type="button"
 								className={`w-full text-left ${
 									category === c
-										? "border-l-4 border-blue-500 px-2 font-semibold"
+										? "border-l-4 border-primary px-2 font-semibold"
 										: null
 								}`}
 								onClick={() => filterProducts(c)}
@@ -85,7 +85,7 @@ const ProductFilter = () => {
 				<h1 className="font-bold">PRICE</h1>
 				<p>{formatPrice(price)}</p>
 				<input
-					className="range"
+					className="range range-primary"
 					type="range"
 					value={price}
 					min={minPrice}

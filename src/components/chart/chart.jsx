@@ -49,7 +49,7 @@ const chart = () => {
 			{
 				label: "Order Count",
 				data: [placed, shipped, processing, delivered],
-				backgroundColor: "rgba(255, 99, 132, 0.5)",
+				backgroundColor: "#191a3ed6",
 			},
 		],
 	};

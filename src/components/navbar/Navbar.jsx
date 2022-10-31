@@ -103,7 +103,7 @@ const Navbar = () => {
 							<label tabIndex={0} className="btn btn-ghost btn-circle">
 								<div className="indicator">
 									<AiOutlineShoppingCart size={30} color="white" />
-									<span className="badge badge-secondary-content indicator-item">
+									<span className="badge badge-primary indicator-item">
 										{totalQuantity}
 									</span>
 								</div>
@@ -114,9 +114,7 @@ const Navbar = () => {
 							>
 								<div className="card-body">
 									<span className="font-bold text-lg">{totalQuantity} Items</span>
-									<span className="text-info">
-										Subtotal: {formatPrice(totalAmount)}
-									</span>
+									<span>Subtotal: {formatPrice(totalAmount)}</span>
 									<div className="card-actions">
 										<Link to="/cart" className="btn btn-primary btn-block">
 											View cart
@@ -136,7 +134,7 @@ const Navbar = () => {
 								className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 "
 							>
 								{userName && (
-									<li className="bg-blue-700 text-gray-200">
+									<li className="bg-primary text-gray-200">
 										<p className="block">
 											Welcome, <span className="font-bold">{userName}</span>
 										</p>
