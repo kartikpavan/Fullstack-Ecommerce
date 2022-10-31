@@ -29,7 +29,7 @@ const Checkout = () => {
 	const description = `Payment of ${formatPrice(totalAmount)} from ${email}`;
 	useEffect(() => {
 		// Create PaymentIntent as soon as the page loads
-		fetch("http://localhost:4242/create-payment-intent", {
+		fetch("https://ecom-stripe-server.onrender.com/create-payment-intent", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
