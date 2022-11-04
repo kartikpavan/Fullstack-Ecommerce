@@ -34,10 +34,7 @@ const Cart = () => {
 	const removeItem = (item) => {
 		dispatch(removeCartItem(item));
 	};
-	//! Clear Cart
-	const clearWholeCart = () => {
-		dispatch(clearCart());
-	};
+
 	useEffect(() => {
 		dispatch(calculateSubtotal());
 		dispatch(calculateTotalQuantity());
@@ -47,12 +44,6 @@ const Cart = () => {
 		<main className="w-full">
 			<Breadcrumbs type="Cart" />
 			<section className="w-full mx-auto p-4 md:p-10 lg:w-9/12 md:px-6 flex flex-col h-full">
-				{/* <button
-					className="btn btn-sm btn-error max-w-[200px] w-full mb-2 "
-					onClick={clearWholeCart}
-				>
-					Clear Cart
-				</button> */}
 				{!cartItems.length ? (
 					<div className="w-full mx-auto h-max flex flex-col items-center justify-center ">
 						<img src={emptyCart} alt="empty-Cart" />
@@ -67,14 +58,13 @@ const Cart = () => {
 				) : (
 					<div>
 						<h1 className="text-3xl font-semibold mb-4">Shopping Cart</h1>
-						<article className="flex flex-col xl:flex-row justify-between gap-4">
+						<article className="flex flex-col xl:flex-row justify-between gap-y-10 gap-x-5">
 							<div className="overflow-x-auto w-full flex-1">
 								<table className="table table-zebra w-full ">
 									{/* Head */}
 									<thead>
 										<tr>
 											<th className="text-sm md:text-lg">Item</th>
-											<th className="text-sm md:text-lg">Total</th>
 											<th className="text-sm md:text-lg">Actions</th>
 										</tr>
 									</thead>
@@ -85,14 +75,17 @@ const Cart = () => {
 											return (
 												<tr key={index}>
 													<td className="flex gap-x-2 ">
-														<Link to={`/product-details/${id}`}>
+														<Link
+															to={`/product-details/${id}`}
+															className="flex items-center"
+														>
 															<LazyLoadImage
 																src={
 																	imageURL ||
 																	`https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png`
 																}
 																alt={name}
-																className="w-10 sm:w-24 object-fill"
+																className="w-24 object-fill"
 																placeholderSrc="https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg"
 																effect="blur"
 															/>
@@ -130,12 +123,15 @@ const Cart = () => {
 																	+
 																</button>
 															</div>
+															<p className="font-light">
+																Total:
+																<span className=" text-lg text-primary">
+																	{formatPrice(price * qty)}
+																</span>
+															</p>
 														</div>
 													</td>
 
-													<td className=" md:text-lg">
-														{formatPrice(price * qty)}
-													</td>
 													<td>
 														<BiTrash
 															size={24}

@@ -10,11 +10,7 @@ const OrderTable = ({ user, order }) => {
 			<table className="table table-compact w-full">
 				<thead>
 					<tr>
-						<th></th>
 						<th className="text-sm md:text-lg">Product</th>
-						<th className="text-sm md:text-lg">Price</th>
-						<th className="text-sm md:text-lg">Qty</th>
-						<th className="text-sm md:text-lg">Total</th>
 						{user && <th className="text-sm md:text-lg">Actions</th>}
 					</tr>
 				</thead>
@@ -23,7 +19,6 @@ const OrderTable = ({ user, order }) => {
 						const { id: productId, name, price, imageURL, qty } = product;
 						return (
 							<tr key={index}>
-								<td>{index + 1}</td>
 								<td>
 									<Link to={`/product-details/${productId}`}>
 										<LazyLoadImage
@@ -36,19 +31,28 @@ const OrderTable = ({ user, order }) => {
 											placeholderSrc="https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg"
 											effect="blur"
 										/>
-										<div>{name}</div>
+										<div className="md:text-lg">{name}</div>
+										<div className="md:text-lg font-medium">
+											Qty:
+											<span className="md:text-lg font-medium text-primary">
+												{qty}
+											</span>
+										</div>
+										<div className="md:text-lg font-medium">
+											Total:
+											<span className="md:text-lg font-medium text-primary">
+												{formatPrice(price * qty)}
+											</span>
+										</div>
 									</Link>
 								</td>
-								<td>{price}</td>
-								<td>{qty}</td>
-								<td>{formatPrice(price * qty)}</td>
 								{user && (
 									<td>
 										<Link
 											to={`/review-product/${productId}`}
-											className="btn btn-accent"
+											className="border p-2 rounded-md md:text-lg"
 										>
-											Add a review
+											Write a Review
 										</Link>
 									</td>
 								)}

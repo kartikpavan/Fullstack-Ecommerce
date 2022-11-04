@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import CheckoutSummary from "../checkoutSummary/CheckoutSummary";
 import Breadcrumbs from "../breadcrumbs/Breadcrumbs";
+import Header from "../header/Header";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 // firebase
@@ -95,7 +96,7 @@ const CheckoutForm = () => {
 
 	return (
 		<>
-			<Breadcrumbs type="cart" checkout="Checkout-Details" stripe="Stripe-Payment" />
+			<Header text="Stripe Payment Gateway" />
 			<section className="w-full mx-auto p-4 md:p-10 md:w-9/12 md:px-6 flex flex-col h-full">
 				<div className="flex flex-col-reverse md:flex-row gap-4 justify-evenly">
 					<div className="w-full md:w-2/5 h-max p-4 bg-base-100 rounded-md shadow-xl">

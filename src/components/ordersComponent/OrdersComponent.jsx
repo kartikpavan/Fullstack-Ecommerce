@@ -40,9 +40,10 @@ const OrdersComponent = ({ orders, user, admin }) => {
 							>
 								<div className="p-4 bg-base-200">
 									<div className="flex items-center justify-between gap-6">
-										<div className="flex flex-col md:flex-row gap-x-5">
+										<div className="flex flex-col md:flex-row gap-x-10">
 											<p className="text-gray-500 text-sm md:text-lg ">
-												ORDER PLACED : <br /> <span>{orderDate}</span>
+												ORDER PLACED : <br />{" "}
+												<span className="text-primary">{orderDate}</span>
 											</p>
 											<p className="text-gray-500 text-sm md:text-lg ">
 												SHIP TO : <br />{" "}
@@ -69,7 +70,7 @@ const OrdersComponent = ({ orders, user, admin }) => {
 										<span
 											className={`font-semibold ${
 												orderStatus !== "Item(s) Delivered"
-													? "text-primary"
+													? "text-neutral"
 													: "text-green-600"
 											}`}
 										>
