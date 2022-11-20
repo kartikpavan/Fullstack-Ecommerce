@@ -18,7 +18,6 @@ const Login = () => {
 	const testLogin = (e) => {
 		e.preventDefault();
 		document.getElementById("my-modal-4").checked = false;
-
 		let testEmail = import.meta.env.VITE_TEST_EMAIL;
 		let testPass = import.meta.env.VITE_TEST_PASSWORD;
 		setIsLoading(true);

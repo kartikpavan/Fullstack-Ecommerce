@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { FcGoogle } from "react-icons/fc";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import Loader from "../loader/Loader";
 import { toast } from "react-toastify";

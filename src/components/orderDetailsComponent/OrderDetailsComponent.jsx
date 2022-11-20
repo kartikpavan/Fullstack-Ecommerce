@@ -59,7 +59,7 @@ const OrderDetailsComponent = ({ order, admin, user, orderId }) => {
 								<p className="font-semibold text-lg">
 									Shipping Address :
 									<span className="font-light">
-										{order.shippingAddress.line1}, {order.shippingAddress.line2}{" "}
+										{order.shippingAddress.line1}, {order.shippingAddress.line2}
 										,{order.shippingAddress.city},
 										{order.shippingAddress.country}
 									</span>
