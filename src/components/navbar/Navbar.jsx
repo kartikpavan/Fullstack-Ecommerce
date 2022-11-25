@@ -227,10 +227,10 @@ const Navbar = () => {
                </Link>
             </div>
          </AdminOnlyLink>
-         <div className="min-w-screen py-4 bg-accent flex items-center justify-center">
-            <p className="uppercase font-medium inline-block">Sale end in :</p>{" "}
-            <Countdown />
-         </div>
+         {/* <div className="min-w-screen py-2 bg-accent flex items-center justify-center">
+        <p className="uppercase font-medium inline-block mx-2">Sale end in </p>
+        <Countdown />
+      </div> */}
       </>
    );
 };
