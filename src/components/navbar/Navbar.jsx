@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { AdminOnlyLink } from "../adminRoute/AdminRoute";
-import { AiOutlineShoppingCart, AiOutlineSearch } from "react-icons/ai";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AdminOnlyLink } from "../adminRoute/AdminRoute";
 // firebase
-import { signOut, onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../firebase/config";
 //Redux
 import { useDispatch, useSelector } from "react-redux";
-import { setActiveUser, removeActiveUser } from "../../redux/slice/authSlice";
-import { formatPrice } from "../../utils/formatPrice";
+import { removeActiveUser, setActiveUser } from "../../redux/slice/authSlice";
 import {
    calculateSubtotal,
    calculateTotalQuantity,
 } from "../../redux/slice/cartSlice";
-import Countdown from "../countdown/Countdown";
+import { formatPrice } from "../../utils/formatPrice";
+// import Countdown from "../countdown/Countdown";
 
 const Navbar = () => {
    const { isUserLoggedIn, userName } = useSelector((store) => store.auth);

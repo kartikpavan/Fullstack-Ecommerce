@@ -1,27 +1,27 @@
-import { Routes, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import {
-   Navbar,
-   Modal,
-   ProtectedRoute,
    AdminRoute,
+   Modal,
+   Navbar,
    ProductDetails,
+   ProtectedRoute,
 } from "./components";
 import {
-   Home,
-   OrderHistory,
-   Cart,
-   ResetPassword,
-   NotFound,
    Admin,
    AllProducts,
-   Contact,
-   CheckoutDetails,
+   Cart,
    Checkout,
+   CheckoutDetails,
    CheckoutSuccess,
+   Contact,
+   Home,
+   NotFound,
    OrderDetails,
+   OrderHistory,
+   ResetPassword,
    Review,
 } from "./pages";
-import { ToastContainer } from "react-toastify";
 
 const App = () => {
    return (
