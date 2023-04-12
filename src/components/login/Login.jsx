@@ -8,22 +8,20 @@ import Loader from "../loader/Loader";
 //Firebase
 import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth } from "../../firebase/config";
-import UrgentInfo from "../urgentInfo/UrgentInfo";
 
 const Login = () => {
    const [email, setEmail] = useState("");
    const [password, setPassword] = useState("");
    const [showPassword, setShowPassword] = useState(false);
    const [isLoading, setIsLoading] = useState(false);
-   const [infoModalOpen, setInfoModalOpen] = useState(false);
    const navigate = useNavigate();
 
    //! Test / Guest Account Login
    //* Currently this feature is disabled due to spam messages reported by the ADMIN
    const testLogin = (e) => {
       e.preventDefault();
-
       document.getElementById("my-modal-69").checked = true;
+      setInfoModalOpen(true);
       // let testEmail = import.meta.env.VITE_TEST_EMAIL;
       // let testPass = import.meta.env.VITE_TEST_PASSWORD;
       // setIsLoading(true);
@@ -147,10 +145,30 @@ const Login = () => {
                         <button type="submit" className="btn w-full" disabled={!AllFieldsRequired}>
                            Login
                         </button>
-                        <button className="btn btn-info btn-sm mt-2" onClick={testLogin}>
-                           Guest Login
-                        </button>
-                        {infoModalOpen ? <UrgentInfo /> : null}
+
+                        {/* The button to open modal */}
+                        <label htmlFor="my-modal-69" className="btn btn-info btn-sm mt-2">
+                           open modal
+                        </label>
+
+                        {/* Put this part before </body> tag */}
+                        <input type="checkbox" id="my-modal-69" className="modal-toggle" />
+                        <label htmlFor="my-modal-69" className="modal cursor-pointer">
+                           <label className="modal-box relative" htmlFor="">
+                              <h3 className="text-lg font-bold">
+                                 SORRY, this feature is currently Disabled due to Spamming
+                              </h3>
+                              <p className="py-4">
+                                 Still wanna test the app ? contact <br />
+                                 <a
+                                    href="mailto: kartikpavan2@gmail.com"
+                                    className="text-red-500 font-semibold"
+                                 >
+                                    kartikpavan2@gmail.com
+                                 </a>
+                              </p>
+                           </label>
+                        </label>
                      </div>
                   </form>
                </div>

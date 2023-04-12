@@ -29,4 +29,3 @@ export { default as Register } from "./register/Register";
 export { default as ReviewComponent } from "./review/ReviewComponent";
 export { default as Search } from "./search/Search";
 export { default as Steps } from "./steps/Steps";
-export { default as UrgentInfo } from "./urgentInfo/UrgentInfo";
