@@ -6,7 +6,11 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "../loader/Loader";
 //Firebase
-import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import {
+   GoogleAuthProvider,
+   signInWithEmailAndPassword,
+   signInWithPopup,
+} from "firebase/auth";
 import { auth } from "../../firebase/config";
 
 const Login = () => {
@@ -20,23 +24,25 @@ const Login = () => {
    //* Currently this feature is disabled due to spam messages reported by the ADMIN
    const testLogin = (e) => {
       e.preventDefault();
-      document.getElementById("my-modal-69").checked = true;
-      setInfoModalOpen(true);
-      // let testEmail = import.meta.env.VITE_TEST_EMAIL;
-      // let testPass = import.meta.env.VITE_TEST_PASSWORD;
-      // setIsLoading(true);
-      // signInWithEmailAndPassword(auth, testEmail, testPass)
-      //    .then((userCredential) => {
-      //       const user = userCredential.user;
-      //       toast.success("Login Successful");
-      //       setIsLoading(false);
-      //       // document.getElementById("my-modal-4").checked = false;
-      //       navigate("/");
-      //    })
-      //    .catch((error) => {
-      //       toast.error(error.code, error.message);
-      //       setIsLoading(false);
-      //    });
+      // document.getElementById("my-modal-69").checked = true;
+      // setInfoModalOpen(true);
+      document.getElementById("my-modal-4").checked = false;
+
+      let testEmail = import.meta.env.VITE_TEST_EMAIL;
+      let testPass = import.meta.env.VITE_TEST_PASSWORD;
+      setIsLoading(true);
+      signInWithEmailAndPassword(auth, testEmail, testPass)
+         .then((userCredential) => {
+            const user = userCredential.user;
+            toast.success("Login Successful");
+            setIsLoading(false);
+            // document.getElementById("my-modal-4").checked = false;
+            navigate("/");
+         })
+         .catch((error) => {
+            toast.error(error.code, error.message);
+            setIsLoading(false);
+         });
    };
 
    const handleSubmit = (e) => {
@@ -88,15 +94,21 @@ const Login = () => {
          <div className="py-6 ">
             <div className="flex bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-4xl">
                <div className="w-full px-8 pt-4 pb-6">
-                  <p className="text-xl text-gray-600 text-center">Welcome back</p>
+                  <p className="text-xl text-gray-600 text-center">
+                     Welcome back
+                  </p>
                   <div className="btn w-full mt-4 gap-2" onClick={googleSignIn}>
                      <FcGoogle size={22} />
                      Sign in with google
                   </div>
-                  <div className="divider text-xs text-gray-400 uppercase">or login with email</div>
+                  <div className="divider text-xs text-gray-400 uppercase">
+                     or login with email
+                  </div>
                   <form className="form-control" onSubmit={handleSubmit}>
                      <div>
-                        <label className="label-text font-bold mb-2 block">Email Address</label>
+                        <label className="label-text font-bold mb-2 block">
+                           Email Address
+                        </label>
                         <input
                            className="input input-bordered w-full border-2"
                            type="email"
@@ -107,12 +119,16 @@ const Login = () => {
                      </div>
                      <div className="mt-4 relative">
                         <div className="flex justify-between">
-                           <label className="label-text font-bold mb-2">Password</label>
+                           <label className="label-text font-bold mb-2">
+                              Password
+                           </label>
                            <Link
                               to="/reset"
                               className="text-xs text-gray-500"
                               onClick={() =>
-                                 (document.getElementById("my-modal-4").checked = false)
+                                 (document.getElementById(
+                                    "my-modal-4"
+                                 ).checked = false)
                               }
                            >
                               Forget Password?
@@ -142,21 +158,37 @@ const Login = () => {
                         </span>
                      </div>
                      <div className="mt-4 w-full flex flex-col items-center justify-center">
-                        <button type="submit" className="btn w-full" disabled={!AllFieldsRequired}>
+                        <button
+                           type="submit"
+                           className="btn w-full"
+                           disabled={!AllFieldsRequired}
+                        >
                            Login
                         </button>
 
                         {/* The button to open modal */}
-                        <label htmlFor="my-modal-69" className="btn btn-info btn-sm mt-2">
-                           open modal
+                        <label
+                           onClick={testLogin}
+                           htmlFor="my-modal-69"
+                           className="btn btn-info btn-sm mt-2"
+                        >
+                           Test User
                         </label>
 
                         {/* Put this part before </body> tag */}
-                        <input type="checkbox" id="my-modal-69" className="modal-toggle" />
-                        <label htmlFor="my-modal-69" className="modal cursor-pointer">
+                        <input
+                           type="checkbox"
+                           id="my-modal-69"
+                           className="modal-toggle"
+                        />
+                        <label
+                           htmlFor="my-modal-69"
+                           className="modal cursor-pointer"
+                        >
                            <label className="modal-box relative" htmlFor="">
                               <h3 className="text-lg font-bold">
-                                 SORRY, this feature is currently Disabled due to Spamming
+                                 SORRY, this feature is currently Disabled due
+                                 to Spamming
                               </h3>
                               <p className="py-4">
                                  Still wanna test the app ? contact <br />

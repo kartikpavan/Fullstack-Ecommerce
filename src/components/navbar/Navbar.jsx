@@ -147,10 +147,11 @@ const Navbar = () => {
                         tabIndex={0}
                         className="btn btn-ghost btn-circle avatar"
                      >
-                        <div className="w-10 rounded-full">
+                        <div className="rounded-full">
                            <img
-                              src="https://placeimg.com/80/80/people"
+                              src="https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-white-blue-png-image_3918443.jpg"
                               alt="dp"
+                              className="w-10 h-10 object-fill"
                            />
                         </div>
                      </label>
