@@ -12,7 +12,6 @@ const AdminRoute = ({ children }) => {
          <Link to="/" className="btn btn-error btn-outline btn-lg">
             &larr; Take me back home
          </Link>
-         {/*  */}
       </section>
    );
 };

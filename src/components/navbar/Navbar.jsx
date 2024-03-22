@@ -10,18 +10,12 @@ import { auth } from "../../firebase/config";
 //Redux
 import { useDispatch, useSelector } from "react-redux";
 import { removeActiveUser, setActiveUser } from "../../redux/slice/authSlice";
-import {
-   calculateSubtotal,
-   calculateTotalQuantity,
-} from "../../redux/slice/cartSlice";
+import { calculateSubtotal, calculateTotalQuantity } from "../../redux/slice/cartSlice";
 import { formatPrice } from "../../utils/formatPrice";
-// import Countdown from "../countdown/Countdown";
 
 const Navbar = () => {
    const { isUserLoggedIn, userName } = useSelector((store) => store.auth);
-   const { totalAmount, totalQuantity, cartItems } = useSelector(
-      (store) => store.cart
-   );
+   const { totalAmount, totalQuantity, cartItems } = useSelector((store) => store.cart);
    const [displayName, setDisplayName] = useState("");
    const navigate = useNavigate();
    const dispatch = useDispatch();
@@ -72,9 +66,7 @@ const Navbar = () => {
             <div className="navbar w-full md:w-9/12 mx-auto flex items-center justify-between">
                <section className="md:gap-4">
                   <Link to="/" className="btn btn-ghost ">
-                     <h1 className="logo text-white text-lg md:text-3xl ">
-                        E-Shop.com
-                     </h1>
+                     <h1 className="logo text-white text-lg md:text-3xl ">E-Shop.com</h1>
                   </Link>
                </section>
                <div>
@@ -82,9 +74,7 @@ const Navbar = () => {
                      <li className="hidden lg:block text-white text-xs md:text-xl">
                         <NavLink
                            to="/"
-                           style={({ isActive }) =>
-                              isActive ? activeStyle : null
-                           }
+                           style={({ isActive }) => (isActive ? activeStyle : null)}
                            end
                         >
                            Home
@@ -93,9 +83,7 @@ const Navbar = () => {
                      <li className="hidden lg:block text-white text-xs md:text-xl">
                         <NavLink
                            to="/all"
-                           style={({ isActive }) =>
-                              isActive ? activeStyle : null
-                           }
+                           style={({ isActive }) => (isActive ? activeStyle : null)}
                         >
                            All Products
                         </NavLink>
@@ -103,9 +91,7 @@ const Navbar = () => {
                      <li className="hidden lg:block text-white text-xs md:text-xl">
                         <NavLink
                            to="/contact"
-                           style={({ isActive }) =>
-                              isActive ? activeStyle : null
-                           }
+                           style={({ isActive }) => (isActive ? activeStyle : null)}
                         >
                            Contact Us
                         </NavLink>
@@ -127,15 +113,10 @@ const Navbar = () => {
                         className="mt-3 card card-compact dropdown-content w-52 bg-base-100  shadow-xl "
                      >
                         <div className="card-body">
-                           <span className="font-bold text-lg">
-                              {totalQuantity} Items
-                           </span>
+                           <span className="font-bold text-lg">{totalQuantity} Items</span>
                            <span>Subtotal: {formatPrice(totalAmount)}</span>
                            <div className="card-actions">
-                              <Link
-                                 to="/cart"
-                                 className="btn btn-primary btn-block"
-                              >
+                              <Link to="/cart" className="btn btn-primary btn-block">
                                  View cart
                               </Link>
                            </div>
@@ -143,10 +124,7 @@ const Navbar = () => {
                      </div>
                   </div>
                   <div className="dropdown dropdown-end ml-4">
-                     <label
-                        tabIndex={0}
-                        className="btn btn-ghost btn-circle avatar"
-                     >
+                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                         <div className="rounded-full">
                            <img
                               src="https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-white-blue-png-image_3918443.jpg"
@@ -162,8 +140,7 @@ const Navbar = () => {
                         {userName && (
                            <li className="bg-primary text-gray-200">
                               <p className="block">
-                                 Welcome,{" "}
-                                 <span className="font-bold">{userName}</span>
+                                 Welcome, <span className="font-bold">{userName}</span>
                               </p>
                            </li>
                         )}
@@ -188,10 +165,7 @@ const Navbar = () => {
                         {isUserLoggedIn ? (
                            <div>
                               <li>
-                                 <Link
-                                    to="/my-orders"
-                                    className="text-lg text-primary"
-                                 >
+                                 <Link to="/my-orders" className="text-lg text-primary">
                                     My Orders
                                  </Link>
                               </li>
